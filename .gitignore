@@ -38,3 +38,4 @@ out/
 
 ### other files ###
 .DS_Store
+application-oauth-key.properties
