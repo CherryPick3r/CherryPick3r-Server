@@ -19,13 +19,13 @@ import java.util.Collection;
 @Table(name="USER_TABLE")
 public class User extends BaseTimeEntity implements UserDetails {
     @Id
-    @Column
+    @Column(name = "user_email")
     private String email;
 
-    @Column
+    @Column(name = "user_nickname")
     private String nickname;
 
-    @Column
+    @Column(name = "user_auth")
     private String auth;
 
     @Builder
