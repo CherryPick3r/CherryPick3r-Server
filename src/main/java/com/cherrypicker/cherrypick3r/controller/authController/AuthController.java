@@ -71,7 +71,7 @@ public class AuthController {
     public ResponseEntity<String> googleLogin() {
         // 로그인 링크 생성
         String googleLoginUrl = "https://accounts.google.com/o/oauth2/v2/auth?" +
-                "scope=https%3A//www.googleapis.com/auth/drive.metadata.readonly&" +
+                "scope=https%3A//www.googleapis.com/auth/userinfo.email https%3A//www.googleapis.com/auth/userinfo.profile&" +
                 "access_type=offline&" +
                 "include_granted_scopes=true&" +
                 "response_type=code&" +

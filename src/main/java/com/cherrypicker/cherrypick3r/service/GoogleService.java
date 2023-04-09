@@ -63,10 +63,6 @@ public class GoogleService {
 
     @Transactional
     public GoogleUserInfoDto getUserInfoByAccessToken(String accessToken) {
-        // TODO: Google 유저 정보에 접근 할 수 있는 적절한 스코프에 대한 OAuth2 요청을 해야함.
-        // TODO: ../auth/userInfo.profile
-        // TODO: ../auth/userinfo.email
-        // TODO: 이렇게 2개의 스코프를 설정할 것
 
         System.out.println("accessToken in func : " + accessToken);
 

@@ -48,11 +48,11 @@ public class SocialService {
         GoogleUserInfoDto googleUserInfoDto = googleService.getUserInfoByAccessToken(accessToken);
 
         String email = googleUserInfoDto.getEmail();
-        socialDto.setEmail("google_" + email.substring(1, email.length() - 1));
+        socialDto.setEmail("google_" + email);
         String name = googleUserInfoDto.getName();
-        socialDto.setName(name.substring(1, name.length() - 1));
+        socialDto.setName(name);
         String imageUrl = googleUserInfoDto.getPicture();
-        socialDto.setImageUrl(imageUrl.substring(1, imageUrl.length() - 1));
+        socialDto.setImageUrl(imageUrl);
 
         return socialDto;
     }

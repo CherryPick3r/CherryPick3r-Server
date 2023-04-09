@@ -17,6 +17,8 @@ public class GoogleUserInfoDto {
 
     private String given_name;
 
+    private String family_name;
+
     private String picture;
 
     private String locale;
