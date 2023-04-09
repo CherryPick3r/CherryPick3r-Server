@@ -6,10 +6,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Getter
-public class KakaoKey {
-    @Value("${client.id.kakao}")
+public class GoogleKey {
+    @Value("${client.id.google}")
     private String clientId;
 
-    @Value("${redirect.uri.kakao}")
+    @Value("${redirect.uri.google}")
     private String redirectUri;
+
+    @Value("${secret.google}")
+    private String secret;
 }

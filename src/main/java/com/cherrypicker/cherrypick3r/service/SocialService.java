@@ -1,5 +1,6 @@
 package com.cherrypicker.cherrypick3r.service;
 
+import com.cherrypicker.cherrypick3r.dto.GoogleUserInfoDto;
 import com.cherrypicker.cherrypick3r.dto.SocialDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class SocialService {
 
     private final KakaoService kakaoService;
+    private final GoogleService googleService;
     private final ObjectMapper objectMapper;
 
     public SocialDto verificationKakao(String code){
@@ -33,6 +35,24 @@ public class SocialService {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
+        return socialDto;
+    }
+
+    public SocialDto verificationGoogle(String code){
+
+        SocialDto socialDto = new SocialDto();
+        // 코드를 이용하여 accessToken 추출
+        String accessToken = googleService.getAccessTokenByCode(code);
+        // accessToken을 이용하여 사용자 정보 추출
+        GoogleUserInfoDto googleUserInfoDto = googleService.getUserInfoByAccessToken(accessToken);
+
+        String email = googleUserInfoDto.getEmail();
+        socialDto.setEmail("google_" + email.substring(1, email.length() - 1));
+        String name = googleUserInfoDto.getName();
+        socialDto.setName(name.substring(1, name.length() - 1));
+        String imageUrl = googleUserInfoDto.getPicture();
+        socialDto.setImageUrl(imageUrl.substring(1, imageUrl.length() - 1));
 
         return socialDto;
     }
