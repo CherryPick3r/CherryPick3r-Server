@@ -1,11 +1,10 @@
 package com.cherrypicker.cherrypick3r.config;
 
 import com.cherrypicker.cherrypick3r.component.JwtAuthenticationFilter;
-import com.cherrypicker.cherrypick3r.jwt.JwtTokenProvider;
+import com.cherrypicker.cherrypick3r.component.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;

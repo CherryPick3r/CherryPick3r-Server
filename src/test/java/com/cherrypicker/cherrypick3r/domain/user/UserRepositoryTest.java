@@ -1,7 +1,7 @@
 package com.cherrypicker.cherrypick3r.domain.user;
 
-import com.cherrypicker.cherrypick3r.domain.user.User;
-import com.cherrypicker.cherrypick3r.domain.user.UserRepository;
+import com.cherrypicker.cherrypick3r.user.domain.User;
+import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

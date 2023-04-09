@@ -1,6 +1,6 @@
-package com.cherrypicker.cherrypick3r.domain.user;
+package com.cherrypicker.cherrypick3r.user.domain;
 
-import com.cherrypicker.cherrypick3r.domain.baseTimeEntity.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

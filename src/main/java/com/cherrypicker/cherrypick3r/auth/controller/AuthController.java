@@ -1,23 +1,15 @@
-package com.cherrypicker.cherrypick3r.controller.authController;
+package com.cherrypicker.cherrypick3r.auth.controller;
 
 import com.cherrypicker.cherrypick3r.component.GoogleKey;
 import com.cherrypicker.cherrypick3r.component.KakaoKey;
-import com.cherrypicker.cherrypick3r.domain.user.User;
-import com.cherrypicker.cherrypick3r.domain.user.UserRepository;
-import com.cherrypicker.cherrypick3r.dto.KakaoAccessTokenDto;
-import com.cherrypicker.cherrypick3r.dto.SocialDto;
-import com.cherrypicker.cherrypick3r.jwt.JwtTokenProvider;
-import com.cherrypicker.cherrypick3r.service.KakaoService;
-import com.cherrypicker.cherrypick3r.service.OAuthServise;
-import com.cherrypicker.cherrypick3r.service.SocialService;
-import com.cherrypicker.cherrypick3r.service.UserService;
-import lombok.NoArgsConstructor;
+import com.cherrypicker.cherrypick3r.user.domain.User;
+import com.cherrypicker.cherrypick3r.auth.dto.SocialDto;
+import com.cherrypicker.cherrypick3r.component.JwtTokenProvider;
+import com.cherrypicker.cherrypick3r.auth.service.SocialService;
+import com.cherrypicker.cherrypick3r.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -102,6 +94,7 @@ public class AuthController {
         // JWT 토큰 헤더에 담아 전달
 //        response.addHeader(env.getProperty("oauth-key.header"), env.getProperty("oauth-key.prefix") + token);
         response.setHeader("Authorization", "bearer " + token);
+//        System.out.println("JWT Token : " + token);
 
         return new ResponseEntity(HttpStatus.OK);
     }

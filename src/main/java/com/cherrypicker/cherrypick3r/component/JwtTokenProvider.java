@@ -1,6 +1,6 @@
-package com.cherrypicker.cherrypick3r.jwt;
+package com.cherrypicker.cherrypick3r.component;
 
-import com.cherrypicker.cherrypick3r.service.UserDetailsService;
+import com.cherrypicker.cherrypick3r.user.service.UserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;

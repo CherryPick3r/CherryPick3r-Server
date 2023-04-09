@@ -1,6 +1,5 @@
 package com.cherrypicker.cherrypick3r.component;
 
-import com.cherrypicker.cherrypick3r.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

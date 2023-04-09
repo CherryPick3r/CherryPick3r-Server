@@ -1,23 +1,23 @@
-package com.cherrypicker.cherrypick3r.service;
+package com.cherrypicker.cherrypick3r.auth.service;
 
-import com.cherrypicker.cherrypick3r.component.KakaoKey;
-import com.cherrypicker.cherrypick3r.dto.KakaoAccessTokenDto;
+import com.cherrypicker.cherrypick3r.component.GoogleKey;
+import com.cherrypicker.cherrypick3r.auth.dto.GoogleAccessTokenDto;
+import com.cherrypicker.cherrypick3r.auth.dto.GoogleUserInfoDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 
-@Service
 @RequiredArgsConstructor
-public class KakaoService {
+@Service
+public class GoogleService {
 
-    private final KakaoKey kakaoKey;
+    private final GoogleKey googleKey;
     private final ObjectMapper objectMapper;
 
     @Transactional
@@ -31,17 +31,17 @@ public class KakaoService {
 
         // Request에 담을 정보 추가
         LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant_type", "authorization_code");
-        params.add("client_id", kakaoKey.getClientId());
-        params.add("redirect_uri", kakaoKey.getRedirectUri());
         params.add("code", code);
-        params.add("client_secret", "");
+        params.add("client_id", googleKey.getClientId());
+        params.add("client_secret", googleKey.getSecret());
+        params.add("redirect_uri", googleKey.getRedirectUri());
+        params.add("grant_type", "authorization_code");
 
         // request를 하기위해 HttpEntity 객체에 헤더와 정보 조립
         HttpEntity<LinkedMultiValueMap<String, String>> request = new HttpEntity<>(params, httpHeaders);
 
         // code에 대한 인증요청을 할 url
-        String url = "https://kauth.kakao.com/oauth/token";
+        String url = "https://oauth2.googleapis.com/token";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -50,7 +50,7 @@ public class KakaoService {
 
         try {
             // 인증에 성공했다면 access_token을 반환
-            return objectMapper.readValue(response.getBody(), KakaoAccessTokenDto.class).getAccess_token();
+            return objectMapper.readValue(response.getBody(), GoogleAccessTokenDto.class).getAccess_token();
         } catch (JsonProcessingException e) {
             // code 인증에 실패한 경우
             e.printStackTrace();
@@ -60,27 +60,40 @@ public class KakaoService {
     }
 
     @Transactional
-    public String getUserInfoByAccessToken(String accessToken) {
+    public GoogleUserInfoDto getUserInfoByAccessToken(String accessToken) {
 
         System.out.println("accessToken in func : " + accessToken);
 
         // accessToken을 통해 유저 정보를 가져올 요청을 생성한다.
         HttpHeaders headers = new HttpHeaders();
-        // kakao에서 요구한 폼대로 작성
-        headers.set("Authorization", "Bearer " + accessToken);
+        // google에서 요구한 폼대로 작성
+//        headers.set("Authorization", "Bearer " + accessToken);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        HttpEntity request = new HttpEntity(headers);
 
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
-
-        // 유저 정보를 받기위해 요청할 kakao 서버 url
-        String url = "https://kapi.kakao.com/v2/user/me";
+        // 유저 정보를 받기위해 요청할 google 서버 url
+        // 여기서 에러터짐
+//        String url = "https://www.googleapis.com/oauth2/v2/userinfo?access_token=$" + accessToken;
+        String url = "https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + accessToken;
+//        String url = "https://www.googleapis.com/oauth2/v2/userinfo";
 
         RestTemplate restTemplate = new RestTemplate();
 
-        // json 형식으로 리퀘스트 값을 반환한다.
-        return restTemplate.postForObject(url, request, String.class);
-    }
+        // get 요청으로 유저 정보를 받아온다.
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);
+//        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
+        System.out.println("결과:" + response.getBody());
+
+        try {
+            // 유저정보 요청에 성공했다면 유저 정보를 반환
+            return objectMapper.readValue(response.getBody(), GoogleUserInfoDto.class);
+        } catch (JsonProcessingException e) {
+            // 유저 정보 요청에 실패한 경우
+            e.printStackTrace();
+        }
+        // 유저 정보 요청에 실패한 경우
+        return null;
+    }
 }

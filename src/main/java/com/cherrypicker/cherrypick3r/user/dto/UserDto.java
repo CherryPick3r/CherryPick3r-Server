@@ -1,4 +1,4 @@
-package com.cherrypicker.cherrypick3r.dto;
+package com.cherrypicker.cherrypick3r.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;

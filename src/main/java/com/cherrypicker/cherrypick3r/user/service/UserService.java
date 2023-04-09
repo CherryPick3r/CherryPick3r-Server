@@ -1,8 +1,7 @@
-package com.cherrypicker.cherrypick3r.service;
+package com.cherrypicker.cherrypick3r.user.service;
 
-import com.cherrypicker.cherrypick3r.domain.user.User;
-import com.cherrypicker.cherrypick3r.domain.user.UserRepository;
-import com.cherrypicker.cherrypick3r.dto.UserDto;
+import com.cherrypicker.cherrypick3r.user.domain.User;
+import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

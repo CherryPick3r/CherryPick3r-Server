@@ -1,4 +1,4 @@
-package com.cherrypicker.cherrypick3r.domain.baseTimeEntity;
+package com.cherrypicker.cherrypick3r.baseTimeEntity.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
