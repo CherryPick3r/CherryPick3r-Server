@@ -19,7 +19,7 @@ public class UserRepositoryTest {
     @Test
     @Transactional
     public void save() {
-        String email = "djajsl54@naver.com";
+        String email = "abcdef@naver.com";
         String nickname = "지나가는강아지";
         String auth = "ROLE_USER";
 
