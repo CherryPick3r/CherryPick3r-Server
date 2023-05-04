@@ -35,7 +35,7 @@ public class JwtTokenProvider {
     // 유효시간 설정 (30분)
     private long tokenValidTime = 30 * 60 * 1000L;
     private final UserDetailsService userDetailsService;
-@Autowired
+    @Autowired
     public JwtTokenProvider(UserDetailsService userDetailsService){
         this.userDetailsService = userDetailsService;
         generateKey();
