@@ -1,6 +1,7 @@
 package com.cherrypicker.cherrypick3r.user.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,11 +29,16 @@ public class User extends BaseTimeEntity implements UserDetails {
     @Column(name = "user_auth")
     private String auth;
 
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
+
     @Builder
-    public User(String email, String nickname, String auth) {
+    public User(String email, String nickname, String auth, Tag tag) {
         this.email = email;
         this.nickname = nickname;
         this.auth = auth;
+        this.tag = tag;
     }
 
     @Override
