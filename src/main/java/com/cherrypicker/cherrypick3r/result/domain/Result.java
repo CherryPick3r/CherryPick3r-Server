@@ -1,8 +1,9 @@
-package com.cherrypicker.cherrypick3r.clipping.domain;
+package com.cherrypicker.cherrypick3r.result.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.game.domain.Game;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.user.domain.User;
+import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,10 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name="CLIPPING_TABLE")
-public class Clipping extends BaseTimeEntity {
+@Table(name="RESULT_TABLE")
+public class Result extends BaseTimeEntity {
     @Id
-    @Column(name = "clipping_id")
+    @Column(name = "result_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,12 +25,12 @@ public class Clipping extends BaseTimeEntity {
     private Shop shop;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_email")
-    private User user;
+    @JoinColumn(name = "game_id")
+    private Game game;
 
     @Builder
-    public Clipping(Shop shop, User user) {
+    public Result(Shop shop, Game game) {
         this.shop = shop;
-        this.user = user;
+        this.game = game;
     }
 }

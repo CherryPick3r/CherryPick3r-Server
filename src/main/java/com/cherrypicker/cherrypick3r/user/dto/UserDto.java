@@ -1,5 +1,6 @@
 package com.cherrypicker.cherrypick3r.user.dto;
 
+import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,4 +17,6 @@ public class UserDto {
 
     // 유저 권한 "ROLE_USER, ROLE_ADMIN"
     private String auth;
+
+    private Tag tag;
 }

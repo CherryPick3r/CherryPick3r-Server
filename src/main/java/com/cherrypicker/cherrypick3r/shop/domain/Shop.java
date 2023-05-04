@@ -1,6 +1,7 @@
 package com.cherrypicker.cherrypick3r.shop.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,8 +52,12 @@ public class Shop extends BaseTimeEntity {
     @Column(name = "shop_main_photo_url_2")
     private String mainPhotoUrl2;
 
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
+
     @Builder
-    public Shop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long likeCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2) {
+    public Shop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long likeCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag) {
         this.phone = phone;
         this.name = name;
         this.address = address;
@@ -64,5 +69,6 @@ public class Shop extends BaseTimeEntity {
         this.onelineReview = onelineReview;
         this.mainPhotoUrl1 = mainPhotoUrl1;
         this.mainPhotoUrl2 = mainPhotoUrl2;
+        this.tag = tag;
     }
 }

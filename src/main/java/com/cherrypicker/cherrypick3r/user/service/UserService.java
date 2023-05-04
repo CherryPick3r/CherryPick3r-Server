@@ -1,5 +1,6 @@
 package com.cherrypicker.cherrypick3r.user.service;
 
+import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class UserService {
                 .email(email)
                 .nickname(nickname)
                 .auth("USER")
+                .tag(new Tag())
                 .build();
 
         userRepository.save(user);
