@@ -57,4 +57,14 @@ public class Game extends BaseTimeEntity {
                 .tag(this.tag)
                 .build();
     }
+
+    public void setStatusStart() {
+        this.status = 2L; // 2:게임 진행 중
+        return ;
+    }
+
+    public void setStatusEnd() {
+        this.status = 3L; // 3:게임 종료
+        return ;
+    }
 }
