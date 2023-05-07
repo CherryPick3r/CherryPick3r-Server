@@ -6,12 +6,14 @@ import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name="SHOP_TABLE")
 public class Shop extends BaseTimeEntity {
 
