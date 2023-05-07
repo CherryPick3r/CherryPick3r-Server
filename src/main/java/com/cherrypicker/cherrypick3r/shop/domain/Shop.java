@@ -1,6 +1,7 @@
 package com.cherrypicker.cherrypick3r.shop.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,8 +35,8 @@ public class Shop extends BaseTimeEntity {
     @Column(name = "shop_address_point_x")
     private Double addressPointX;
 
-    @Column(name = "shop_like_count")
-    private Long likeCount;
+    @Column(name = "shop_clipping_count")
+    private Long clippingCount;
 
     @Column(name = "shop_picked_count")
     private Long pickedCount;
@@ -57,18 +58,35 @@ public class Shop extends BaseTimeEntity {
     private Tag tag;
 
     @Builder
-    public Shop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long likeCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag) {
+    public Shop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag) {
         this.phone = phone;
         this.name = name;
         this.address = address;
         this.addressPointY = addressPointY;
         this.addressPointX = addressPointX;
-        this.likeCount = likeCount;
+        this.clippingCount = clippingCount;
         this.pickedCount = pickedCount;
         this.operatingHours = operatingHours;
         this.onelineReview = onelineReview;
         this.mainPhotoUrl1 = mainPhotoUrl1;
         this.mainPhotoUrl2 = mainPhotoUrl2;
         this.tag = tag;
+    }
+
+    public ShopDto toDto() {
+        return ShopDto.builder()
+                .id(this.id)
+                .phone(this.phone)
+                .name(this.name)
+                .address(this.address)
+                .addressPointX(this.addressPointX)
+                .addressPointY(this.addressPointY)
+                .clippingCount(this.clippingCount)
+                .pickedCount(this.pickedCount)
+                .operatingHours(this.operatingHours)
+                .onelineReview(this.onelineReview)
+                .mainPhotoUrl1(this.mainPhotoUrl1)
+                .mainPhotoUrl2(this.mainPhotoUrl2)
+                .build();
     }
 }

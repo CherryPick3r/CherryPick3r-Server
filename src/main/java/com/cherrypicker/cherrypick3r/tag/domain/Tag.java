@@ -1,6 +1,7 @@
 package com.cherrypicker.cherrypick3r.tag.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.tag.dto.TagDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -237,5 +238,12 @@ public class Tag extends BaseTimeEntity {
         this.tagValue28 = tags.get(27);
 
         return ;
+    }
+
+    public TagDto toDto() {
+        return TagDto.builder()
+                .id(this.id)
+                .tagValues(this.getTagsByList())
+                .build();
     }
 }
