@@ -91,4 +91,16 @@ public class Shop extends BaseTimeEntity {
                 .mainPhotoUrl2(this.mainPhotoUrl2)
                 .build();
     }
+
+    public void increasePickedCount() {
+        this.pickedCount++;
+
+        return ;
+    }
+
+    public void decreasePickedCount() {
+        this.pickedCount--;
+
+        return ;
+    }
 }
