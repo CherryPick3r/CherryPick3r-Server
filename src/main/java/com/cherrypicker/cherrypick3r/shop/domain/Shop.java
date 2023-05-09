@@ -2,6 +2,7 @@ package com.cherrypicker.cherrypick3r.shop.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
+import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Table(name="SHOP_TABLE")
 public class Shop extends BaseTimeEntity {
 
@@ -59,6 +59,9 @@ public class Shop extends BaseTimeEntity {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
+    @OneToOne(mappedBy = "shop")
+    private ShopClassify shopClassify;
+
     @Builder
     public Shop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag) {
         this.phone = phone;
@@ -72,6 +75,7 @@ public class Shop extends BaseTimeEntity {
         this.onelineReview = onelineReview;
         this.mainPhotoUrl1 = mainPhotoUrl1;
         this.mainPhotoUrl2 = mainPhotoUrl2;
+        this.shopClassify = null;
         this.tag = tag;
     }
 
@@ -100,6 +104,12 @@ public class Shop extends BaseTimeEntity {
 
     public void decreasePickedCount() {
         this.pickedCount--;
+
+        return ;
+    }
+
+    public void mappingShopClassify(ShopClassify shopClassify) {
+        this.shopClassify = shopClassify;
 
         return ;
     }

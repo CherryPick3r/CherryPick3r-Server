@@ -1,6 +1,7 @@
 package com.cherrypicker.cherrypick3r.user.dto;
 
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
+import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassify;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,4 +20,6 @@ public class UserDto {
     private String auth;
 
     private Tag tag;
+
+    private UserClassify userClassify;
 }

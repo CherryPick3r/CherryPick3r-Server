@@ -1,5 +1,6 @@
 package com.cherrypicker.cherrypick3r.shop.dto;
 
+import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Builder;
 import lombok.Data;
@@ -38,8 +39,10 @@ public class ShopDto {
 
     private Tag tag;
 
+    private ShopClassify shopClassify;
+
     @Builder
-    public ShopDto(Long id, String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag) {
+    public ShopDto(Long id, String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag, ShopClassify shopClassify) {
         this.id = id;
         this.phone = phone;
         this.name = name;
@@ -53,5 +56,6 @@ public class ShopDto {
         this.mainPhotoUrl1 = mainPhotoUrl1;
         this.mainPhotoUrl2 = mainPhotoUrl2;
         this.tag = tag;
+        this.shopClassify = shopClassify;
     }
 }

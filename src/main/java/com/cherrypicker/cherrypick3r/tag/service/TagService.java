@@ -49,4 +49,9 @@ public class TagService {
 
         return findTagByTagId(id);
     }
+
+    // TODO: 태그를 게임 시작할 때, 모든 가게의 평균값으로 가중치 초기화하는 함수
+
+
+    // TODO: 각 태그 값의 값에 따라서 태그가 있는지 없는지 구해서 반환하는 함수
 }

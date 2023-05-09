@@ -67,4 +67,16 @@ public class Game extends BaseTimeEntity {
         this.status = 3L; // 3:게임 종료
         return ;
     }
+
+    public void increaseCurRound() {
+        this.curRound++;
+
+        return ;
+    }
+
+    public void decreaseCurRound() {
+        this.curRound--;
+
+        return ;
+    }
 }
