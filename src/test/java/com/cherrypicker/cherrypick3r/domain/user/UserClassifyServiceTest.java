@@ -9,6 +9,7 @@ import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassify;
 import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassifyRepository;
 import com.cherrypicker.cherrypick3r.userClassify.service.UserClassifyService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,6 +38,13 @@ public class UserClassifyServiceTest {
         this.userClassifyRepository = userClassifyRepository;
         this.tagRepository = tagRepository;
         this.userClassifyService = userClassifyService;
+    }
+
+    @BeforeEach
+    public void beforeEach() {
+        userClassifyRepository.deleteAll();
+        userRepository.deleteAll();
+        tagRepository.deleteAll();
     }
 
     @Test

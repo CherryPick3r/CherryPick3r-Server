@@ -35,7 +35,7 @@ public class User extends BaseTimeEntity implements UserDetails {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.DETACH)
     private UserClassify userClassify;
 
     @Builder

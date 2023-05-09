@@ -48,8 +48,14 @@ public class GameService {
         tag = new Tag();
         tagRepository.save(tag);
 
-        // TODO: 모든 가게 태그의 평균치를 구해서 초기값을 설정해야 함
-        // TODO: 유저의 기본 태그를 반영하기 위해서 유저의 기본 태그와 높은 가중치로 한 번 닮음 연산을 해야 함.
+        // TODO: 모든 가게 태그의 평균치를 구해서 초기값을 설정해야 함 (임시값 : 0.5)
+        // 유저의 기본 태그를 반영하기 위해서 유저의 기본 태그와 높은 가중치로 한 번 닮음 연산을 해야 함.
+        List<Double> gameTagValues = tag.getTagsByList();
+        List<Double> userTagValues = user.getTag().getTagsByList();
+        for (int i=0;i<28;i++) { // 임시 값 주입
+            gameTagValues.set(i, 0.5D);
+        }
+        tag.setTagsByList(gameCalc.makeSimilarly(gameTagValues, userTagValues, 4L));
 
         Game game = Game.builder()
                 .totalRound(12L) // 임의의 라운드 12라운드로 설정, 3라운드씩 추천 (4번 후 종료)
@@ -123,6 +129,58 @@ public class GameService {
     }
 
     @Transactional
+    public Game swipeLeft(Game game, Shop shop) {
+        Tag shopTag = shop.getTag();
+        Tag gameTag = game.getTag();
+
+        if (shop == null) {
+            return null; // TODO: ShopNotFoundException
+        }
+        if (game == null) {
+            return null; // TODO: GameNotFoundException
+        }
+        if (game.getStatus() == 3L) {
+            return null; // TODO: EndedGameException
+        }
+
+        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 싫어요에 대한 반영 수식을 적용한다. (비율 : 1/10)
+        gameTag.setTagsByList(gameCalc.makeUnsimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 10L));
+
+        // 게임의 진행을 반영한다.
+        game.increaseCurRound();
+
+        // 만약 게임이 끝에 도달했다면 결과를 도출한다. (다른 함수로 뺼 것)
+        gameRepository.save(game);
+        return game;
+    }
+
+    @Transactional
+    public Game swipeRight(Game game, Shop shop) {
+        Tag shopTag = shop.getTag();
+        Tag gameTag = game.getTag();
+
+        if (shop == null) {
+            return null; // TODO: ShopNotFoundException
+        }
+        if (game == null) {
+            return null; // TODO: GameNotFoundException
+        }
+        if (game.getStatus() == 3L) {
+            return null; // TODO: EndedGameException
+        }
+
+        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 일부 유사하게 만든다. (비율 : 1/10)
+        gameTag.setTagsByList(gameCalc.makeSimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 10L));
+
+        // 게임의 진행을 반영한다.
+        game.increaseCurRound();
+
+        // 만약 게임이 끝에 도달했다면 결과를 도출한다. (다른 함수로 뺼 것)
+        gameRepository.save(game);
+        return game;
+    }
+
+    @Transactional
     public ShopDto endGame(GameDto gameDto, ShopDto shopDto) {
         Shop shop = shopRepository.findById(shopDto.getId()).get();
         Game game = gameRepository.findById(gameDto.getId()).get();
@@ -154,6 +212,38 @@ public class GameService {
 
         // 결과 가게의 DTO를 반환
         return shop.toDto();
+    }
+
+    @Transactional
+    public Shop endGame(Game game, Shop shop) {
+        Result result;
+
+        if (shop == null) {
+            return null; // TODO: ShopNotFoundException
+        }
+        if (game == null) {
+            return null; // TODO: GameNotFoundException
+        }
+        if (game.getStatus() == 3L) {
+            return null; // TODO: EndedGameException
+        }
+
+        // 게임의 상태를 종료로 만든다.
+        game.setStatusEnd();
+
+        // 결과(체리픽)를 만든다.
+        result = Result.builder()
+                .shop(shop)
+                .game(game)
+                .build();
+        resultRepository.save(result);
+
+        // 가게의 picked_count를 1늘린다.
+        shop.increasePickedCount();
+        shopRepository.save(shop);
+
+        // 결과 가게의 DTO를 반환
+        return shop;
     }
 
     /*

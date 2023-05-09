@@ -30,7 +30,7 @@ public class Game extends BaseTimeEntity {
     @Column(name = "game_status")
     private Long status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_email")
     private User user;
 
