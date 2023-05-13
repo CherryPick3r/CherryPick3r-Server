@@ -50,6 +50,7 @@ public class GameServiceTest {
 
     @BeforeEach
     public void beforeEach() {
+        // 데이터 삭제 순서 중요 : 무결성에 위배되지 않게 하기위해서 중요함
         resultRepository.deleteAll();
         gameRepository.deleteAll();
         shopRepository.deleteAll();
@@ -131,7 +132,7 @@ public class GameServiceTest {
         Tag tag1 = game.getTag();
         List<Double> tagValues = tag1.getTagsByList();
         System.out.println("*********************************************************");
-        System.out.println("*-------------------🔥MakeGameTest🔥---------------------*");
+        System.out.println("*--------------------🔥MakeGameTest🔥--------------------*");
         System.out.println("*---------------------🚀TEST START🚀---------------------*");
         System.out.println("*********************************************************");
         Assertions.assertEquals(game.getUser().getEmail(), user.getEmail());
@@ -475,7 +476,7 @@ public class GameServiceTest {
 
         // 결과를 출력
         System.out.println("*********************************************************");
-        System.out.println("*--------------------🔥EndGameTest🔥--------------------*");
+        System.out.println("*--------------------🔥EndGameTest🔥---------------------*");
         System.out.println("*---------------------🚀TEST START🚀---------------------*");
         System.out.println("*********************************************************");
         Assertions.assertEquals(game.getId(), result.getGame().getId());

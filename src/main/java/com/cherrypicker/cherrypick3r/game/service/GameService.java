@@ -9,6 +9,8 @@ import com.cherrypicker.cherrypick3r.result.domain.ResultRepository;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
+import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
+import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.user.domain.User;
@@ -17,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,16 +28,12 @@ import java.util.List;
 public class GameService {
 
     private final UserRepository userRepository;
-
     private final GameRepository gameRepository;
-
     private final TagRepository tagRepository;
-
     private final ShopRepository shopRepository;
-
     private final ResultRepository resultRepository;
-
     private final GameCalc gameCalc;
+    private final ShopClassifyService shopClassifyService;
 
     @Transactional
     public GameDto makeGame(String userEmail) {
@@ -242,35 +242,126 @@ public class GameService {
         shop.increasePickedCount();
         shopRepository.save(shop);
 
-        // 결과 가게의 DTO를 반환
+        // 결과 가게를 반환
         return shop;
     }
 
-    /*
-    // TODO: 다음 추천 가게를 뽑는 함수
+    // 특정 태그에 따라 모든 가게를 조회하는 함수
     @Transactional
-    public List<ShopDto> makeRecommendations(GameDto gameDto) {
+    public List<ShopDto> findShopsByTags(List<Long> tags) {
+        List<ShopDto> shopDtos = new ArrayList<>();
 
-        // TODO: 만약 게임이 방금 시작됐다면 (curstage == 0 이라면) 랜덤하게 가게 3개를 뽑아서 반환
+        // 태그에 해당하는 가게들 조회
+        List<Shop> shops = shopClassifyService.findAllShopByClassifyTags(tags);
 
-        // TODO: 게임의 태그와 가장 유사한 가게 2개를 뽑음
+        // Dto로 변환
+        for (Shop shop : shops) {
+            shopDtos.add(shop.toDto());
+        }
 
-        // TODO: 랜덤하게 가게 1개를 뽑음
-
+        // 모든 가게를 반환
+        return shopDtos;
     }
 
-    // TODO: 다음 추천 가게를 유저가 선택한 태그를 하나도 가지지 않는 애들을 제외하고 진행
+    // 다음 추천 가게를 뽑는 함수
     @Transactional
-    public List<ShopDto> makeConditionalRecommendations(GameDto gameDto, Tag tag) {
-        // TODO: 모든 과정중에서 유저가 고른 태그가 일정 개수 이상 없는 가게는 제외함
+    public List<ShopDto> makeRecommendations(GameDto gameDto, List<ShopDto> shopDtos) {
+        List<ShopDto> recommends = new ArrayList<>();
 
-        // TODO: 만약 게임이 방금 시작됐다면 (curstage == 0 이라면) 랜덤하게 가게 3개를 뽑아서 반환
+        // 랜덤 셔플
+        Collections.shuffle(shopDtos);
 
-        // TODO: 게임의 태그와 가장 유사한 가게 2개를 뽑음
+        // 1: 만약 게임이 방금 시작됐다면 (curRound == 0 이라면) 랜덤하게 가게 3개를 뽑아서 반환
+        if (gameDto.getCurRound() == 0L) {
+            for (int i = 0; i < 3; i++) {
+                recommends.add(shopDtos.get(i));
+                // 여기서 뽑은 가게를 지울지 말지 고민 (일단 안 지움)
+            }
+            return recommends;
+        }
 
-        // TODO: 랜덤하게 가게 1개를 뽑음
+        // 2-1: 게임의 태그와 가장 유사한 가게 2개를 뽑음
+        List<ShopDto> similarShops =  findShopsBySimilarity(gameDto, shopDtos, 2L);
+        recommends.add(similarShops.get(0));
+        recommends.add(similarShops.get(1));
+
+        // 2-2: 랜덤하게 가게 1개를 뽑음
+        recommends.add(shopDtos.get(0));
+
+        return recommends;
     }
 
-    // TODO: 게임의 태그와 가장 유사한 가게 검색 로직
-    */
+    // 게임의 태그와 가장 유사한 가게 1개 검색 로직
+    @Transactional
+    public ShopDto findShopBySimilarity(GameDto gameDto, List<ShopDto> shopDtos) {
+        List<Double> gameTagValues = gameDto.getTag().getTagsByList();
+        Double similarity = Double.MAX_VALUE;
+        ShopDto resultDto = null;
+
+        for (ShopDto shopDto : shopDtos) {
+            List<Double> shopTagValues = shopDto.getTag().getTagsByList();
+
+            Double curSimilarity = gameCalc.euclideanSimilarity(gameTagValues, shopTagValues);
+            if (similarity > curSimilarity) {
+                similarity = curSimilarity;
+                resultDto = shopDto;
+            }
+        }
+
+        if (resultDto == null) {
+            return null; // TODO: ShopNotFoundException
+        }
+
+        return resultDto;
+    }
+
+    // 게임의 태그와 가장 유사한 가게 n개 검색 로직
+    // 로직의 문제점 : 가게가 n개 이상일 때는 잘 작동하지만 그것보다 작을 때는 사실상 랜덤이다.
+    //           -> 결과를 뽑을 때 로직을 사용하는게 아니라면 크게 영향을 미치지는 않는다. but 정렬보단 효율적
+    // 개선 방안 : 모든 가게의 유사도를 검색해서 각 객체의 값으로 추가 해두고 유사도에 따라 정렬한 후, 앞에서 3개 뽑는게 나을 듯
+    @Transactional
+    public List<ShopDto> findShopsBySimilarity(GameDto gameDto, List<ShopDto> shopDtos, Long n) {
+        List<Double> gameTagValues = gameDto.getTag().getTagsByList();
+        Double similarity = Double.MAX_VALUE;
+        List<ShopDto> resultDtos = new ArrayList<>();
+        Long totalCnt = 0L;
+        int idx = 0, max = Math.toIntExact(n);
+
+        // n개의 음식점을 가까운 순서대로 뽑는다.
+        for (ShopDto shopDto : shopDtos) {
+            List<Double> shopTagValues = shopDto.getTag().getTagsByList();
+
+            Double curSimilarity = gameCalc.euclideanSimilarity(gameTagValues, shopTagValues);
+
+            if (n > totalCnt) {
+                // 아직 n개 이상 뽑지 않은 경우
+                if (similarity > curSimilarity) {
+                    similarity = curSimilarity;
+                }
+
+                // 추가는 유사도와 관련없이 일단 뽑는다.
+                resultDtos.add(shopDto);
+                idx = (idx + 1) % max;
+                totalCnt++;
+            }
+            else {
+                // 이미 n개 이상 뽑은 경우
+                if (similarity > curSimilarity) {
+                    similarity = curSimilarity;
+
+                    // 앞에서부터 덮어 쓴다.
+                    resultDtos.set(idx, shopDto);
+                    idx = (idx + 1) % max;
+                    totalCnt++;
+                }
+            }
+        }
+
+        return resultDtos;
+    }
+
+    // gameId로 게임 객체를 찾아서 반환하는 함수
+    public GameDto findGameDtoById(Long gameId) {
+        return gameRepository.findById(gameId).get().toDto();
+    }
 }
