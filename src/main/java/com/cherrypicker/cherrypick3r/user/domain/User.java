@@ -3,6 +3,7 @@ package com.cherrypicker.cherrypick3r.user.domain;
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
+import com.cherrypicker.cherrypick3r.user.dto.UserDto;
 import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassify;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class User extends BaseTimeEntity implements UserDetails {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.DETACH)
     private UserClassify userClassify;
 
     @Builder
@@ -93,5 +94,15 @@ public class User extends BaseTimeEntity implements UserDetails {
         this.userClassify = userClassify;
 
         return ;
+    }
+
+    public UserDto toDto() {
+        return UserDto.builder()
+                .email(this.email)
+                .nickname(this.nickname)
+                .auth(this.auth)
+                .tag(this.tag)
+                .userClassify(this.userClassify)
+                .build();
     }
 }

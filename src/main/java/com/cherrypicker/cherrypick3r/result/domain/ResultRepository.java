@@ -10,6 +10,8 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
 
     List<Result> findByShop(Shop shop);
     List<Result> findByGame(Game game);
+
+    Result findByGameAndShop(Game game, Shop shop);
     void deleteByShop(Shop shop);
     void deleteByGame(Game game);
 }

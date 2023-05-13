@@ -106,7 +106,7 @@ public class UserClassify extends BaseTimeEntity {
     @Column(name = "user_classify_tag_28")
     private Long userClassifyTag28;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_email")
     private User user;
 
