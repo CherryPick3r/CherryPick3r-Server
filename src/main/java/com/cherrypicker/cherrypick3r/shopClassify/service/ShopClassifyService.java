@@ -2,6 +2,7 @@ package com.cherrypicker.cherrypick3r.shopClassify.service;
 
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
 import com.cherrypicker.cherrypick3r.shopClassify.dto.ShopClassifyDto;
@@ -50,7 +51,6 @@ public class ShopClassifyService {
         shopClassify.setShopClassifyByList(classifys);
 
         shopClassifyRepository.save(shopClassify);
-
         return shopClassify;
     }
 
@@ -63,7 +63,6 @@ public class ShopClassifyService {
         for (Shop shop : shops) {
             shopClassifies.add(makeShopClassifyUsingTagValues(shop, n));
         }
-
         return shopClassifies;
     }
 
@@ -95,4 +94,24 @@ public class ShopClassifyService {
 
         return shops;
     }
+
+    @Transactional
+    public List<ShopDto> findAllShopDtoByClassifyTags(List<Long> tags) {
+        List<ShopDto> shops = new ArrayList<>();
+
+        List<ShopClassify> shopClassifies = shopClassifyRepository.findByShopClassifyTag1OrShopClassifyTag2OrShopClassifyTag3OrShopClassifyTag4OrShopClassifyTag5OrShopClassifyTag6OrShopClassifyTag7OrShopClassifyTag8OrShopClassifyTag9OrShopClassifyTag10OrShopClassifyTag11OrShopClassifyTag12OrShopClassifyTag13OrShopClassifyTag14OrShopClassifyTag15OrShopClassifyTag16OrShopClassifyTag17OrShopClassifyTag18OrShopClassifyTag19OrShopClassifyTag20OrShopClassifyTag21OrShopClassifyTag22OrShopClassifyTag23OrShopClassifyTag24OrShopClassifyTag25OrShopClassifyTag26OrShopClassifyTag27OrShopClassifyTag28(
+                tags.get(0) == 0L ? null : tags.get(0),tags.get(1) == 0L ? null : tags.get(1),tags.get(2) == 0L ? null : tags.get(2),tags.get(3) == 0L ? null : tags.get(3),tags.get(4) == 0L ? null : tags.get(4),
+                tags.get(5) == 0L ? null : tags.get(5),tags.get(6) == 0L ? null : tags.get(6),tags.get(7) == 0L ? null : tags.get(7),tags.get(8) == 0L ? null : tags.get(8),tags.get(9) == 0L ? null : tags.get(9),
+                tags.get(10) == 0L ? null : tags.get(10),tags.get(11) == 0L ? null : tags.get(11),tags.get(12) == 0L ? null : tags.get(12),tags.get(13) == 0L ? null : tags.get(13),tags.get(14) == 0L ? null : tags.get(14),
+                tags.get(15) == 0L ? null : tags.get(15),tags.get(16) == 0L ? null : tags.get(16),tags.get(17) == 0L ? null : tags.get(17),tags.get(18) == 0L ? null : tags.get(18),tags.get(19) == 0L ? null : tags.get(19),
+                tags.get(20) == 0L ? null : tags.get(20),tags.get(21) == 0L ? null : tags.get(21),tags.get(22) == 0L ? null : tags.get(22),tags.get(23) == 0L ? null : tags.get(23),tags.get(24) == 0L ? null : tags.get(24),
+                tags.get(25) == 0L ? null : tags.get(25),tags.get(26) == 0L ? null : tags.get(26),tags.get(27) == 0L ? null : tags.get(27)
+        );
+
+        for (ShopClassify shopClassify : shopClassifies) {
+            shops.add(shopClassify.getShop().toDto());
+        }
+        return shops;
+    }
+
 }

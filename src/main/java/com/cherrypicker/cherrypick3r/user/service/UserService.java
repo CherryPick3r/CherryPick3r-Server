@@ -3,6 +3,7 @@ package com.cherrypicker.cherrypick3r.user.service;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
+import com.cherrypicker.cherrypick3r.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,7 @@ public class UserService {
 
         return user;
     }
+
+    //public UserDto(String email, String nickname, String auth, Tag tag, UserClassify userClassify){
+
 }

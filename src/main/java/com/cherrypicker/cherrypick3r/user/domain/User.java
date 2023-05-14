@@ -92,10 +92,8 @@ public class User extends BaseTimeEntity implements UserDetails {
 
     public void mappingUserClassify(UserClassify userClassify) {
         this.userClassify = userClassify;
-
         return ;
     }
-
     public UserDto toDto() {
         return UserDto.builder()
                 .email(this.email)
