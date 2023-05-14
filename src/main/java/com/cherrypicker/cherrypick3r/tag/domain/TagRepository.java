@@ -9,4 +9,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TagRepository extends JpaRepository<Tag, Long> {
+    Long findTagValueById(Long id);
 }

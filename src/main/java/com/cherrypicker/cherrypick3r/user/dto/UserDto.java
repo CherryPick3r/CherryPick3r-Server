@@ -2,6 +2,7 @@ package com.cherrypicker.cherrypick3r.user.dto;
 
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassify;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,4 +23,13 @@ public class UserDto {
     private Tag tag;
 
     private UserClassify userClassify;
+
+    @Builder
+    public UserDto(String email, String nickname, String auth, Tag tag, UserClassify userClassify){
+        this.email = email;
+        this.nickname = nickname;
+        this.auth = auth;
+        this.tag = tag;
+        this.userClassify = userClassify;
+    }
 }
