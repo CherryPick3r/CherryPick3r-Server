@@ -14,4 +14,8 @@ public class ShopPhotoDto {
         this.photoUrl = photoUrl;
         this.shop = shop;
     }
+
+    public Long getId(){
+        return this.id;
+    }
 }

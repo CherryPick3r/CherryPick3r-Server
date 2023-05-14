@@ -2,6 +2,7 @@ package com.cherrypicker.cherrypick3r.shopPhoto.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
+import com.cherrypicker.cherrypick3r.shopPhoto.dto.ShopPhotoDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,14 @@ public class ShopPhoto extends BaseTimeEntity {
     public ShopPhoto(String photoUrl, Shop shop) {
         this.photoUrl = photoUrl;
         this.shop = shop;
+    }
+
+    public ShopPhotoDto toDto(){
+        return ShopPhotoDto.builder()
+                .photoUrl(this.photoUrl)
+                .shop(this.shop)
+                .build();
+
     }
 
 }

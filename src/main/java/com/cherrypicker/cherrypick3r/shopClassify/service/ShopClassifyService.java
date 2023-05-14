@@ -104,7 +104,6 @@ public class ShopClassifyService {
         for (ShopClassify shopClassify : shopClassifies) {
             shops.add(shopClassify.getShop().toDto());
         }
-
         return shops;
     }
 
