@@ -2,6 +2,7 @@ package com.cherrypicker.cherrypick3r.result.service;
 
 import com.cherrypicker.cherrypick3r.game.domain.Game;
 import com.cherrypicker.cherrypick3r.game.domain.GameRepository;
+import com.cherrypicker.cherrypick3r.game.dto.GameDto;
 import com.cherrypicker.cherrypick3r.result.domain.Result;
 import com.cherrypicker.cherrypick3r.result.domain.ResultRepository;
 import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
@@ -36,11 +37,26 @@ public class ResultService {
     }
 
     @Transactional
+    public Result createResult(ShopDto shopDto, GameDto gameDto) {
+        Shop shop = shopRepository.findById(shopDto.getId()).get();
+        Game game = gameRepository.findById(gameDto.getId()).get();
+
+        Result result = Result.builder()
+                .shop(shop)
+                .game(game)
+                .build();
+
+        resultRepository.save(result);
+
+        return result;
+    }
+
+    @Transactional
     public void deleteResult(Long id) {
         Result result = resultRepository.findById(id).get();
 
         if (result == null) {
-            return ; // ResultNotFountException
+            return ; // TODO: ResultNotFountException
         }
 
         resultRepository.delete(result);
@@ -65,7 +81,7 @@ public class ResultService {
         Result result = resultRepository.findByGame(gameRepository.findById(id).get()).get(0);
 
         if (result == null) {
-            return null; // ResultNotFoundException
+            return null; // TODO: ResultNotFoundException
         }
 
         return result.toDto();
