@@ -37,7 +37,7 @@ public class ResultService {
     }
 
     @Transactional
-    public Result createResult(ShopDto shopDto, GameDto gameDto) {
+    public ResultDto createResult(ShopDto shopDto, GameDto gameDto) {
         Shop shop = shopRepository.findById(shopDto.getId()).get();
         Game game = gameRepository.findById(gameDto.getId()).get();
 
@@ -48,7 +48,7 @@ public class ResultService {
 
         resultRepository.save(result);
 
-        return result;
+        return result.toDto();
     }
 
     @Transactional
