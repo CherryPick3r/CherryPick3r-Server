@@ -6,6 +6,7 @@ import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -64,6 +65,7 @@ public class Shop extends BaseTimeEntity {
     private Tag tag;
 
     @OneToOne(mappedBy = "shop")
+    @JsonManagedReference
     private ShopClassify shopClassify;
 
 
@@ -98,7 +100,8 @@ public class Shop extends BaseTimeEntity {
                 .onelineReview(this.onelineReview)
                 .mainPhotoUrl1(this.mainPhotoUrl1)
                 .mainPhotoUrl2(this.mainPhotoUrl2)
-                .shopClassify(shopClassify)
+                .tag(this.tag)
+                .shopClassify(this.shopClassify)
                 .build();
     }
 
@@ -117,7 +120,6 @@ public class Shop extends BaseTimeEntity {
 
     public void mappingShopClassify(ShopClassify shopClassify) {
         this.shopClassify = shopClassify;
-
         return ;
     }
 }
