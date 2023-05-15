@@ -36,7 +36,7 @@ public class User extends BaseTimeEntity implements UserDetails {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.DETACH)
+    @OneToOne(mappedBy = "user")
     private UserClassify userClassify;
 
     @Builder
@@ -92,9 +92,11 @@ public class User extends BaseTimeEntity implements UserDetails {
 
     public void mappingUserClassify(UserClassify userClassify) {
         this.userClassify = userClassify;
+
         return ;
     }
-    public UserDto toDto() {
+
+    public UserDto toDto(){
         return UserDto.builder()
                 .email(this.email)
                 .nickname(this.nickname)

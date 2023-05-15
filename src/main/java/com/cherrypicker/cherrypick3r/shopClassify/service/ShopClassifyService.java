@@ -23,7 +23,7 @@ public class ShopClassifyService {
 
     private final ShopRepository shopRepository;
 
-    // 가게를 받아서 가게의 태그 값을 이용해서 가게 태그 분류 테이블의 엔티티를 생성하고 값을 채워넣는 함수, n(0~1)의 값을 기준으로 이하는 0, 이상은 1로 만들어서 태그 유무를 분리한다.
+    // TODO: 가게를 받아서 가게의 태그 값을 이용해서 가게 태그 분류 테이블의 엔티티를 생성하고 값을 채워넣는 함수, n(0~1)의 값을 기준으로 이하는 0, 이상은 1로 만들어서 태그 유무를 분리한다.
     @Transactional
     public ShopClassify makeShopClassifyUsingTagValues(Shop shop, Double n) {
         Tag tag = shop.getTag();
@@ -54,7 +54,7 @@ public class ShopClassifyService {
         return shopClassify;
     }
 
-    // 가게를 받아서 결정치 n(0~1)에 따라서 '모든' 가게 태그 분류 테이블의 엔티티를 만드는 함수 (batchJob)
+    // TODO: 가게를 받아서 결정치 n(0~1)에 따라서 '모든' 가게 태그 분류 테이블의 엔티티를 만드는 함수 (batchJob)
     @Transactional
     public List<ShopClassify> makeAllShopClassifyUsingTagValues(Double n) {
         List<Shop> shops = shopRepository.findAll();
@@ -66,15 +66,8 @@ public class ShopClassifyService {
         return shopClassifies;
     }
 
-    // 특정 태그들에 해당하는 모든 가게를 반환하는 함수
+    // TODO: 특정 태그들에 해당하는 모든 가게를 반환하는 함수
     // 0L을 null로 바꿔서 넣는 이유: 0L을 null로 만들어서 넣으면 쿼리를 생성할 때, 해당 값은 신경쓰지 않고 넘어감
-//    주어진 함수는 특정 태그들에 해당하는 모든 가게를 반환하는 기능을 수행합니다.
-//    함수 내부에서는 shopClassifyRepository를 사용하여 findByShopClassifyTag1OrShopClassifyTag2OrShopClassifyTag3Or... 등의 메서드를 호출하여 태그 조건에 맞는 ShopClassify 엔티티를 검색합니다.
-//    그 후, ShopClassify 엔티티의 shop 속성을 통해 해당 가게를 가져와 shops 리스트에 추가합니다.
-//    최종적으로 shops 리스트를 반환합니다.
-//
-//    함수는 tags 리스트의 크기에 따라 findByShopClassifyTag1OrShopClassifyTag2OrShopClassifyTag3Or... 메서드의 호출 개수가 결정됩니다.
-//    각 태그의 값이 0L인 경우 해당 태그를 무시하기 위해 null로 변환하여 메서드에 전달합니다.
     @Transactional
     public List<Shop> findAllShopByClassifyTags(List<Long> tags) {
         List<Shop> shops = new ArrayList<>();

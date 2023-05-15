@@ -25,7 +25,7 @@ public class UserDto {
     private UserClassify userClassify;
 
     @Builder
-    public UserDto(String email, String nickname, String auth, Tag tag, UserClassify userClassify) {
+    public UserDto(String email, String nickname, String auth, Tag tag, UserClassify userClassify){
         this.email = email;
         this.nickname = nickname;
         this.auth = auth;
