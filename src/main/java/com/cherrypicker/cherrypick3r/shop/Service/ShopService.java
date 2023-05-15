@@ -20,11 +20,9 @@ import java.util.List;
 @Service
 public class ShopService {
 
-    private ShopRepository shopRepository;
+    private final ShopRepository shopRepository;
 
     private final TagRepository tagRepository;
-
-    private final ShopClassify shopClassify;
 
     private final ShopClassifyService shopClassifyService;
 
