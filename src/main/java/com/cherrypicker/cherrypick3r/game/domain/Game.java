@@ -2,6 +2,7 @@ package com.cherrypicker.cherrypick3r.game.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.game.dto.GameDto;
+import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,6 +33,9 @@ public class Game extends BaseTimeEntity {
     @Column(name = "game_status")
     private Long status;
 
+    @ElementCollection
+    private List<Long> recommendedShopIds;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_email")
     private User user;
@@ -44,6 +49,7 @@ public class Game extends BaseTimeEntity {
         this.totalRound = totalRound;
         this.curRound = curRound;
         this.status = status;
+        this.recommendedShopIds = new ArrayList<>();
         this.user = user;
         this.tag = tag;
     }
@@ -61,23 +67,33 @@ public class Game extends BaseTimeEntity {
 
     public void setStatusStart() {
         this.status = 2L; // 2:게임 진행 중
-        return ;
     }
 
     public void setStatusEnd() {
         this.status = 3L; // 3:게임 종료
-        return ;
     }
 
     public void increaseCurRound() {
         this.curRound++;
-
-        return ;
     }
 
     public void decreaseCurRound() {
         this.curRound--;
+    }
 
-        return ;
+    public void addRecommendedShopId(Long shopId) {
+        this.recommendedShopIds.add(shopId);
+    }
+
+    public int findRecommendedShopIdIndexByShopId(Long shopId) {
+        int len = this.recommendedShopIds.size();
+
+        for (int i=0;i<len;i++) {
+            if (recommendedShopIds.get(i).equals(shopId)) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }

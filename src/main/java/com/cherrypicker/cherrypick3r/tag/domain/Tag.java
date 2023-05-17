@@ -18,7 +18,7 @@ public class Tag extends BaseTimeEntity {
     @Id
     @Column(name = "tag_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "tag_value_1")
     private Double tagValue1;
@@ -142,34 +142,34 @@ public class Tag extends BaseTimeEntity {
     }
 
     public Tag() {
-        this.tagValue1 = 0D;
-        this.tagValue2 = 0D;
-        this.tagValue3 = 0D;
-        this.tagValue4 = 0D;
-        this.tagValue5 = 0D;
-        this.tagValue6 = 0D;
-        this.tagValue7 = 0D;
-        this.tagValue8 = 0D;
-        this.tagValue9 = 0D;
-        this.tagValue10 = 0D;
-        this.tagValue11 = 0D;
-        this.tagValue12 = 0D;
-        this.tagValue13 = 0D;
-        this.tagValue14 = 0D;
-        this.tagValue15 = 0D;
-        this.tagValue16 = 0D;
-        this.tagValue17 = 0D;
-        this.tagValue18 = 0D;
-        this.tagValue19 = 0D;
-        this.tagValue20 = 0D;
-        this.tagValue21 = 0D;
-        this.tagValue22 = 0D;
-        this.tagValue23 = 0D;
-        this.tagValue24 = 0D;
-        this.tagValue25 = 0D;
-        this.tagValue26 = 0D;
-        this.tagValue27 = 0D;
-        this.tagValue28 = 0D;
+        this.tagValue1 = 0.5D;
+        this.tagValue2 = 0.5D;
+        this.tagValue3 = 0.5D;
+        this.tagValue4 = 0.5D;
+        this.tagValue5 = 0.5D;
+        this.tagValue6 = 0.5D;
+        this.tagValue7 = 0.5D;
+        this.tagValue8 = 0.5D;
+        this.tagValue9 = 0.5D;
+        this.tagValue10 = 0.5D;
+        this.tagValue11 = 0.5D;
+        this.tagValue12 = 0.5D;
+        this.tagValue13 = 0.5D;
+        this.tagValue14 = 0.5D;
+        this.tagValue15 = 0.5D;
+        this.tagValue16 = 0.5D;
+        this.tagValue17 = 0.5D;
+        this.tagValue18 = 0.5D;
+        this.tagValue19 = 0.5D;
+        this.tagValue20 = 0.5D;
+        this.tagValue21 = 0.5D;
+        this.tagValue22 = 0.5D;
+        this.tagValue23 = 0.5D;
+        this.tagValue24 = 0.5D;
+        this.tagValue25 = 0.5D;
+        this.tagValue26 = 0.5D;
+        this.tagValue27 = 0.5D;
+        this.tagValue28 = 0.5D;
     }
 
     public List<Double> getTagsByList() {

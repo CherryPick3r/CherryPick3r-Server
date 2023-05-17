@@ -53,4 +53,16 @@ public class GameCalc {
         return ret;
     }
 
+    // 두 개의 리스트를 비교해서 점수를 계산한다.
+    public Double calculateScore(List<Double> listA, List<Double> listB) {
+        int len = listA.size();
+        Double ret = 0D;
+
+        for (int i=0;i<len;i++) {
+            ret += listA.get(i) * (1D + (listB.get(i))); // 스코어를 계산해서 더한다.
+        }
+
+        return ret;
+    }
+
 }
