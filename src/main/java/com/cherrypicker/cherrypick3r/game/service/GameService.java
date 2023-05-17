@@ -6,9 +6,12 @@ import com.cherrypicker.cherrypick3r.game.domain.GameRepository;
 import com.cherrypicker.cherrypick3r.game.dto.GameDto;
 import com.cherrypicker.cherrypick3r.result.domain.Result;
 import com.cherrypicker.cherrypick3r.result.domain.ResultRepository;
+import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopScoreDto;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopSimilarityDto;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
@@ -19,9 +22,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -55,7 +56,7 @@ public class GameService {
         for (int i=0;i<28;i++) { // 임시 값 주입
             gameTagValues.set(i, 0.5D);
         }
-        tag.setTagsByList(gameCalc.makeSimilarly(gameTagValues, userTagValues, 4L));
+        tag.setTagsByList(gameCalc.makeSimilarly(gameTagValues, userTagValues, 3L));
 
         Game game = Game.builder()
                 .totalRound(12L) // 임의의 라운드 12라운드로 설정, 3라운드씩 추천 (4번 후 종료)
@@ -89,13 +90,12 @@ public class GameService {
             return null; // TODO: EndedGameException
         }
 
-        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 싫어요에 대한 반영 수식을 적용한다. (비율 : 1/10)
-        gameTag.setTagsByList(gameCalc.makeUnsimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 10L));
+        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 싫어요에 대한 반영 수식을 적용한다. (비율 : 1/5)
+        gameTag.setTagsByList(gameCalc.makeUnsimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 5L));
 
         // 게임의 진행을 반영한다.
         game.increaseCurRound();
 
-        // 만약 게임이 끝에 도달했다면 결과를 도출한다. (다른 함수로 뺼 것)
         gameRepository.save(game);
         return game.toDto();
     }
@@ -117,13 +117,12 @@ public class GameService {
             return null; // TODO: EndedGameException
         }
 
-        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 일부 유사하게 만든다. (비율 : 1/10)
-        gameTag.setTagsByList(gameCalc.makeSimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 10L));
+        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 일부 유사하게 만든다. (비율 : 1/5)
+        gameTag.setTagsByList(gameCalc.makeSimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 5L));
 
         // 게임의 진행을 반영한다.
         game.increaseCurRound();
 
-        // 만약 게임이 끝에 도달했다면 결과를 도출한다. (다른 함수로 뺼 것)
         gameRepository.save(game);
         return game.toDto();
     }
@@ -143,13 +142,12 @@ public class GameService {
             return null; // TODO: EndedGameException
         }
 
-        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 싫어요에 대한 반영 수식을 적용한다. (비율 : 1/10)
-        gameTag.setTagsByList(gameCalc.makeUnsimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 10L));
+        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 싫어요에 대한 반영 수식을 적용한다. (비율 : 1/5)
+        gameTag.setTagsByList(gameCalc.makeUnsimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 5L));
 
         // 게임의 진행을 반영한다.
         game.increaseCurRound();
 
-        // 만약 게임이 끝에 도달했다면 결과를 도출한다. (다른 함수로 뺼 것)
         gameRepository.save(game);
         return game;
     }
@@ -169,19 +167,18 @@ public class GameService {
             return null; // TODO: EndedGameException
         }
 
-        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 일부 유사하게 만든다. (비율 : 1/10)
-        gameTag.setTagsByList(gameCalc.makeSimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 10L));
+        // 선택한 가게과 게임의 태그 값을 수식을 이용해서 일부 유사하게 만든다. (비율 : 1/5)
+        gameTag.setTagsByList(gameCalc.makeSimilarly(gameTag.getTagsByList(), shopTag.getTagsByList(), 5L));
 
         // 게임의 진행을 반영한다.
         game.increaseCurRound();
 
-        // 만약 게임이 끝에 도달했다면 결과를 도출한다. (다른 함수로 뺼 것)
         gameRepository.save(game);
         return game;
     }
 
     @Transactional
-    public ShopDto endGame(GameDto gameDto, ShopDto shopDto) {
+    public ResultDto endGame(GameDto gameDto, ShopDto shopDto) {
         Shop shop = shopRepository.findById(shopDto.getId()).get();
         Game game = gameRepository.findById(gameDto.getId()).get();
         Result result;
@@ -199,23 +196,27 @@ public class GameService {
         // 게임의 상태를 종료로 만든다.
         game.setStatusEnd();
 
+        // 가게의 picked_count를 1늘린다.
+        shop.increasePickedCount();
+        shopRepository.save(shop);
+
+        //TODO: 정확도가 음수로 나오는 문제 해결할 것
         // 결과(체리픽)를 만든다.
         result = Result.builder()
+                .similarity(gameCalc.euclideanSimilarity(game.getTag().getTagsByList(), shop.getTag().getTagsByList()))
+//                .similarity(Math.floor((100 - gameCalc.euclideanSimilarity(game.getTag().getTagsByList(), shop.getTag().getTagsByList()) * 100) * 10) / 10)
+                .score(gameCalc.calculateScore(game.getTag().getTagsByList(), shop.getTag().getTagsByList()))
                 .shop(shop)
                 .game(game)
                 .build();
         resultRepository.save(result);
 
-        // 가게의 picked_count를 1늘린다.
-        shop.increasePickedCount();
-        shopRepository.save(shop);
-
         // 결과 가게의 DTO를 반환
-        return shop.toDto();
+        return result.toDto();
     }
 
     @Transactional
-    public Shop endGame(Game game, Shop shop) {
+    public Result endGame(Game game, Shop shop) {
         Result result;
 
         if (shop == null) {
@@ -231,19 +232,22 @@ public class GameService {
         // 게임의 상태를 종료로 만든다.
         game.setStatusEnd();
 
+        // 가게의 picked_count를 1늘린다.
+        shop.increasePickedCount();
+        shopRepository.save(shop);
+
         // 결과(체리픽)를 만든다.
         result = Result.builder()
+                .similarity(gameCalc.euclideanSimilarity(game.getTag().getTagsByList(), shop.getTag().getTagsByList()))
+//                .similarity(Math.floor((1 - gameCalc.euclideanSimilarity(game.getTag().getTagsByList(), shop.getTag().getTagsByList()) * 1000) * 10) / 10)
+                .score(gameCalc.calculateScore(game.getTag().getTagsByList(), shop.getTag().getTagsByList()))
                 .shop(shop)
                 .game(game)
                 .build();
         resultRepository.save(result);
 
-        // 가게의 picked_count를 1늘린다.
-        shop.increasePickedCount();
-        shopRepository.save(shop);
-
         // 결과 가게를 반환
-        return shop;
+        return result;
     }
 
     // 특정 태그에 따라 모든 가게를 조회하는 함수
@@ -315,44 +319,45 @@ public class GameService {
         return resultDto;
     }
 
-    // 게임의 태그와 가장 유사한 가게 n개 검색 로직
-    // 로직의 문제점 : 가게가 n개 이상일 때는 잘 작동하지만 그것보다 작을 때는 사실상 랜덤이다.
-    //           -> 결과를 뽑을 때 로직을 사용하는게 아니라면 크게 영향을 미치지는 않는다. but 정렬보단 효율적
-    // 개선 방안 : 모든 가게의 유사도를 검색해서 각 객체의 값으로 추가 해두고 유사도에 따라 정렬한 후, 앞에서 3개 뽑는게 나을 듯
+    // 유사도를 기반으로 게임의 태그와 가장 유사한 가게 (n - 1)개 + 랜덤 1개 검색 로직
     @Transactional
     public List<ShopDto> findShopsBySimilarity(GameDto gameDto, List<ShopDto> shopDtos, Long n) {
-        List<Double> gameTagValues = gameDto.getTag().getTagsByList();
-        Double similarity = Double.MAX_VALUE;
+        Random random = new Random();
+        Game game = gameRepository.findById(gameDto.getId()).get();
+        List<Double> gameTagValues = game.getTag().getTagsByList();
         List<ShopDto> resultDtos = new ArrayList<>();
-        Long totalCnt = 0L;
-        int idx = 0, max = Math.toIntExact(n);
+        List<ShopSimilarityDto> shopSimilarityDtos = new ArrayList<>();
 
-        // n개의 음식점을 가까운 순서대로 뽑는다.
+        // 처음 3개의 음식점은 랜덤으로 추천해준다.
+        if (game.getCurRound() == 0) {
+            resultDtos.add(shopDtos.get(random.nextInt(shopDtos.size())));
+            resultDtos.add(shopDtos.get(random.nextInt(shopDtos.size())));
+            resultDtos.add(shopDtos.get(random.nextInt(shopDtos.size())));
+            return resultDtos;
+        }
+
+        // n개의 {음식점, 유사도} 값을 가진 리스트를 만든다.
         for (ShopDto shopDto : shopDtos) {
             List<Double> shopTagValues = shopDto.getTag().getTagsByList();
 
-            Double curSimilarity = gameCalc.euclideanSimilarity(gameTagValues, shopTagValues);
+            ShopSimilarityDto shopSimilarityDto = new ShopSimilarityDto(shopDto, gameCalc.euclideanSimilarity(gameTagValues, shopTagValues));
+            shopSimilarityDtos.add(shopSimilarityDto);
+        }
 
-            if (n > totalCnt) {
-                // 아직 n개 이상 뽑지 않은 경우
-                if (similarity > curSimilarity) {
-                    similarity = curSimilarity;
-                }
+        // similarity 값을 기준으로 오름차순으로 정렬
+        Collections.sort(shopSimilarityDtos, Comparator.comparingDouble(ShopSimilarityDto::getSimilarity));
 
-                // 추가는 유사도와 관련없이 일단 뽑는다.
-                resultDtos.add(shopDto);
-                idx = (idx + 1) % max;
-                totalCnt++;
-            }
-            else {
-                // 이미 n개 이상 뽑은 경우
-                if (similarity > curSimilarity) {
-                    similarity = curSimilarity;
+        // 1개의 가게를 랜덤하게 하나 뽑는다.
+        resultDtos.add(shopSimilarityDtos.get(random.nextInt(shopSimilarityDtos.size())).getShopDto());
 
-                    // 앞에서부터 덮어 쓴다.
-                    resultDtos.set(idx, shopDto);
-                    idx = (idx + 1) % max;
-                    totalCnt++;
+        // 2개의 가게를 유사도 가까운 순서대로 뽑는다.
+        for (ShopSimilarityDto shopSimilarityDto : shopSimilarityDtos) {
+            if ((game.findRecommendedShopIdIndexByShopId(shopSimilarityDto.getShopDto().getId()) == -1) && (!shopSimilarityDto.getShopDto().getId().equals(resultDtos.get(0).getId()))) {
+                // 이미 추천하지 않았다면 중복이 아니므로 뽑는다. && 랜덤으로 뽑은 것과 겹치지 않는다면.
+                resultDtos.add(shopSimilarityDto.getShopDto());
+                if (resultDtos.size() == n) {
+                    // n개를 다 뽑았다면 종료
+                    break ;
                 }
             }
         }
@@ -360,7 +365,98 @@ public class GameService {
         return resultDtos;
     }
 
+    // 스코어가 가장 높은 가게 1개 검색 로직
+    @Transactional
+    public ShopDto findShopByScore(GameDto gameDto, List<ShopDto> shopDtos) {
+        List<Double> gameTagValues = gameDto.getTag().getTagsByList();
+        Double score = 0D;
+        ShopDto resultDto = null;
+
+        for (ShopDto shopDto : shopDtos) {
+            List<Double> shopTagValues = shopDto.getTag().getTagsByList();
+
+            Double curScore = gameCalc.calculateScore(gameTagValues, shopTagValues);
+            if (score <= curScore) {
+                score = curScore;
+                resultDto = shopDto;
+            }
+        }
+
+        if (resultDto == null) {
+            return null; // TODO: ShopNotFoundException
+        }
+
+        return resultDto;
+    }
+
+    // 스코어를 기반으로 게임의 태그와 가장 유사한 가게 (n - 1)개 + 랜덤 1개 검색 로직
+    @Transactional
+    public List<ShopDto> findShopsByScore(GameDto gameDto, List<ShopDto> shopDtos, Long n) {
+        Random random = new Random();
+        Game game = gameRepository.findById(gameDto.getId()).get();
+        List<Double> gameTagValues = game.getTag().getTagsByList();
+        List<ShopDto> resultDtos = new ArrayList<>();
+        List<ShopScoreDto> shopScoreDtos = new ArrayList<>();
+
+        // 처음 3개의 음식점은 랜덤으로 추천해준다.
+        if (game.getCurRound() == 0) {
+            resultDtos.add(shopDtos.get(random.nextInt(shopDtos.size())));
+            resultDtos.add(shopDtos.get(random.nextInt(shopDtos.size())));
+            resultDtos.add(shopDtos.get(random.nextInt(shopDtos.size())));
+            return resultDtos;
+        }
+
+        // n개의 {음식점, 스코어} 값을 가진 리스트를 만든다.
+        for (ShopDto shopDto : shopDtos) {
+            List<Double> shopTagValues = shopDto.getTag().getTagsByList();
+
+            ShopScoreDto shopScoreDto = new ShopScoreDto(shopDto, gameCalc.calculateScore(gameTagValues, shopTagValues));
+            shopScoreDtos.add(shopScoreDto);
+        }
+
+        // score 값을 기준으로 내림차순으로 정렬
+        Collections.sort(shopScoreDtos, Comparator.comparingDouble(ShopScoreDto::getScore).reversed());
+
+        // 1개의 가게를 랜덤하게 하나 뽑는다.
+        resultDtos.add(shopScoreDtos.get(random.nextInt(shopScoreDtos.size())).getShopDto());
+
+        // 2개의 가게를 유사도 가까운 순서대로 뽑는다.
+        for (ShopScoreDto shopScoreDto : shopScoreDtos) {
+            if ((game.findRecommendedShopIdIndexByShopId(shopScoreDto.getShopDto().getId()) == -1) && (!shopScoreDto.getShopDto().getId().equals(resultDtos.get(0).getId()))) {
+                // 이미 추천하지 않았다면 중복이 아니므로 뽑는다. && 랜덤으로 뽑은 것과 겹치지 않는다면.
+                resultDtos.add(shopScoreDto.getShopDto());
+                if (resultDtos.size() == n) {
+                    // n개를 다 뽑았다면 종료
+                    break ;
+                }
+            }
+        }
+
+        return resultDtos;
+    }
+
+    // Shop리스트로 게임에서 추천한 가게들을 저장해주는 함수
+    @Transactional
+    public void saveRecommendedShopsByList(Game game, List<Shop> shops) {
+        for (Shop shop : shops) {
+            game.addRecommendedShopId(shop.getId());
+        }
+    }
+
+    // ShopDto리스트로 게임에서 추천한 가게들을 저장해주는 함수
+    @Transactional
+    public void saveRecommendedShopsByList(GameDto gameDto, List<ShopDto> shopDtos) {
+        Game game = gameRepository.findById(gameDto.getId()).get();
+
+        for (ShopDto shopDto : shopDtos) {
+            game.addRecommendedShopId(shopDto.getId());
+        }
+        gameRepository.save(game);
+    }
+
+
     // gameId로 게임 객체를 찾아서 반환하는 함수
+    @Transactional
     public GameDto findGameDtoById(Long gameId) {
         return gameRepository.findById(gameId).get().toDto();
     }

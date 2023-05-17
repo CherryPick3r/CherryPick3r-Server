@@ -21,6 +21,12 @@ public class Result extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "result_similarity")
+    private Double similarity;
+
+    @Column(name = "score_similarity")
+    private Double score;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "shop_id")
     private Shop shop;
@@ -30,7 +36,9 @@ public class Result extends BaseTimeEntity {
     private Game game;
 
     @Builder
-    public Result(Shop shop, Game game) {
+    public Result(Double similarity, Double score, Shop shop, Game game) {
+        this.similarity = similarity;
+        this.score = score;
         this.shop = shop;
         this.game = game;
     }
@@ -38,6 +46,8 @@ public class Result extends BaseTimeEntity {
     public ResultDto toDto() {
         return ResultDto.builder()
                 .id(this.id)
+                .similarity(this.similarity)
+                .score(this.score)
                 .shop(this.shop)
                 .game(this.game)
                 .build();
