@@ -80,16 +80,16 @@ public class ShopService {
     }
 
 
-        @Transactional
-        public Long findShopid(Shop shop)
-        {
-            return shop.getId();
-        }
-        @Transactional
-        public ShopDto findShopById(Long id)
-        {
-            return shopRepository.findById(id).get().toDto();
-        }
+    @Transactional
+    public Long findShopid(Shop shop)
+    {
+        return shop.getId();
+    }
+    @Transactional
+    public ShopDto findShopById(Long id)
+    {
+        return shopRepository.findById(id).get().toDto();
+    }
 
 
     public ShopDto findShopByName(String name){
@@ -97,15 +97,12 @@ public class ShopService {
     }
 
     @Transactional
-    public List <ShopDto> findAllDtos(){
+    public List<ShopDto> findAllDtos() {
         List<ShopDto> shopDtoList = new ArrayList<>();
-        List <Shop> shopList = shopRepository.findAll();
-        for(Shop shop : shopList){
+        List<Shop> shopList = shopRepository.findAll();
+        for (Shop shop : shopList) {
             shopDtoList.add(shop.toDto());
         }
         return shopDtoList;
     }
-
-
-
 }
