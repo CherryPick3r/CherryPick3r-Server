@@ -49,12 +49,7 @@ public class GameController {
         gameResponse.setGameDto(gameDto);
 
         // TODO: 태그에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-        // TODO: ShopDto를 ShopService에서 리스트로 반환해줄 수 있는 메서드가 생기면 그 메서드로 치환할 것
-        List<ShopDto> shopDtos = new ArrayList<>();
-        List<Shop> shops = shopRepository.findAll();
-        for (Shop shop : shops) {
-            shopDtos.add(shop.toDto());
-        }
+        List<ShopDto> shopDtos = shopService.findAllDtos();
 
 //                // 유사도를 기반으로 추천 가게 리스트를 만든다.
 //                List<ShopDto> recommendedShopDtos = gameService.findShopsBySimilarity(gameDto, shopDtos, 3L);
@@ -86,12 +81,7 @@ public class GameController {
 
             // 결과 생성
             // TODO: 태그에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-            // TODO: ShopDto를 ShopService에서 리스트로 반환해줄 수 있는 메서드가 생기면 그 메서드로 치환할 것
-            List<ShopDto> shopDtos = new ArrayList<>();
-            List<Shop> shops = shopRepository.findAll();
-            for (Shop shop : shops) {
-                shopDtos.add(shop.toDto());
-            }
+            List<ShopDto> shopDtos = shopService.findAllDtos();
 
             // 게임을 종료상태로 만든다. : 유사도를 이용한 결과 도출
 //            ResultDto resultDto = gameService.endGame(gameDto, gameService.findShopBySimilarity(gameDto, shopDtos));
@@ -111,12 +101,7 @@ public class GameController {
                 // 게임의 3번째 스탭마다 다음 3개의 가게를 다시 뽑아서 추천해준다.
 
                 // TODO: 태그에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-                // TODO: ShopDto를 ShopService에서 리스트로 반환해줄 수 있는 메서드가 생기면 그 메서드로 치환할 것
-                List<ShopDto> shopDtos = new ArrayList<>();
-                List<Shop> shops = shopRepository.findAll();
-                for (Shop shop : shops) {
-                    shopDtos.add(shop.toDto());
-                }
+                List<ShopDto> shopDtos = shopService.findAllDtos();
 
 //                // 유사도를 기반으로 추천 가게 리스트를 만든다.
 //                List<ShopDto> recommendedShopDtos = gameService.findShopsBySimilarity(gameDto, shopDtos, 3L);
@@ -151,12 +136,7 @@ public class GameController {
 
             // 결과 생성
             // TODO: 태그에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-            // TODO: ShopDto를 ShopService에서 리스트로 반환해줄 수 있는 메서드가 생기면 그 메서드로 치환할 것
-            List<ShopDto> shopDtos = new ArrayList<>();
-            List<Shop> shops = shopRepository.findAll();
-            for (Shop shop : shops) {
-                shopDtos.add(shop.toDto());
-            }
+            List<ShopDto> shopDtos = shopService.findAllDtos();
 
             // 게임을 종료상태로 만든다. : 유사도를 이용한 결과 도출
 //            ResultDto resultDto = gameService.endGame(gameDto, gameService.findShopBySimilarity(gameDto, shopDtos));
@@ -176,12 +156,7 @@ public class GameController {
                 // 게임의 3번째 스탭마다 다음 3개의 가게를 다시 뽑아서 추천해준다.
 
                 // TODO: 태그에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-                // TODO: ShopDto를 ShopService에서 리스트로 반환해줄 수 있는 메서드가 생기면 그 메서드로 치환할 것
-                List<ShopDto> shopDtos = new ArrayList<>();
-                List<Shop> shops = shopRepository.findAll();
-                for (Shop shop : shops) {
-                    shopDtos.add(shop.toDto());
-                }
+                List<ShopDto> shopDtos = shopService.findAllDtos();
 
 //                // 유사도를 기반으로 추천 가게 리스트를 만든다.
 //                List<ShopDto> recommendedShopDtos = gameService.findShopsBySimilarity(gameDto, shopDtos, 3L);
