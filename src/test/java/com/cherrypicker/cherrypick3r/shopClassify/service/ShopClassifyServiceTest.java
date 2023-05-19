@@ -25,7 +25,6 @@ public class ShopClassifyServiceTest {
     private ShopClassifyRepository shopClassifyRepository;
     private ShopRepository shopRepository;
     private TagRepository tagRepository;
-
     private ShopClassifyService shopClassifyService;
 
     @Autowired
@@ -333,7 +332,6 @@ public class ShopClassifyServiceTest {
 
         Shop shop1 = shopClassifyService.findAllShopByClassifyTags(classify1).get(0);
         long size = shopClassifyService.findAllShopByClassifyTags(classify2).size();
-
         Assertions.assertEquals(shop1.getId(), shop.getId());
         Assertions.assertEquals(size, 0);
     }

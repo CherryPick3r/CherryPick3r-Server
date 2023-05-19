@@ -32,7 +32,6 @@ public class ShopService {
         Shop shop =  new Shop(phone, name , address, addressPointY, addressPointX , clippingCount, pickedCount, operatingHours, onelineReview, mainPhotoUrl1, mainPhotoUrl2, tag);
         shopRepository.save(shop);
         return shop;
-
     }
 
     @Transactional
@@ -95,6 +94,16 @@ public class ShopService {
 
     public ShopDto findShopByName(String name){
         return shopRepository.findByName(name).get().toDto();
+    }
+
+    @Transactional
+    public List <ShopDto> findAllDtos(){
+        List<ShopDto> shopDtoList = new ArrayList<>();
+        List <Shop> shopList = shopRepository.findAll();
+        for(Shop shop : shopList){
+            shopDtoList.add(shop.toDto());
+        }
+        return shopDtoList;
     }
 
 

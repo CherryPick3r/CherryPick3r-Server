@@ -38,6 +38,4 @@ public class UserRepositoryTest {
         Assertions.assertEquals(user1.getNickname(), nickname);
         Assertions.assertEquals(user1.getAuth(), auth);
     }
-
-    
 }
