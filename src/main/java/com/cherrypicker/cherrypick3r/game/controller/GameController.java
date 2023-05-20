@@ -19,14 +19,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GameController {
 
-    private final UserService userService;
-    private final ShopService shopService;
-    private final GameService gameService;
-    private final ResultService resultService;
-    private final ShopClassifyService shopClassifyService;
-
-    // 임시
-    private final ShopRepository shopRepository;
+//    private final UserService userService;
+//    private final ShopService shopService;
+//    private final GameService gameService;
+//    private final ResultService resultService;
+//    private final ShopClassifyService shopClassifyService;
+//
+//    // 임시
+//    private final ShopRepository shopRepository;
 
     // 여기서 RequestBody로 태그 리스트를 받는게 맞는지 잘 모르겠음.
 //    @PostMapping("/start-game")

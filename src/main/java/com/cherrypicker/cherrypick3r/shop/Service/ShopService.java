@@ -24,6 +24,10 @@ public class ShopService {
 
     private final TagRepository tagRepository;
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     private final ShopClassifyService shopClassifyService;
 
     @Transactional

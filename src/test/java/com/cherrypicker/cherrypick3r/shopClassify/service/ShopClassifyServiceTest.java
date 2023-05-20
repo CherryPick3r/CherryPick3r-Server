@@ -106,6 +106,7 @@ public class ShopClassifyServiceTest {
         String mainPhotoUrl1 = "https://testlink1";
         String mainPhotoUrl2 = "https://testlink2";
         Tag tag = new Tag();
+        tagRepository.save(tag);
 
         Shop shop = Shop.builder()
                 .phone(phone)
@@ -122,7 +123,6 @@ public class ShopClassifyServiceTest {
                 .tag(tag)
                 .build();
 
-        tagRepository.save(tag);
         shopRepository.save(shop);
 
         ShopClassify shopClassify = new ShopClassify(shop);

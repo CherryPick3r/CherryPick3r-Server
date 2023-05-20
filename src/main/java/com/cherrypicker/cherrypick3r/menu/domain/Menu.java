@@ -1,12 +1,14 @@
 package com.cherrypicker.cherrypick3r.menu.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.menu.dto.MenuDto;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -35,5 +37,14 @@ public class Menu extends BaseTimeEntity {
         this.price = price;
         this.shop = shop;
     }
+    public MenuDto toDto(){
+        return MenuDto.builder()
+                .id(id)
+                .name(this.name)
+                .price(this.price)
+                .shop(this.shop)
+                .build();
+    }
+
 
 }
