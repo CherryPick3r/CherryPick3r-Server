@@ -12,14 +12,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-<<<<<<< Updated upstream
-public class menuService {
-//    private final MenuRepository menuRepository;
-=======
 @Service
 public class MenuService {
     private final MenuRepository menuRepository;
->>>>>>> Stashed changes
 
     public Menu createMenu(String name, Long price, Shop shop){
         Menu menu = new Menu(name, price, shop);
