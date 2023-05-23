@@ -41,7 +41,7 @@ public class AuthController {
 
     @GetMapping("/kakao/callback")
     public ResponseEntity kakaoCallback(@RequestParam String code,
-                                                HttpServletResponse response) {
+                                        HttpServletResponse response) {
         // 코드로 유저 불러오기
         SocialDto socialDto = socialService.verificationKakao(code);
         // 유저 등록
@@ -80,7 +80,7 @@ public class AuthController {
 
     @GetMapping("/google/callback")
     public ResponseEntity googleCallback(@RequestParam String code,
-                                        HttpServletResponse response) {
+                                         HttpServletResponse response) {
         // 코드로 유저 불러오기
         SocialDto socialDto = socialService.verificationGoogle(code);
         // 유저 등록
@@ -99,3 +99,6 @@ public class AuthController {
         return new ResponseEntity(HttpStatus.OK);
     }
 }
+
+
+
