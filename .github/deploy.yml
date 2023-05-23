@@ -11,16 +11,16 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
 env:
-  client.id.google: ${{secrets.GOOGLE_CLIENT_ID}}
-  redirect.uri.google: ${{secrets.GOOGLE_REDIRECT_URI}}
-  secret.google : ${{secrets.GOOGLE_SECRET}}
+  CLIENT_ID_GOOGLE: ${{secrets.GOOGLE_CLIENT_ID}}
+  REDIRECT_URI_GOOGLE: ${{secrets.GOOGLE_REDIRECT_URI}}
+  SECRET_GOOGLE : ${{secrets.GOOGLE_SECRET}}
 
-  client.id.kakao: ${{secrets.KAKAO_CLIENT_ID}}
-  redirect.uri.kakao: ${{secrets.KAKAO_REDIRECT_URI}}
+  CLIENT_ID_KAKAO: ${{secrets.KAKAO_CLIENT_ID}}
+  REDIRECT_URI_KAKAO: ${{secrets.KAKAO_REDIRECT_URI}}
 
-  spring.datasource.url: ${{secrets.DATASOURCE_URL}}
-  spring.datasource.username : ${{secrets.DATASOURCE_USERNAME}}
-  spring.datasource.password: ${{secrets.DATASOURCE_PASSWORD}}
+  DATASOURCE_URL: ${{secrets.DATASOURCE_URL}}
+  DATASOURCE_USERNAME : ${{secrets.DATASOURCE_USERNAME}}
+  DATASOURCE_PASSWORD: ${{secrets.DATASOURCE_PASSWORD}}
 
   S3_BUCKET_NAME: ${{secrets.S3_BUCKET_NAME}}
   CODE_DEPLOY_APPLICATION_NAME: ${{secrets.CODE_DEPLOY_APPLICATION_NAME}}
