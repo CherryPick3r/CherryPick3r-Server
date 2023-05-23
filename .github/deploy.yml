@@ -25,6 +25,7 @@ env:
   S3_BUCKET_NAME: ${{secrets.S3_BUCKET_NAME}}
   CODE_DEPLOY_APPLICATION_NAME: ${{secrets.CODE_DEPLOY_APPLICATION_NAME}}
   CODE_DEPlOY_DEPLOYMENT_GROUP_NAME: ${{secrets.CODE_DEPlOY_DEPLOYMENT_GROUP_NAME}}
+  TEST : testforEC2_yml
   working_directory: ./
 
 permissions:
