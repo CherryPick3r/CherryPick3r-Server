@@ -204,7 +204,6 @@ public class GameService {
         // 결과(체리픽)를 만든다.
         result = Result.builder()
                 .similarity(gameCalc.euclideanSimilarity(game.getTag().getTagsByList(), shop.getTag().getTagsByList()))
-//                .similarity(Math.floor((100 - gameCalc.euclideanSimilarity(game.getTag().getTagsByList(), shop.getTag().getTagsByList()) * 100) * 10) / 10)
                 .score(gameCalc.calculateScore(game.getTag().getTagsByList(), shop.getTag().getTagsByList()))
                 .shop(shop)
                 .game(game)
@@ -239,7 +238,6 @@ public class GameService {
         // 결과(체리픽)를 만든다.
         result = Result.builder()
                 .similarity(gameCalc.euclideanSimilarity(game.getTag().getTagsByList(), shop.getTag().getTagsByList()))
-//                .similarity(Math.floor((1 - gameCalc.euclideanSimilarity(game.getTag().getTagsByList(), shop.getTag().getTagsByList()) * 1000) * 10) / 10)
                 .score(gameCalc.calculateScore(game.getTag().getTagsByList(), shop.getTag().getTagsByList()))
                 .shop(shop)
                 .game(game)

@@ -1,10 +1,12 @@
 package com.cherrypicker.cherrypick3r.shop.dto;
 
 import com.cherrypicker.cherrypick3r.menu.dto.MenuSimple;
+import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.tag.dto.TagPairDto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -50,4 +52,18 @@ public class ShopDetailResponse {
         this.shopKakaoId = shopKakaoId;
     }
 
+    public ShopDetailResponse(ShopDto shopDto) {
+        this.shopId = shopDto.getId();
+        this.shopName = shopDto.getName();
+        this.shopCategory = ""; //샵카테고리 어떻게 넣을지
+        this.oneLineReview = shopDto.getOnelineReview();
+        this.shopAddress = shopDto.getAddress();
+        this.totalCherryPickCount = shopDto.getPickedCount();
+        this.operatingHours = shopDto.getOperatingHours();
+        this.topTags = null;
+        this.shopMenus = null;
+        this.shopMainPhotoURLs = null;
+        this.shopNaverId = null;
+        this.shopKakaoId = null;
+    }
 }

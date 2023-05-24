@@ -1,14 +1,22 @@
 package com.cherrypicker.cherrypick3r.shop.Service;
 
+import com.cherrypicker.cherrypick3r.clipping.service.ClippingService;
+import com.cherrypicker.cherrypick3r.menu.service.MenuService;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopDetailResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
+import com.cherrypicker.cherrypick3r.shopPhoto.service.ShopPhotoService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 
+import com.cherrypicker.cherrypick3r.tag.service.TagService;
+import com.cherrypicker.cherrypick3r.user.domain.User;
+import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +33,16 @@ public class ShopService {
     private final TagRepository tagRepository;
 
     private final ShopClassifyService shopClassifyService;
+
+    private final UserRepository userRepository;
+
+    private final TagService tagService;
+
+    private final ClippingService clippingService;
+
+    private final MenuService menuService;
+
+    private final ShopPhotoService shopPhotoService;
 
     @Transactional
     public Shop createShop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag)
@@ -104,5 +122,26 @@ public class ShopService {
             shopDtoList.add(shop.toDto());
         }
         return shopDtoList;
+    }
+
+    @Transactional
+    public ShopCardResponse createShopCardResponseByShopDtoAndUserEmail(ShopDto shopDto, String userEmail) {
+        ShopCardResponse shopCardResponse = new ShopCardResponse(shopDto);
+
+        shopCardResponse.setTopTags(tagService.getTop5TagPairDtoByShop(shopDto));
+        shopCardResponse.setShopClipping(clippingService.findClippingByUserEmailAndShopId(userEmail, shopDto.getId()));
+
+        return shopCardResponse;
+    }
+
+    @Transactional
+    public ShopDetailResponse createShopDetailResponseByShopDto(ShopDto shopDto) {
+        ShopDetailResponse shopDetailResponse = new ShopDetailResponse(shopDto);
+
+        shopDetailResponse.setTopTags(tagService.getTop5TagPairDtoByShop(shopDto));
+        shopDetailResponse.setShopMenus(menuService.findAllMenuSimpleByShopDto(shopDto));
+        shopDetailResponse.setShopMainPhotoURLs(shopPhotoService.findShopPhotoURLsByShopDto(shopDto));
+
+        return shopDetailResponse;
     }
 }

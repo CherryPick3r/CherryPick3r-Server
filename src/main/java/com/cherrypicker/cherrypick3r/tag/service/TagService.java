@@ -3,6 +3,7 @@ package com.cherrypicker.cherrypick3r.tag.service;
 import com.cherrypicker.cherrypick3r.component.TagType;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
@@ -86,6 +87,24 @@ public class TagService {
     // shop의 상위 5개 태그값을 (설명, 값) 쌍으로 반환해주는 메서드
     @Transactional
     public List<TagPairDto> getTop5TagPairDtoByShop(Shop shop) {
+        TagDescriptionDto tagDescriptionDto = getTagDescriptionDtoListByShop(shop);
+        List<TagPairDto> tagPairDtos = new ArrayList<>();
+
+        // Double형 태그 값을 기준으로 내림차순 정렬
+        Collections.sort(tagDescriptionDto.getTagPairDtos(), Comparator.comparing(TagPairDto::getValue).reversed());
+
+        for (int i=0;i<5;i++) {
+            tagPairDtos.add(tagDescriptionDto.getTagPairDtos().get(i));
+        }
+
+        return tagPairDtos;
+    }
+
+    // shop의 상위 5개 태그값을 (설명, 값) 쌍으로 반환해주는 메서드
+    @Transactional
+    public List<TagPairDto> getTop5TagPairDtoByShop(ShopDto shopDto) {
+        Shop shop = shopRepository.findById(shopDto.getId()).get();
+
         TagDescriptionDto tagDescriptionDto = getTagDescriptionDtoListByShop(shop);
         List<TagPairDto> tagPairDtos = new ArrayList<>();
 

@@ -11,5 +11,5 @@ public interface ClippingRepository extends JpaRepository<Clipping, Long> {
     List<Clipping> findAllByShop(Shop shop);
     List<Clipping> findAllByUser(User user);
 
-
+    Clipping findByShopAndUser(Shop shop, User user);
 }

@@ -23,6 +23,26 @@ public class GameResponse {
     public List<Long> recommendShopIds;
 
     public List<ShopCardResponse> recommendShops;
+
+    @Builder
+    public GameResponse(Long gameId , Long totalRound, Long curRound, Long gameStatus, List<Long> recommendShopIds, List<ShopCardResponse> recommendShops) {
+        this.gameId = gameId;
+        this.totalRound = totalRound;
+        this.curRound = curRound;
+        this.gameStatus = gameStatus;
+        this.recommendShopIds = recommendShopIds;
+        this.recommendShops = recommendShops;
+    }
+
+    public GameResponse() {
+        this.gameId = null;
+        this.totalRound = null;
+        this.curRound = null;
+        this.gameStatus = null;
+        this.recommendShopIds = null;
+        this.recommendShops = null;
+    }
+
 //    public ResultDto resultDto;
 //
 //    public GameDto gameDto;

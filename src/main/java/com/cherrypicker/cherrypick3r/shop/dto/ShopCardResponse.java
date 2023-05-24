@@ -37,4 +37,14 @@ public class ShopCardResponse {
         this.shopClipping = shopClipping;
     }
 
+    public ShopCardResponse(ShopDto shopDto) {
+        this.shopId = shopDto.getId();
+        this.shopMainPhoto1 = shopDto.getMainPhotoUrl1();
+        this.shopMainPhoto2 = shopDto.getMainPhotoUrl2();
+        this.shopName = shopDto.getName();
+        this.shopCategory = ""; // 카테고리 어떻게 채워줄까
+        this.oneLineReview = shopDto.getOnelineReview();
+        this.topTags = null;
+        this.shopClipping = null;
+    }
 }

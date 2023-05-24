@@ -58,4 +58,18 @@ public class ClippingService {
     public Integer findClippingUserNumberByShop(User user){
         return findClippingShopByUser(user).size();
     }
+
+    public Long findClippingByUserEmailAndShopId(String userEmail, Long shopId) {
+        Shop shop = shopRepository.findById(shopId).get();
+        User user = userRepository.findByEmail(userEmail).get();
+
+        Clipping clipping = clippingRepository.findByShopAndUser(shop, user);
+
+        if (clipping != null) {
+            return 1L;
+        }
+        else {
+            return 0L;
+        }
+    }
 }
