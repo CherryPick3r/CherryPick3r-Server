@@ -101,7 +101,7 @@ public class GameController {
                     .curRound(gameDto.getCurRound())
                     .gameStatus(gameDto.getStatus())
                     .recommendedShopId(resultDto.getShop().getId())
-                    .recommendedShopDetail(shopService.createShopDetailResponseByShopDto(resultDto.getShop().toDto())).build();
+                    .recommendedShopDetail(shopService.createShopDetailResponseByShopDto(resultDto.getShop().toDto(), gameDto.getUser().getEmail())).build();
             return ResponseEntity.ok(gameResponse);
         }
         else {
@@ -167,7 +167,7 @@ public class GameController {
                     .curRound(gameDto.getCurRound())
                     .gameStatus(gameDto.getStatus())
                     .recommendedShopId(resultDto.getShop().getId())
-                    .recommendedShopDetail(shopService.createShopDetailResponseByShopDto(resultDto.getShop().toDto())).build();
+                    .recommendedShopDetail(shopService.createShopDetailResponseByShopDto(resultDto.getShop().toDto(), gameDto.getUser().getEmail())).build();
             return ResponseEntity.ok(gameResponse);
         }
         else {

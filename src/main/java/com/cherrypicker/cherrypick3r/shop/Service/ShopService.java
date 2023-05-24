@@ -1,18 +1,22 @@
 package com.cherrypicker.cherrypick3r.shop.Service;
 
+import com.cherrypicker.cherrypick3r.clipping.domain.Clipping;
 import com.cherrypicker.cherrypick3r.clipping.service.ClippingService;
+import com.cherrypicker.cherrypick3r.game.domain.Game;
+import com.cherrypicker.cherrypick3r.game.domain.GameRepository;
 import com.cherrypicker.cherrypick3r.menu.service.MenuService;
+import com.cherrypicker.cherrypick3r.result.domain.Result;
+import com.cherrypicker.cherrypick3r.result.domain.ResultRepository;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDetailResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
-import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
 import com.cherrypicker.cherrypick3r.shopPhoto.service.ShopPhotoService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
-import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
-import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
+import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 
 import com.cherrypicker.cherrypick3r.tag.service.TagService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
@@ -22,7 +26,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -43,6 +49,10 @@ public class ShopService {
     private final MenuService menuService;
 
     private final ShopPhotoService shopPhotoService;
+
+    private final GameRepository gameRepository;
+
+    private final ResultRepository resultRepository;
 
     @Transactional
     public Shop createShop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag)
@@ -135,13 +145,71 @@ public class ShopService {
     }
 
     @Transactional
-    public ShopDetailResponse createShopDetailResponseByShopDto(ShopDto shopDto) {
+    public ShopDetailResponse createShopDetailResponseByShopDto(ShopDto shopDto, String userEmail) {
         ShopDetailResponse shopDetailResponse = new ShopDetailResponse(shopDto);
 
         shopDetailResponse.setTopTags(tagService.getTop5TagPairDtoByShop(shopDto));
         shopDetailResponse.setShopMenus(menuService.findAllMenuSimpleByShopDto(shopDto));
         shopDetailResponse.setShopMainPhotoURLs(shopPhotoService.findShopPhotoURLsByShopDto(shopDto));
+        shopDetailResponse.setShopClipping(clippingService.findClippingByUserEmailAndShopId(userEmail, shopDto.getId()));
 
         return shopDetailResponse;
+    }
+
+    @Transactional
+    public ShopSimple createShopSimpleByShopDto(ShopDto shopDto) {
+        ShopSimple shopSimple = ShopSimple.builder()
+                .shopId(shopDto.getId())
+                .shopName(shopDto.getName())
+                .shopCategory("")
+                .shopAddress(shopDto.getAddress())
+                .operatingHours(shopDto.getOperatingHours())
+                .mainPhotoUrl(shopDto.getMainPhotoUrl1())
+                .build();
+
+        return shopSimple;
+    }
+
+    @Transactional
+    public List<ShopSimple> createShopSimpleListByUserEmailResults(String userEmail) {
+        User user = userRepository.findByEmail(userEmail).get();
+        List<Game> games = gameRepository.findAllByUser(user);
+        List<ShopSimple> shopSimples = new ArrayList<>();
+
+        for (Game game : games) {
+            Result result = resultRepository.findByGame(game);
+            if (result != null) {
+                shopSimples.add(new ShopSimple(result.getShop()));
+            }
+        }
+
+        // Set을 이용해서 중복 제거
+        // List를 Set으로 변경
+        Set<ShopSimple> set = new HashSet<ShopSimple>(shopSimples);
+        // Set을 List로 변경
+        List<ShopSimple> shopSimplesResult =new ArrayList<ShopSimple>(set);
+
+        return shopSimplesResult;
+    }
+
+    @Transactional
+    public List<ShopSimple> createShopSimpleListByUserEmailClippings(String userEmail) {
+        User user = userRepository.findByEmail(userEmail).get();
+        List<ShopDto> shopDtos = clippingService.findClippingShopByUser(user);
+        List<ShopSimple> shopSimples = new ArrayList<>();
+
+        for (ShopDto shopDto : shopDtos) {
+            if (shopDto != null) {
+                shopSimples.add(new ShopSimple(shopDto));
+            }
+        }
+
+        // Set을 이용해서 중복 제거
+        // List를 Set으로 변경
+        Set<ShopSimple> set = new HashSet<ShopSimple>(shopSimples);
+        // Set을 List로 변경
+        List<ShopSimple> shopSimplesResult =new ArrayList<ShopSimple>(set);
+
+        return shopSimplesResult;
     }
 }

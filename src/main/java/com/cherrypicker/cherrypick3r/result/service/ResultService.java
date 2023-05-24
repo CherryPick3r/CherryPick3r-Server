@@ -63,30 +63,6 @@ public class ResultService {
 
         return ;
     }
-
-    @Transactional
-    public List<ResultDto> findResultListByShopId(Long id) {
-        List<Result> results = resultRepository.findByShop(shopRepository.findById(id).get());
-        List<ResultDto> resultDtos = new ArrayList<>();
-
-        for(Result result : results) {
-            resultDtos.add(result.toDto());
-        }
-
-        return resultDtos;
-    }
-
-    @Transactional
-    public ResultDto findResultByGameId(Long id) {
-        Result result = resultRepository.findByGame(gameRepository.findById(id).get()).get(0);
-
-        if (result == null) {
-            return null; // TODO: ResultNotFoundException
-        }
-
-        return result.toDto();
-    }
-
     @Transactional
     public void deleteResultByShopId(Long id) {
         Shop shop = shopRepository.findById(id).get();
@@ -107,4 +83,5 @@ public class ResultService {
 
         return ;
     }
+
 }

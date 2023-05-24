@@ -32,12 +32,14 @@ public class ShopDetailResponse {
 
     public List<String> shopMainPhotoURLs;
 
+    public Long shopClipping;
+
     public Long shopNaverId;
 
     public Long shopKakaoId;
 
     @Builder
-    public ShopDetailResponse(Long shopId, String shopName, String shopCategory, String oneLineReview, String shopAddress, Long totalCherryPickCount, String operatingHours, List<TagPairDto> topTags, List<MenuSimple> shopMenus, List<String> shopMainPhotoURLs, Long shopNaverId, Long shopKakaoId) {
+    public ShopDetailResponse(Long shopId, String shopName, String shopCategory, String oneLineReview, String shopAddress, Long totalCherryPickCount, String operatingHours, List<TagPairDto> topTags, List<MenuSimple> shopMenus, List<String> shopMainPhotoURLs, Long shopClipping, Long shopNaverId, Long shopKakaoId) {
         this.shopId = shopId;
         this.shopName = shopName;
         this.shopCategory = shopCategory;
@@ -48,6 +50,7 @@ public class ShopDetailResponse {
         this.topTags = topTags;
         this.shopMenus = shopMenus;
         this.shopMainPhotoURLs = shopMainPhotoURLs;
+        this.shopClipping = shopClipping;
         this.shopNaverId = shopNaverId;
         this.shopKakaoId = shopKakaoId;
     }
@@ -63,6 +66,7 @@ public class ShopDetailResponse {
         this.topTags = null;
         this.shopMenus = null;
         this.shopMainPhotoURLs = null;
+        this.shopClipping = null;
         this.shopNaverId = null;
         this.shopKakaoId = null;
     }

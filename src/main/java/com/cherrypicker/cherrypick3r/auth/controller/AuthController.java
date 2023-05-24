@@ -6,6 +6,7 @@ import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.auth.dto.SocialDto;
 import com.cherrypicker.cherrypick3r.component.JwtTokenProvider;
 import com.cherrypicker.cherrypick3r.auth.service.SocialService;
+import com.cherrypicker.cherrypick3r.user.dto.LoginResponse;
 import com.cherrypicker.cherrypick3r.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,15 +29,18 @@ public class AuthController {
     private final GoogleKey googleKey;
 
     @GetMapping("/kakao/login")
-    public ResponseEntity<String> kakaoLogin() {
+    public ResponseEntity<LoginResponse> kakaoLogin() {
         // 로그인 링크 생성
         String kakaoLoginUrl =  "https://kauth.kakao.com/oauth/authorize?client_id=" + kakaoKey.getClientId() + "&redirect_uri=" + kakaoKey.getRedirectUri() + "&response_type=code";
 
         // 로그
         System.out.println(kakaoLoginUrl);
 
+        // 결과 생성
+        LoginResponse loginResponse = new LoginResponse(kakaoLoginUrl);
+
         // 로그인 링크 반환
-        return new ResponseEntity<>(kakaoLoginUrl, HttpStatus.OK);
+        return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 
     @GetMapping("/kakao/callback")
@@ -60,7 +64,7 @@ public class AuthController {
     }
 
     @GetMapping("/google/login")
-    public ResponseEntity<String> googleLogin() {
+    public ResponseEntity<LoginResponse> googleLogin() {
         // 로그인 링크 생성
         String googleLoginUrl = "https://accounts.google.com/o/oauth2/v2/auth?" +
                 "scope=https%3A//www.googleapis.com/auth/userinfo.email https%3A//www.googleapis.com/auth/userinfo.profile&" +
@@ -74,8 +78,11 @@ public class AuthController {
         // 로그
         System.out.println(googleLoginUrl);
 
+        // 결과 생성
+        LoginResponse loginResponse = new LoginResponse(googleLoginUrl);
+
         // 로그인 링크 반환
-        return new ResponseEntity<>(googleLoginUrl, HttpStatus.OK);
+        return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 
     @GetMapping("/google/callback")
