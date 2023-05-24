@@ -94,6 +94,11 @@ public class User extends BaseTimeEntity implements UserDetails {
         this.userClassify = userClassify;
         return ;
     }
+
+    public void changeNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public UserDto toDto() {
         return UserDto.builder()
                 .email(this.email)
