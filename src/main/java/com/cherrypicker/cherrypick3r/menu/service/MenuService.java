@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class menuService {
+public class MenuService {
 //    private final MenuRepository menuRepository;
 
 
