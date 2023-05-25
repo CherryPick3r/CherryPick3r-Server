@@ -7,6 +7,7 @@ import com.cherrypicker.cherrypick3r.clipping.dto.ClippingUndoResponse;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import com.cherrypicker.cherrypick3r.user.dto.UserDto;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -113,4 +115,31 @@ public class ClippingService {
             return 0L;
         }
     }
+
+    @Transactional
+    public Long findClippingCountByUserEmail(String userEmail) {
+        User user = userRepository.findByEmail(userEmail).get();
+        List<Clipping> clippings = clippingRepository.findAllByUser(user);
+
+        return Long.valueOf(clippings.size());
+    }
+
+    @Transactional
+    public List<ShopSimple> find3ShopSimpleByUserEmail(String userEmail) {
+        User user = userRepository.findByEmail(userEmail).get();
+        List<Clipping> clippings = clippingRepository.findAllByUser(user);
+        List<ShopSimple> shopSimples = new ArrayList<>();
+        int cnt = 0;
+
+        Collections.reverse(clippings);
+        for (Clipping clipping : clippings) {
+            if (cnt >= 3)
+                break;
+            shopSimples.add(new ShopSimple(clipping.getShop()));
+            cnt++;
+        }
+
+        return shopSimples;
+    }
+
 }
