@@ -54,10 +54,10 @@ public class Shop extends BaseTimeEntity {
     @Column(name = "shop_oneline_review")
     private String onelineReview;
 
-    @Column(name = "shop_main_photo_url_1")
+    @Column(name = "shop_main_photo_url_1", length = 1000)
     private String mainPhotoUrl1;
 
-    @Column(name = "shop_main_photo_url_2")
+    @Column(name = "shop_main_photo_url_2", length = 1000)
     private String mainPhotoUrl2;
 
     @Column(name = "shop_naver_id")

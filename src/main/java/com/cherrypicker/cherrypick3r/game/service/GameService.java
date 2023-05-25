@@ -59,7 +59,7 @@ public class GameService {
         tag.setTagsByList(gameCalc.makeSimilarly(gameTagValues, userTagValues, 3L));
 
         Game game = Game.builder()
-                .totalRound(12L) // 임의의 라운드 12라운드로 설정, 3라운드씩 추천 (4번 후 종료)
+                .totalRound(3L) // 임의의 라운드 12라운드로 설정, 3라운드씩 추천 (4번 후 종료)
                 .curRound(0L) // 0라운드부터 시작
                 .status(0L) // 게임은 시작하지 않은 상태
                 .user(user) // 유저가 존재한다면 게임을 시작시킨 유저를 설정
@@ -438,7 +438,7 @@ public class GameService {
         Game game = gameRepository.findById(gameDto.getId()).get();
         List<Long> recommendedShopIDs = game.getRecommendedShopIds();
         List<ShopDto> shopDtos = new ArrayList<>();
-        int len = recommendedShopIDs.size(), cnt = 0, i;
+        int len = recommendedShopIDs.size(), cnt = 0, i, j;
 
         // 3개의 랜덤한 가게를 겹치지 않게 뽑는다.
         while (cnt < 3) {
@@ -448,7 +448,12 @@ public class GameService {
                     break ;
                 }
             }
-            if (i == len) {
+            for (j=0;j<cnt;j++) {
+                if (shop.getId() == shopDtos.get(j).getId()) {
+                    break ;
+                }
+            }
+            if (i == len && j == cnt) {
                 shopDtos.add(shop.toDto());
                 cnt++;
             }

@@ -33,7 +33,7 @@ public class GameController {
 
     @GetMapping("/make-test-data")
     public ResponseEntity<?> makeTestData() {
-        testComponent.makeShopTestData();
+        testComponent.makeShopData();
         return ResponseEntity.ok().build();
     }
 

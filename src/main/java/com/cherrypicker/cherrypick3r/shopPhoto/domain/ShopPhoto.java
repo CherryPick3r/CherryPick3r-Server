@@ -20,7 +20,7 @@ public class ShopPhoto extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "shop_photo_url")
+    @Column(name = "shop_photo_url", length = 1000)
     private String photoUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
