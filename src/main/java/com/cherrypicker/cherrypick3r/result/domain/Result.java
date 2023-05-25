@@ -24,7 +24,7 @@ public class Result extends BaseTimeEntity {
     @Column(name = "result_similarity")
     private Double similarity;
 
-    @Column(name = "score_similarity")
+    @Column(name = "result_score")
     private Double score;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)

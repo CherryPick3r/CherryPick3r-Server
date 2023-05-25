@@ -26,9 +26,9 @@ import java.util.List;
 public class GameController {
 
     private final ShopService shopService;
+
     private final GameService gameService;
-    private final ResultService resultService;
-    private final ShopRepository shopRepository;
+
     private final TestComponent testComponent;
 
     @GetMapping("/make-test-data")
@@ -46,11 +46,13 @@ public class GameController {
             return ResponseEntity.badRequest().build(); // MakeGameFailure
         }
 
-        // TODO: 게임 모드에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-        List<ShopDto> shopDtos = shopService.findAllDtos();
-
-        // 스코어를 기반으로 추천 가게 리스트를 만든다.
-        List<ShopDto> recommendedShopDtos = gameService.findShopsByScore(gameDto, shopDtos, 3L);
+//        // TODO: 게임 모드에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
+//        List<ShopDto> shopDtos = shopService.findAllDtos();
+//
+//        // 스코어를 기반으로 추천 가게 리스트를 만든다.
+//        List<ShopDto> recommendedShopDtos = gameService.findShopsByScore(gameDto, shopDtos, 3L);
+        // 랜덤하게 3개의 추천 가게 리스트를 만든다.
+        List<ShopDto> recommendedShopDtos = gameService.find3ShopByRandom(gameDto);
         List<Long> recommendedShopIds = new ArrayList<>();
         List<ShopCardResponse> shopCardResponses = new ArrayList<>();
         for (int i=0;i<3;i++) {
@@ -118,11 +120,13 @@ public class GameController {
             if (gameDto.getCurRound() % 3 == 0) {
                 // 게임의 3번째 스탭마다 다음 3개의 가게를 다시 뽑아서 추천해준다.
 
-                // TODO: 게임 모드에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-                List<ShopDto> shopDtos = shopService.findAllDtos();
-
-                // 스코어를 기반으로 추천 가게 리스트를 만든다.
-                List<ShopDto> recommendedShopDtos = gameService.findShopsByScore(gameDto, shopDtos, 3L);
+//                // TODO: 게임 모드에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
+//                List<ShopDto> shopDtos = shopService.findAllDtos();
+//
+//                // 스코어를 기반으로 추천 가게 리스트를 만든다.
+//                List<ShopDto> recommendedShopDtos = gameService.findShopsByScore(gameDto, shopDtos, 3L);
+                // 랜덤하게 3개의 추천 가게 리스트를 만든다.
+                List<ShopDto> recommendedShopDtos = gameService.find3ShopByRandom(gameDto);
                 List<Long> recommendedShopIds = new ArrayList<>();
                 List<ShopCardResponse> shopCardResponses = new ArrayList<>();
                 for (int i=0;i<3;i++) {
@@ -184,11 +188,13 @@ public class GameController {
             if (gameDto.getCurRound() % 3 == 0) {
                 // 게임의 3번째 스탭마다 다음 3개의 가게를 다시 뽑아서 추천해준다.
 
-                // TODO: 게임 모드에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-                List<ShopDto> shopDtos = shopService.findAllDtos();
-
-                // 스코어를 기반으로 추천 가게 리스트를 만든다.
-                List<ShopDto> recommendedShopDtos = gameService.findShopsByScore(gameDto, shopDtos, 3L);
+//                // TODO: 게임 모드에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
+//                List<ShopDto> shopDtos = shopService.findAllDtos();
+//
+//                // 스코어를 기반으로 추천 가게 리스트를 만든다.
+//                List<ShopDto> recommendedShopDtos = gameService.findShopsByScore(gameDto, shopDtos, 3L);
+                // 랜덤하게 3개의 추천 가게 리스트를 만든다.
+                List<ShopDto> recommendedShopDtos = gameService.find3ShopByRandom(gameDto);
                 List<Long> recommendedShopIds = new ArrayList<>();
                 List<ShopCardResponse> shopCardResponses = new ArrayList<>();
                 for (int i=0;i<3;i++) {

@@ -60,6 +60,13 @@ public class Shop extends BaseTimeEntity {
     @Column(name = "shop_main_photo_url_2")
     private String mainPhotoUrl2;
 
+    @Column(name = "shop_naver_id")
+    private Long naverId;
+
+    @Column(name = "shop_kakao_id")
+    private Long kakaoId;
+
+
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "tag_id")
     private Tag tag;
@@ -70,7 +77,7 @@ public class Shop extends BaseTimeEntity {
 
 
     @Builder
-    public Shop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag) {
+    public Shop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Long naverId, Long kakaoId, Tag tag) {
         this.phone = phone;
         this.name = name;
         this.address = address;
@@ -82,6 +89,8 @@ public class Shop extends BaseTimeEntity {
         this.onelineReview = onelineReview;
         this.mainPhotoUrl1 = mainPhotoUrl1;
         this.mainPhotoUrl2 = mainPhotoUrl2;
+        this.naverId = naverId;
+        this.kakaoId = kakaoId;
         this.shopClassify = null;
         this.tag = tag;
     }
@@ -100,6 +109,8 @@ public class Shop extends BaseTimeEntity {
                 .onelineReview(this.onelineReview)
                 .mainPhotoUrl1(this.mainPhotoUrl1)
                 .mainPhotoUrl2(this.mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
                 .tag(this.tag)
                 .shopClassify(this.shopClassify)
                 .build();

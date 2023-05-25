@@ -67,7 +67,7 @@ public class ShopDetailResponse {
         this.shopMenus = null;
         this.shopMainPhotoURLs = null;
         this.shopClipping = null;
-        this.shopNaverId = null;
-        this.shopKakaoId = null;
+        this.shopNaverId = shopDto.getNaverId();
+        this.shopKakaoId = shopDto.getKakaoId();
     }
 }

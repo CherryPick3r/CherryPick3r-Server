@@ -433,6 +433,30 @@ public class GameService {
         return resultDtos;
     }
 
+    @Transactional
+    public List<ShopDto> find3ShopByRandom(GameDto gameDto) {
+        Game game = gameRepository.findById(gameDto.getId()).get();
+        List<Long> recommendedShopIDs = game.getRecommendedShopIds();
+        List<ShopDto> shopDtos = new ArrayList<>();
+        int len = recommendedShopIDs.size(), cnt = 0, i;
+
+        // 3개의 랜덤한 가게를 겹치지 않게 뽑는다.
+        while (cnt < 3) {
+            Shop shop = shopRepository.findRandomShop().get();
+            for (i=0;i<len;i++) {
+                if (shop.getId() == recommendedShopIDs.get(i)) {
+                    break ;
+                }
+            }
+            if (i == len) {
+                shopDtos.add(shop.toDto());
+                cnt++;
+            }
+        }
+
+        return shopDtos;
+    }
+
     // Shop리스트로 게임에서 추천한 가게들을 저장해주는 함수
     @Transactional
     public void saveRecommendedShopsByList(Game game, List<Shop> shops) {

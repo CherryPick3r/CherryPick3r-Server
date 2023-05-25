@@ -37,12 +37,16 @@ public class ShopDto {
 
     private String mainPhotoUrl2;
 
+    private Long naverId;
+
+    private Long kakaoId;
+
     private Tag tag;
 
     private ShopClassify shopClassify;
 
     @Builder
-    public ShopDto(Long id, String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Tag tag, ShopClassify shopClassify) {
+    public ShopDto(Long id, String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Long naverId, Long kakaoId, Tag tag, ShopClassify shopClassify) {
         this.id = id;
         this.phone = phone;
         this.name = name;
@@ -55,6 +59,8 @@ public class ShopDto {
         this.onelineReview = onelineReview;
         this.mainPhotoUrl1 = mainPhotoUrl1;
         this.mainPhotoUrl2 = mainPhotoUrl2;
+        this.naverId = naverId;
+        this.kakaoId = kakaoId;
         this.tag = tag;
         this.shopClassify = shopClassify;
     }
