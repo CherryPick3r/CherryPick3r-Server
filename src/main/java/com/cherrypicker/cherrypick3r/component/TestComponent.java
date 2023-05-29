@@ -201,6 +201,8 @@ public class TestComponent {
         tagValues.add(0D);
         tag.setTagsByList(tagValues);
 
+        tagRepository.save(tag);
+
         Shop shop = Shop.builder()
                 .phone(phone)
                 .name(name)
@@ -218,7 +220,6 @@ public class TestComponent {
                 .tag(tag)
                 .build();
 
-        tagRepository.save(tag);
         shopRepository.save(shop);
 
         List<Menu> menus = new ArrayList<>();
@@ -314,6 +315,8 @@ public class TestComponent {
         tagValues.add(0D);
         tag2.setTagsByList(tagValues);
 
+        tagRepository.save(tag2);
+
         Shop shop2 = Shop.builder()
                 .phone(phone)
                 .name(name)
@@ -331,7 +334,6 @@ public class TestComponent {
                 .tag(tag2)
                 .build();
 
-        tagRepository.save(tag2);
         shopRepository.save(shop2);
 
         List<Menu> menus2 = new ArrayList<>();
@@ -374,8 +376,8 @@ public class TestComponent {
 
         menuRepository.saveAll(menus2);
 
-        ShopPhoto shopPhoto3 = ShopPhoto.builder().shop(shop).photoUrl("https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20160427_95%2F1461748880413puPwv_JPEG%2F176377585139428_0.jpeg").build();
-        ShopPhoto shopPhoto4 = ShopPhoto.builder().shop(shop).photoUrl("https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMjEyMjlfNTEg%2FMDAxNjcyMzA5Njk1OTAx.6WO75tYLunRH_7hL5VJPt1hQqj_ADZ9jMmcY4dLVJLcg.k5-fXopjfoMAlCvGa2o6mBZ9vNmYxVYAs5L34Io8xXYg.JPEG%2F68F00654-113B-4B7D-B4D2-3E1C3E14415D.jpeg").build();
+        ShopPhoto shopPhoto3 = ShopPhoto.builder().shop(shop2).photoUrl("https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20160427_95%2F1461748880413puPwv_JPEG%2F176377585139428_0.jpeg").build();
+        ShopPhoto shopPhoto4 = ShopPhoto.builder().shop(shop2).photoUrl("https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMjEyMjlfNTEg%2FMDAxNjcyMzA5Njk1OTAx.6WO75tYLunRH_7hL5VJPt1hQqj_ADZ9jMmcY4dLVJLcg.k5-fXopjfoMAlCvGa2o6mBZ9vNmYxVYAs5L34Io8xXYg.JPEG%2F68F00654-113B-4B7D-B4D2-3E1C3E14415D.jpeg").build();
 
         shopPhotoRepository.save(shopPhoto3);
         shopPhotoRepository.save(shopPhoto4);
@@ -438,6 +440,8 @@ public class TestComponent {
         tagValues.add(0D);
         tag3.setTagsByList(tagValues);
 
+        tagRepository.save(tag3);
+
         Shop shop3 = Shop.builder()
                 .phone(phone)
                 .name(name)
@@ -455,7 +459,6 @@ public class TestComponent {
                 .tag(tag3)
                 .build();
 
-        tagRepository.save(tag3);
         shopRepository.save(shop3);
 
         List<Menu> menus3 = new ArrayList<>();
@@ -478,11 +481,20 @@ public class TestComponent {
 
         menuRepository.saveAll(menus3);
 
-        ShopPhoto shopPhoto5 = ShopPhoto.builder().shop(shop).photoUrl("https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230217_279%2F1676608690615rBeRn_JPEG%2F20230209_201042.jpg").build();
-        ShopPhoto shopPhoto6 = ShopPhoto.builder().shop(shop).photoUrl("https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230323_141%2F1679573785448siNlR_JPEG%2FCYMERA_20230323_211542.jpg").build();
+        ShopPhoto shopPhoto5 = ShopPhoto.builder().shop(shop3).photoUrl("https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230217_279%2F1676608690615rBeRn_JPEG%2F20230209_201042.jpg").build();
+        ShopPhoto shopPhoto6 = ShopPhoto.builder().shop(shop3).photoUrl("https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230323_141%2F1679573785448siNlR_JPEG%2FCYMERA_20230323_211542.jpg").build();
 
         shopPhotoRepository.save(shopPhoto5);
         shopPhotoRepository.save(shopPhoto6);
     }
 
 }
+
+/*
+해야할 일
+1. DB
+2.
+3.
+4.
+5.
+ */

@@ -59,6 +59,7 @@ public class AuthController {
         // JWT 토큰 헤더에 담아 전달
 //        response.addHeader(env.getProperty("oauth-key.header"), env.getProperty("oauth-key.prefix") + token);
         response.setHeader("Authorization", "bearer " + token);
+        response.setHeader("UserEmail", socialDto.getEmail());
 
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -101,6 +102,7 @@ public class AuthController {
         // JWT 토큰 헤더에 담아 전달
 //        response.addHeader(env.getProperty("oauth-key.header"), env.getProperty("oauth-key.prefix") + token);
         response.setHeader("Authorization", "bearer " + token);
+        response.setHeader("UserEmail", socialDto.getEmail());
 //        System.out.println("JWT Token : " + token);
 
         return new ResponseEntity(HttpStatus.OK);
