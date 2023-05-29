@@ -374,7 +374,11 @@ public class GameService {
             List<Double> shopTagValues = shopDto.getTag().getTagsByList();
 
             Double curScore = gameCalc.calculateScore(gameTagValues, shopTagValues);
-            if (score <= curScore) {
+            if (resultDto == null) {
+                score = curScore;
+                resultDto = shopDto;
+            }
+            else if (score <= curScore) {
                 score = curScore;
                 resultDto = shopDto;
             }
