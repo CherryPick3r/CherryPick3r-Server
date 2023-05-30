@@ -171,7 +171,7 @@ public class TestComponent {
                 "11:00 - 19:30\n" +
                 "19:00 라스트오더";
         onelineReview = "중소벤처기업부 인증 백년가게";
-        mainPhotoUrl1 = "https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150831_137%2F1441030738247q5Ht8_JPEG%2F11727906_0.jpg";
+        mainPhotoUrl1 = "https://m.blog.naver.com/semins77/221675555000?view=img_13";
         mainPhotoUrl2 = "https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150831_244%2F1441030738444nvPM1_JPEG%2F11727906_1.jpg";
         naverId = 11727906L;
         Tag tag = new Tag();
