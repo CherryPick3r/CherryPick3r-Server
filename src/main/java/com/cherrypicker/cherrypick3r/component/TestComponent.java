@@ -18,6 +18,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.transaction.Transactional;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -995,11 +998,7 @@ public class TestComponent {
         tagValues.clear();
         tagValues.add(0D);
         tagValues.add(0D);
-        tagValues.add(33.1578947D);
-        tagValues.add(0D);
-        tagValues.add(0D);
-        tagValues.add(0D);
-        tagValues.add(0D);
+        tagValues.add(38.5555555555556D);
         tagValues.add(0D);
         tagValues.add(0D);
         tagValues.add(0D);
@@ -1021,6 +1020,10 @@ public class TestComponent {
         tagValues.add(12.8888889D);
         tagValues.add(0D);
         tagValues.add(0.12111111D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
         tag7.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
 
         tagRepository.save(tag7); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
@@ -1079,72 +1082,99 @@ public class TestComponent {
         shopPhotoRepository.save(shopPhoto14); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
 
     }
-//
-//    // 정제된 데이터 csv로 넣기
-//    public void putDataIntoDatabaseByCSV() throws IOException, CsvException {
-//
-//        // csv 오픈
-//        // utf-8 형태로 csv 파일 파싱
-//        ClassPathResource resourceShop = new ClassPathResource("shop.csv");
-//        CSVReader shopCsvReader = new CSVReader(new FileReader(resourceShop.getFile()));
-//
-//        shopCsvReader.readNext(); // 컬럼명은 저장되지 않도록 한 줄 읽기
-//
-//        String[] st
-//
-//        do {    //파일에서 데이터를 읽어 파싱하고 Park 객체로 만들어 ArrayList 에 넣는다.
-//            shopCsvReader = shopCsvReader.readNext();    //한 라인 읽기 (자동으로 콤마 분리해서 배열에 저장 됌)
-//
-//            if (parkInfo != null) {
-//                if (parkInfo[28] == null || parkInfo[29] == null || parkInfo[28].isEmpty() || parkInfo[29].isEmpty())  //읽어온 데이터의 위도, 경도 값이 없거나 null 이면 저장하지 않고 넘김
-//                    continue;
-//                else if (checkDuplicate(parkInfo[0], parkList))  //주차장 코드가 중복(checkDuplicate 값이 true)이면 저장하지 않고 넘김
-//                    continue;
-//                else {  //위의 두 조건에 해당사항이 없으면 데이터를 객체에 저장 후 임시 저장 ArrayList에 삽입
-//                    Park park = new Park();   //Park 객체 생성하기
-//
-//                    park.setPrkplceNo(parkInfo[0]);      //객체에 값 저장하기
-//                    park.setPrkplceNm(parkInfo[1]);
-//                    park.setPrkplceSe(parkInfo[2]);
-//                    park.setPrkplceType(parkInfo[3]);
-//                    park.setRdnmadr(parkInfo[4]);
-//                    park.setLnmadr(parkInfo[5]);
-//                    park.setPrkcmprt(parkInfo[6]);
-//                    park.setFeedingSe(parkInfo[7]);
-//                    park.setEnforceSe(parkInfo[8]);
-//                    park.setOperDay(parkInfo[9]);
-//                    park.setWeekdayOperOpenHhmm(parkInfo[10]);
-//                    park.setWeekdayOperCloseHhmm(parkInfo[11]);
-//                    park.setSatOperOperOpenHhmm(parkInfo[12]);
-//                    park.setSatOperCloseHhmm(parkInfo[13]);
-//                    park.setHolidayOperOpenHhmm(parkInfo[14]);
-//                    park.setHolidayCloseOpenHhmm(parkInfo[15]);
-//                    park.setParkingchrgeInfo(parkInfo[16]);
-//                    park.setBasicTime(parkInfo[17]);
-//                    park.setBasicCharge(parkInfo[18]);
-//                    park.setAddUnitTime(parkInfo[19]);
-//                    park.setAddUnitCharge(parkInfo[20]);
-//                    park.setDayCmmtktAdjTime(parkInfo[21]);
-//                    park.setDayCmmtkt(parkInfo[22]);
-//                    park.setMonthCmmtkt(parkInfo[23]);
-//                    park.setMetpay(parkInfo[24]);
-//                    park.setSpcmnt(parkInfo[25]);
-//                    park.setInstitutionNm(parkInfo[26]);
-//                    park.setPhoneNumber(parkInfo[27].replace("-", ""));
-//                    park.setLatitude(parkInfo[28]);
-//                    park.setLongitude(parkInfo[29]);
-//                    park.setReferenceDate(parkInfo[30]);
-//                    park.setInsttCode(parkInfo[31]);
-//                    park.setInsttNm(parkInfo[32]);
-//
-//                    parkList.add(park);   //리스트에 Park 객체 저장하기
-//                    em.persist(park);   //park 객체를 DB에 INSERT
-//                }
-//            }
-//        } while (parkInfo != null);
-//
-//        csvReader.close();
-//
-//    }
+
+    // 정제된 데이터 csv로 넣기
+    @Transactional
+    public void putDataIntoDatabaseByCSV() throws IOException, CsvException {
+
+        // csv 오픈
+        // utf-8 형태로 csv 파일 파싱
+        ClassPathResource resourceShop = new ClassPathResource("db_shop_table.csv");
+        CSVReader shopCsvReader = new CSVReader(new FileReader(resourceShop.getFile()));
+
+        ClassPathResource resourceTag = new ClassPathResource("db_tag_table.csv");
+        CSVReader tagCsvReader = new CSVReader(new FileReader(resourceTag.getFile()));
+
+        ClassPathResource resourceMenu = new ClassPathResource("db_menu_table.csv");
+        CSVReader menuCsvReader = new CSVReader(new FileReader(resourceMenu.getFile()));
+
+        shopCsvReader.readNext(); // 컬럼명은 저장되지 않도록 한 줄 읽기
+
+        String[] shopStrings;
+        String[] tagStrings;
+        String[] menuStrings;
+
+        int cnt = 0;
+
+        while ((shopStrings = shopCsvReader.readNext()) != null) {
+            //한 라인 읽기 (자동으로 콤마 분리해서 배열에 저장 됌)
+            tagStrings = tagCsvReader.readNext();
+            menuStrings = tagCsvReader.readNext();
+
+            cnt++;
+
+            String phone = shopStrings[1];
+            String name = shopStrings[2];
+            String address = shopStrings[3];
+            Double addressPointY = Double.valueOf(shopStrings[4]);
+            Double addressPointX = Double.valueOf(shopStrings[5]);
+            Long clippingCount = Long.valueOf(shopStrings[6]);
+            Long pickedCount = Long.valueOf(shopStrings[7]);
+            String operatingHours = shopStrings[8];
+            String onelineReview = shopStrings[9];
+            String mainPhotoUrl1 = shopStrings[10];
+            String mainPhotoUrl2 = shopStrings[11];
+            Long naverId = Long.valueOf(shopStrings[12]);
+            Long kakaoId = Long.valueOf(shopStrings[13]);
+            Tag tag = new Tag();
+            List<Double> tagValues = new ArrayList<>();
+            for (int i=1;i<=28;i++) {
+                tagValues.add(Double.valueOf(tagStrings[i]));
+            }
+            tag.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+            tagRepository.save(tag); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+            Shop shop = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                    .phone(phone)
+                    .name(name)
+                    .address(address)
+                    .addressPointY(addressPointY)
+                    .addressPointX(addressPointX)
+                    .clippingCount(clippingCount)
+                    .pickedCount(pickedCount)
+                    .operatingHours(operatingHours)
+                    .onelineReview(onelineReview)
+                    .mainPhotoUrl1(mainPhotoUrl1)
+                    .mainPhotoUrl2(mainPhotoUrl2)
+                    .naverId(naverId)
+                    .kakaoId(kakaoId)
+                    .tag(tag) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                    .build();
+
+            shopRepository.save(shop); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+            List<Menu> menus = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+            for (;Long.valueOf(menuStrings[2]) != cnt; menuStrings = menuCsvReader.readNext()) {
+                menus.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                        .name(menuStrings[0])
+                        .price(Long.valueOf(menuStrings[1]))
+                        .shop(shop).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+            }
+
+            menuRepository.saveAll(menus); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+            ShopPhoto shopPhoto1 = ShopPhoto.builder().shop(shop).photoUrl(shopStrings[10]).build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+            ShopPhoto shopPhoto2 = ShopPhoto.builder().shop(shop).photoUrl(shopStrings[11]).build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+            shopPhotoRepository.save(shopPhoto1); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+            shopPhotoRepository.save(shopPhoto2); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        }
+
+        shopCsvReader.close();
+        tagCsvReader.close();
+        menuCsvReader.close();
+    }
 
 }
