@@ -45,6 +45,14 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+sourceSets {
+	main {
+		resources {
+			srcDirs = ["src/main/resources"]
+		}
+	}
+}
+
 jar {
 	enabled = false
 }
