@@ -515,7 +515,7 @@ public class TestComponent {
                 "일\n" +
                 "11:00 - 24:00";
         onelineReview = "칠리새우와 맛있는 오리지널양꼬치";
-        mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/2025425_1670417642516181.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80";
+        mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/2025425_1670417643920342.jpg";
         mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/73743/2627_1634469629406_6731";
         naverId = 12966607L;
         kakaoId = 14822911L;
@@ -636,7 +636,7 @@ public class TestComponent {
 
         menuRepository.saveAll(menus4); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
 
-        ShopPhoto shopPhoto7 = ShopPhoto.builder().shop(shop4).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/2025425_1670417642516181.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto7 = ShopPhoto.builder().shop(shop4).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/2025425_1670417642516181.jpg").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
         ShopPhoto shopPhoto8 = ShopPhoto.builder().shop(shop4).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/73743/2627_1634469629406_6731").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
 
         shopPhotoRepository.save(shopPhoto7); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
@@ -666,8 +666,8 @@ public class TestComponent {
                 "일\n" +
                 "16:00~ 03:00";
         onelineReview = "역전할머니맥주 구의점에서 먹는 시원한 얼음맥주";
-        mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/2091186_1671943165220234.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80";
-        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/2038726_1641895779640502.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80";
+        mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/2091186_1671943165220234.jpg";
+        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/2038726_1641895779640502.jpg";
         naverId = 1208854457L;
         kakaoId = 884648433L;
         Tag tag5 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
@@ -763,8 +763,8 @@ public class TestComponent {
 
         menuRepository.saveAll(menus5); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
 
-        ShopPhoto shopPhoto9 = ShopPhoto.builder().shop(shop5).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/2091186_1671943165220234.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
-        ShopPhoto shopPhoto10 = ShopPhoto.builder().shop(shop5).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/2038726_1641895779640502.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto9 = ShopPhoto.builder().shop(shop5).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/2091186_1671943165220234.jpg").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto10 = ShopPhoto.builder().shop(shop5).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/2038726_1641895779640502.jpg").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
 
         shopPhotoRepository.save(shopPhoto9); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
         shopPhotoRepository.save(shopPhoto10); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
@@ -988,7 +988,7 @@ public class TestComponent {
                 "연중무휴";
         onelineReview = "건대, 세종대 맛집 삼겹살이 맛있는 곳";
         mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F49d4a13827d0c27d8caae9b1d648642c8a11b5dc%3Foriginal";
-        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/280411/1440124_1629614990766_8565?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80";
+        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/280411/1440124_1629614990766_8565";
         naverId = 35357402L;
         kakaoId = 24944745L;
         Tag tag7 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
@@ -1073,7 +1073,7 @@ public class TestComponent {
         menuRepository.saveAll(menus7); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
 
         ShopPhoto shopPhoto13 = ShopPhoto.builder().shop(shop7).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F49d4a13827d0c27d8caae9b1d648642c8a11b5dc%3Foriginal").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
-        ShopPhoto shopPhoto14 = ShopPhoto.builder().shop(shop7).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/280411/1440124_1629614990766_8565?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto14 = ShopPhoto.builder().shop(shop7).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/280411/1440124_1629614990766_8565").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
 
         shopPhotoRepository.save(shopPhoto13); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
         shopPhotoRepository.save(shopPhoto14); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
