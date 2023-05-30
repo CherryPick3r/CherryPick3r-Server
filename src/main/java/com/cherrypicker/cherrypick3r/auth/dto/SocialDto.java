@@ -15,4 +15,6 @@ public class SocialDto {
 
     // 유저의 프로필 사진 Url
     private String imageUrl;
+
+    private String accessToken;
 }

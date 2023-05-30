@@ -21,6 +21,7 @@ public class SocialService {
         SocialDto socialDto = new SocialDto();
         // 코드를 이용하여 accessToken 추출
         String accessToken = kakaoService.getAccessTokenByCode(code);
+        socialDto.setAccessToken(accessToken);
         // accessToken을 이용하여 사용자 정보 추출
         String userInfo = kakaoService.getUserInfoByAccessToken(accessToken);
 
@@ -32,6 +33,7 @@ public class SocialService {
             socialDto.setName(name.substring(1, name.length() - 1));
             String imageUrl = String.valueOf(jsonNode.get("kakao_account").get("profile").get("profile_image_url"));
             socialDto.setImageUrl(imageUrl.substring(1, imageUrl.length() - 1));
+
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -44,6 +46,7 @@ public class SocialService {
         SocialDto socialDto = new SocialDto();
         // 코드를 이용하여 accessToken 추출
         String accessToken = googleService.getAccessTokenByCode(code);
+        socialDto.setAccessToken(accessToken);
         // accessToken을 이용하여 사용자 정보 추출
         GoogleUserInfoDto googleUserInfoDto = googleService.getUserInfoByAccessToken(accessToken);
 
