@@ -5,6 +5,7 @@ import com.cherrypicker.cherrypick3r.game.domain.Game;
 import com.cherrypicker.cherrypick3r.game.dto.GameDto;
 import com.cherrypicker.cherrypick3r.preference.domain.PreferenceGame;
 import com.cherrypicker.cherrypick3r.preference.domain.PreferenceGameRepository;
+import com.cherrypicker.cherrypick3r.preference.dto.CheckPreferenceGameResponse;
 import com.cherrypicker.cherrypick3r.preference.dto.PreferenceCard;
 import com.cherrypicker.cherrypick3r.preference.dto.UserPreferenceResponse;
 import com.cherrypicker.cherrypick3r.preference.dto.UserPreferenceStartResponse;
@@ -138,6 +139,18 @@ public class PreferenceGameService {
         UserPreferenceResponse userPreferenceResponse = new UserPreferenceResponse(preferenceGame);
 
         return userPreferenceResponse;
+    }
+
+    @Transactional
+    public CheckPreferenceGameResponse findPlayRecode(String userEmail) {
+        User user = userRepository.findByEmail(userEmail).get();
+        List<PreferenceGame> preferenceGames = preferenceGameRepository.findAllByUser(user);
+        int size = preferenceGames.size();
+
+        if (size == 0)
+            return CheckPreferenceGameResponse.builder().isPlayed(0L).build();
+        else
+            return CheckPreferenceGameResponse.builder().isPlayed(1L).build();
     }
 
 }

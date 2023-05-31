@@ -13,10 +13,12 @@ import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.cherrypicker.cherrypick3r.user.service.UserService;
+import com.opencsv.exceptions.CsvException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,12 @@ public class GameController {
     @GetMapping("/make-test-data")
     public ResponseEntity<?> makeTestData() {
         testComponent.makeShopData();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/make-test-data-csv")
+    public ResponseEntity<?> makeTestDataCsv() throws IOException, CsvException {
+        testComponent.putDataIntoDatabaseByCSV();
         return ResponseEntity.ok().build();
     }
 

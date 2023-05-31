@@ -60,6 +60,7 @@ public class AuthController {
 //        response.addHeader(env.getProperty("oauth-key.header"), env.getProperty("oauth-key.prefix") + token);
         response.setHeader("Authorization", "bearer " + token);
         response.setHeader("UserEmail", socialDto.getEmail());
+        response.setHeader("AccessToken", "bearer " + socialDto.getAccessToken());
 
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -103,8 +104,31 @@ public class AuthController {
 //        response.addHeader(env.getProperty("oauth-key.header"), env.getProperty("oauth-key.prefix") + token);
         response.setHeader("Authorization", "bearer " + token);
         response.setHeader("UserEmail", socialDto.getEmail());
+        response.setHeader("AccessToken", "bearer " + socialDto.getAccessToken());
+
 //        System.out.println("JWT Token : " + token);
 
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/apple/login")
+    public ResponseEntity appleLogin(@RequestParam("userEmail") String userEmail,
+                                     @RequestParam("nickname") String nickname,
+                                     HttpServletResponse response) {
+
+        // 유저 생성
+        User user = userService.saveUserByUserEmail(userEmail, nickname);
+
+        // JWT 토큰 생성
+        List<String> list = new ArrayList<>();
+        list.add(user.getAuth());
+        String token = jwtTokenProvider.createToken(user.getEmail(), list);
+
+        // JWT 토큰 헤더에 담아 전달
+        response.setHeader("Authorization", "bearer " + token);
+        response.setHeader("UserEmail", userEmail);
+
+        // 로그인 링크 반환
         return new ResponseEntity(HttpStatus.OK);
     }
 }
