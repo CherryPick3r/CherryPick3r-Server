@@ -81,6 +81,14 @@ public class ClippingService {
     }
 
     @Transactional
+    public List<Clipping> findClippingByUser(User user)
+    {
+        List <Clipping> clippingList = clippingRepository.findAllByUser(user);
+
+        return clippingList;
+    }
+
+    @Transactional
     public List<UserDto> findClippingUserByShop(Shop shop)
     {
         List <Clipping> clippingList = clippingRepository.findAllByShop(shop);
@@ -135,7 +143,7 @@ public class ClippingService {
         for (Clipping clipping : clippings) {
             if (cnt >= 3)
                 break;
-            shopSimples.add(new ShopSimple(clipping.getShop()));
+            shopSimples.add(new ShopSimple(clipping.getShop(), clipping.getCreatedTime()));
             cnt++;
         }
 

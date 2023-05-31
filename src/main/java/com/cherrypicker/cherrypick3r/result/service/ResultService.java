@@ -121,7 +121,7 @@ public class ResultService {
             if (result != null) {
                 if (cnt >= 3)
                     break;
-                shopSimples.add(new ShopSimple(result.getShop()));
+                shopSimples.add(new ShopSimple(result.getShop(), result.getCreatedTime()));
                 cnt++;
             }
         }

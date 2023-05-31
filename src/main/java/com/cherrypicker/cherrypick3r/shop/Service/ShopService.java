@@ -179,7 +179,7 @@ public class ShopService {
         for (Game game : games) {
             Result result = resultRepository.findByGame(game);
             if (result != null) {
-                shopSimples.add(new ShopSimple(result.getShop()));
+                shopSimples.add(new ShopSimple(result.getShop(), result.getCreatedTime()));
             }
         }
 
@@ -195,12 +195,19 @@ public class ShopService {
     @Transactional
     public List<ShopSimple> createShopSimpleListByUserEmailClippings(String userEmail) {
         User user = userRepository.findByEmail(userEmail).get();
-        List<ShopDto> shopDtos = clippingService.findClippingShopByUser(user);
+//        List<ShopDto> shopDtos = clippingService.findClippingShopByUser(user);
+        List<Clipping> clippings = clippingService.findClippingByUser(user);
         List<ShopSimple> shopSimples = new ArrayList<>();
 
-        for (ShopDto shopDto : shopDtos) {
-            if (shopDto != null) {
-                shopSimples.add(new ShopSimple(shopDto));
+//        for (ShopDto shopDto : shopDtos) {
+//            if (shopDto != null) {
+//                shopSimples.add(new ShopSimple(shopDto, clippingService.));
+//            }
+//        }
+
+        for (Clipping clipping : clippings) {
+            if (clipping.getShop() != null) {
+                shopSimples.add(new ShopSimple(clipping.getShop(), clipping.getCreatedTime()));
             }
         }
 
