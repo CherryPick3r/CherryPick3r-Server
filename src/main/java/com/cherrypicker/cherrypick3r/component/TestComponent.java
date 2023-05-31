@@ -93,6 +93,42 @@ public class TestComponent {
         shopClassifyService.makeAllShopClassifyUsingTagValues(0.5D);
     }
 
+    public Tag makeTag(Double tagV1, Double tagV2, Double tagV3, Double tagV4, Double tagV5, Double tagV6, Double tagV7, Double tagV8, Double tagV9, Double tagV10, Double tagV11, Double tagV12, Double tagV13, Double tagV14, Double tagV15, Double tagV16, Double tagV17, Double tagV18, Double tagV19, Double tagV20, Double tagV21, Double tagV22, Double tagV23, Double tagV24, Double tagV25, Double tagV26, Double tagV27, Double tagV28) {
+        List<Double> tagValues = new ArrayList<>();
+        tagValues.add(tagV1);
+        tagValues.add(tagV2);
+        tagValues.add(tagV3);
+        tagValues.add(tagV4);
+        tagValues.add(tagV5);
+        tagValues.add(tagV6);
+        tagValues.add(tagV7);
+        tagValues.add(tagV8);
+        tagValues.add(tagV9);
+        tagValues.add(tagV10);
+        tagValues.add(tagV11);
+        tagValues.add(tagV12);
+        tagValues.add(tagV13);
+        tagValues.add(tagV14);
+        tagValues.add(tagV15);
+        tagValues.add(tagV16);
+        tagValues.add(tagV17);
+        tagValues.add(tagV18);
+        tagValues.add(tagV19);
+        tagValues.add(tagV20);
+        tagValues.add(tagV21);
+        tagValues.add(tagV22);
+        tagValues.add(tagV23);
+        tagValues.add(tagV24);
+        tagValues.add(tagV25);
+        tagValues.add(tagV26);
+        tagValues.add(tagV27);
+        tagValues.add(tagV28);
+        Tag tag = new Tag();
+        tag.setTagsByList(tagValues);
+        tagRepository.save(tag);
+        return tag;
+    }
+
     public void makeShopData() {
         String phone;
         String name;
@@ -155,11 +191,11 @@ public class TestComponent {
 //        userRepository.save(user);
 
         // 유저 초기 취향 게임 데이터 생성
-        PreferenceShop preferenceShop1 = new PreferenceShop(44.2145D,33.5D,15.1D,0D,55.13513D,1.1D,1.1D,1.1D,1.1D,0D,0D,0D,1.1D,0D,0D,0D,0D,1.1D,15.155D,1.1D,20.134134D,0D,0D,10.55D,0D,0D,0D,0D);
-        PreferenceShop preferenceShop2 = new PreferenceShop(0D,8.9D,0D,0D,0D,11.4D,41.33D,15.9D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,20.1D,0D,0D,0D,20.11D,30.613D,0D,34.0145D,45.4D);
-        PreferenceShop preferenceShop3 = new PreferenceShop(0D,0D,30.3D,0D,0D,15.15D,0D,0D,0D,0D,0D,0D,45.22D,0D,8.9D,55.1D,20.5D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D);
-        PreferenceShop preferenceShop4 = new PreferenceShop(0D,0D,0D,54.2D,0D,0D,0D,15.9D,0D,0D,20.1D,0D,0D,0D,0D,0D,23.14D,40.4D,0D,9D,52.55D,0D,0D,0D,0D,0D,0D,0D);
-        PreferenceShop preferenceShop5 = new PreferenceShop(0D,0D,0D,0D,0D,0D,49.1D,51.6D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,8.9D,20.92D,0D,48.22D,11.1D,31.99D,0D,0D,0D);
+        PreferenceShop preferenceShop1 = new PreferenceShop(makeTag(44.2145D,33.5D,15.1D,0D,55.13513D,1.1D,1.1D,1.1D,1.1D,0D,0D,0D,1.1D,0D,0D,0D,0D,1.1D,15.155D,1.1D,20.134134D,0D,0D,10.55D,0D,0D,0D,0D));
+        PreferenceShop preferenceShop2 = new PreferenceShop(makeTag(0D,8.9D,0D,0D,0D,11.4D,41.33D,15.9D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,20.1D,0D,0D,0D,20.11D,30.613D,0D,34.0145D,45.4D));
+        PreferenceShop preferenceShop3 = new PreferenceShop(makeTag(0D,0D,30.3D,0D,0D,15.15D,0D,0D,0D,0D,0D,0D,45.22D,0D,8.9D,55.1D,20.5D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D));
+        PreferenceShop preferenceShop4 = new PreferenceShop(makeTag(0D,0D,0D,54.2D,0D,0D,0D,15.9D,0D,0D,20.1D,0D,0D,0D,0D,0D,23.14D,40.4D,0D,9D,52.55D,0D,0D,0D,0D,0D,0D,0D));
+        PreferenceShop preferenceShop5 = new PreferenceShop(makeTag(0D,0D,0D,0D,0D,0D,49.1D,51.6D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,8.9D,20.92D,0D,48.22D,11.1D,31.99D,0D,0D,0D));
 
         preferenceShopRepository.save(preferenceShop1);
         preferenceShopRepository.save(preferenceShop2);
