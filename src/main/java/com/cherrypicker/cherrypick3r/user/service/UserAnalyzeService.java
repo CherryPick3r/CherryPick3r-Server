@@ -185,8 +185,20 @@ public class UserAnalyzeService {
     @Transactional
     public List<String> findUserPreferenceTags(String userEmail) {
         User user = userRepository.findByEmail(userEmail).get();
-        UserClassify userClassify = userClassifyService.makeUserClassifyUsingTagValues(user, 5D);
-        List<Long> userClassifys = userClassify.getUserClassifyByList();
+
+        List<Double> tags = user.getTag().getTagsByList();
+        List<Long> userClassifys = new ArrayList<>();
+        int tagsLen = tags.size();
+
+        for (int i=0;i<tagsLen;i++) {
+            if (tags.get(i) <= 5D) {
+                userClassifys.add(0L);
+            }
+            else {
+                userClassifys.add(1L);
+            }
+        }
+
         List<String> retTags = new ArrayList<>();
 
         if (userClassifys.get(0) == 1) retTags.add(TagType.CTAG001.getDescription());
