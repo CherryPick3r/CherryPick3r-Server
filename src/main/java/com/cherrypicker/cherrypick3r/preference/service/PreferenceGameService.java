@@ -9,6 +9,8 @@ import com.cherrypicker.cherrypick3r.preference.dto.CheckPreferenceGameResponse;
 import com.cherrypicker.cherrypick3r.preference.dto.PreferenceCard;
 import com.cherrypicker.cherrypick3r.preference.dto.UserPreferenceResponse;
 import com.cherrypicker.cherrypick3r.preference.dto.UserPreferenceStartResponse;
+import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShop;
+import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShopRepository;
 import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
@@ -38,6 +40,8 @@ public class PreferenceGameService {
 
     private final ShopRepository shopRepository;
 
+    private final PreferenceShopRepository preferenceShopRepository;
+
     private final ShopService shopService;
 
     private final TagService tagService;
@@ -63,13 +67,21 @@ public class PreferenceGameService {
         // 초기취향 게임 시작
         preferenceGame.setStatusStart();
 
-        // TODO: 일단 랜덤하게 가게를 뽑아서 주지만 정형화한 가게 5개를 만들어서 줄 필요성이 있음
-        // 초기 취향 게임 가게 5개 생성, 일단 랜덤한 5개의 가게를 뽑아서 줌
-        List<Shop> shops = shopRepository.findRandomShops();
+//        // TODO: 일단 랜덤하게 가게를 뽑아서 주지만 정형화한 가게 5개를 만들어서 줄 필요성이 있음
+//        // 초기 취향 게임 가게 5개 생성, 일단 랜덤한 5개의 가게를 뽑아서 줌
+//        List<Shop> shops = shopRepository.findRandomShops();
+//        List<PreferenceCard> preferenceCards = new ArrayList<>();
+//        for (Shop shop : shops) {
+//            preferenceGame.getRecommendedShopIds().add(shop.getId());
+//            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByShop(shop)));
+//        }
+
+        // 정형화한 가게 5개를 만들어서 줌
+        List<PreferenceShop> preferenceShops = preferenceShopRepository.findRandomPreferenceShops();
         List<PreferenceCard> preferenceCards = new ArrayList<>();
-        for (Shop shop : shops) {
-            preferenceGame.getRecommendedShopIds().add(shop.getId());
-            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByShop(shop)));
+        for (PreferenceShop preferenceShop : preferenceShops) {
+            preferenceGame.getRecommendedShopIds().add(preferenceShop.getId());
+            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByPreferenceShop(preferenceShop)));
         }
 
         // 생성한 초기취향 게임 저장

@@ -2,6 +2,8 @@ package com.cherrypicker.cherrypick3r.component;
 
 import com.cherrypicker.cherrypick3r.menu.domain.Menu;
 import com.cherrypicker.cherrypick3r.menu.domain.MenuRepository;
+import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShop;
+import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShopRepository;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
@@ -38,6 +40,7 @@ public class TestComponent {
     private final MenuRepository menuRepository;
     private final ShopPhotoRepository shopPhotoRepository;
     private final UserRepository userRepository;
+    private final PreferenceShopRepository preferenceShopRepository;
 
     // 랜덤한 태그 값 생성
     public List<Double> makeRandomTagValueList() {
@@ -150,6 +153,19 @@ public class TestComponent {
 //                .build();
 //
 //        userRepository.save(user);
+
+        // 유저 초기 취향 게임 데이터 생성
+        PreferenceShop preferenceShop1 = new PreferenceShop(44.2145D,33.5D,15.1D,0D,55.13513D,1.1D,1.1D,1.1D,1.1D,0D,0D,0D,1.1D,0D,0D,0D,0D,1.1D,15.155D,1.1D,20.134134D,0D,0D,10.55D,0D,0D,0D,0D);
+        PreferenceShop preferenceShop2 = new PreferenceShop(0D,8.9D,0D,0D,0D,11.4D,41.33D,15.9D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,20.1D,0D,0D,0D,20.11D,30.613D,0D,34.0145D,45.4D);
+        PreferenceShop preferenceShop3 = new PreferenceShop(0D,0D,30.3D,0D,0D,15.15D,0D,0D,0D,0D,0D,0D,45.22D,0D,8.9D,55.1D,20.5D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D);
+        PreferenceShop preferenceShop4 = new PreferenceShop(0D,0D,0D,54.2D,0D,0D,0D,15.9D,0D,0D,20.1D,0D,0D,0D,0D,0D,23.14D,40.4D,0D,9D,52.55D,0D,0D,0D,0D,0D,0D,0D);
+        PreferenceShop preferenceShop5 = new PreferenceShop(0D,0D,0D,0D,0D,0D,49.1D,51.6D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,0D,8.9D,20.92D,0D,48.22D,11.1D,31.99D,0D,0D,0D);
+
+        preferenceShopRepository.save(preferenceShop1);
+        preferenceShopRepository.save(preferenceShop2);
+        preferenceShopRepository.save(preferenceShop3);
+        preferenceShopRepository.save(preferenceShop4);
+        preferenceShopRepository.save(preferenceShop5);
 
         // Testcase1
         phone = "02-457-8319";

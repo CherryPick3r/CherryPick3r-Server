@@ -1,6 +1,7 @@
 package com.cherrypicker.cherrypick3r.tag.service;
 
 import com.cherrypicker.cherrypick3r.component.TagType;
+import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShop;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
@@ -84,10 +85,46 @@ public class TagService {
         return tagDescriptionDto;
     }
 
+    // 가게를 받아서 가게의 태그를 TagDescriptionDto로 바꿔주는 메서드
+    @Transactional
+    public TagDescriptionDto getTagDescriptionDtoListByPreferenceShop(PreferenceShop shop) {
+        Tag tag = shop.getTag();
+        List<Double> tagValues = tag.getTagsByList();
+
+        List<TagPairDto> tagPairDtos = new ArrayList<>();
+        int i = 0;
+        // 열거형 상수 순회하기
+        for (TagType tagType : TagType.values()) {
+            tagPairDtos.add(TagPairDto.builder()
+                    .description(tagType.getDescription())
+                    .value(tagValues.get(i++))
+                    .build());
+        }
+        TagDescriptionDto tagDescriptionDto = new TagDescriptionDto(tagPairDtos);
+
+        return tagDescriptionDto;
+    }
+
     // shop의 상위 5개 태그값을 (설명, 값) 쌍으로 반환해주는 메서드
     @Transactional
     public List<TagPairDto> getTop5TagPairDtoByShop(Shop shop) {
         TagDescriptionDto tagDescriptionDto = getTagDescriptionDtoListByShop(shop);
+        List<TagPairDto> tagPairDtos = new ArrayList<>();
+
+        // Double형 태그 값을 기준으로 내림차순 정렬
+        Collections.sort(tagDescriptionDto.getTagPairDtos(), Comparator.comparing(TagPairDto::getValue).reversed());
+
+        for (int i=0;i<5;i++) {
+            tagPairDtos.add(tagDescriptionDto.getTagPairDtos().get(i));
+        }
+
+        return tagPairDtos;
+    }
+
+    // shop의 상위 5개 태그값을 (설명, 값) 쌍으로 반환해주는 메서드
+    @Transactional
+    public List<TagPairDto> getTop5TagPairDtoByPreferenceShop(PreferenceShop shop) {
+        TagDescriptionDto tagDescriptionDto = getTagDescriptionDtoListByPreferenceShop(shop);
         List<TagPairDto> tagPairDtos = new ArrayList<>();
 
         // Double형 태그 값을 기준으로 내림차순 정렬
