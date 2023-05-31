@@ -166,13 +166,13 @@ public class UserAnalyzeService {
 
         total = cnt1 + cnt2 + cnt3 + cnt4 + cnt5 + cnt6 + cnt7;
 
-        userClassValues.add(Double.valueOf(cnt1 / total));
-        userClassValues.add(Double.valueOf(cnt2 / total));
-        userClassValues.add(Double.valueOf(cnt3 / total));
-        userClassValues.add(Double.valueOf(cnt4 / total));
-        userClassValues.add(Double.valueOf(cnt5 / total));
-        userClassValues.add(Double.valueOf(cnt6 / total));
-        userClassValues.add(Double.valueOf(cnt7 / total));
+        userClassValues.add(Double.valueOf((double)cnt1 / total));
+        userClassValues.add(Double.valueOf((double)cnt2 / total));
+        userClassValues.add(Double.valueOf((double)cnt3 / total));
+        userClassValues.add(Double.valueOf((double)cnt4 / total));
+        userClassValues.add(Double.valueOf((double)cnt5 / total));
+        userClassValues.add(Double.valueOf((double)cnt6 / total));
+        userClassValues.add(Double.valueOf((double)cnt7 / total));
 
         UserClassPair userClassPair = UserClassPair.builder()
                 .userClass(userClass)
