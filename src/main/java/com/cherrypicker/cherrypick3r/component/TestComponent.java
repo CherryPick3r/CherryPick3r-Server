@@ -1342,7 +1342,7 @@ public class TestComponent {
                 "17:00 ~ 00:00 ";
         onelineReview = "감튀맛집 폼프리츠";
         mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Fpostfiles14.naver.net%2FMjAyMTA2MTBfMjgg%2FMDAxNjIzMzM1NzY4OTA3.w0WMYNsCG244RmKw9_S3K5uGY2GOQ7lWDnsIXiHEP3Ug.npA8DxlHCFo_emgp5j6qDOWMCUvL9msAr0ArW78wr3Qg.JPEG.seraphhz%2FSE-6d93a04f-2be7-4736-9a36-9e7b7fb35f66.jpg%3Ftype%3Dw966";
-        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/75017/1560043_1577505070545"
+        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/75017/1560043_1577505070545";
         naverId = 33510840L;
         kakaoId = 21801734L;
         Tag tag10 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
