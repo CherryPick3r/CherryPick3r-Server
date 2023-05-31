@@ -370,10 +370,27 @@ public class GameService {
         Double score = 0D;
         ShopDto resultDto = null;
 
+        // 임시
+        Game game = gameRepository.findById(gameDto.getId()).get();
+        List<Long> recommendedShopIds = game.getRecommendedShopIds();
+        int flag;
+
         for (ShopDto shopDto : shopDtos) {
             List<Double> shopTagValues = shopDto.getTag().getTagsByList();
 
             Double curScore = gameCalc.calculateScore(gameTagValues, shopTagValues);
+
+            // 임시
+            flag = 0;
+            for (int i=0;i<recommendedShopIds.size();i++) {
+                if (shopDto.getId() == recommendedShopIds.get(i)) {
+                    flag = 1;
+                }
+            }
+            if (flag == 1) {
+                continue;
+            }
+
             if (resultDto == null) {
                 score = curScore;
                 resultDto = shopDto;
