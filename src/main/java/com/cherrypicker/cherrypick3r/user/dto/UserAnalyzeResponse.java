@@ -14,8 +14,10 @@ public class UserAnalyzeResponse {
     public Double userPercentile;
 
     // 보류: 유저 분류
+    public String userClass;
 
     // 보류: 유저 분석 그래프에 넣을 값
+    public List<Double> userAnalyzeValues;
 
     public Long cherrypickClippingTotalCount;
 
@@ -27,18 +29,20 @@ public class UserAnalyzeResponse {
 
     public List<ShopSimple> recentClippingShops;
 
-    public List<String> weeklyTags;
+    public List<String> userTags;
 
     @Builder
-    public UserAnalyzeResponse(String userNickname, Double userPercentile, Long cherrypickClippingTotalCount, Long cherrypickCount, List<ShopSimple> recentCherrypickShops, Long clippingCount, List<ShopSimple> recentClippingShops, List<String> weeklyTags) {
+    public UserAnalyzeResponse(String userNickname, Double userPercentile, String userClass, List<Double> userAnalyzeValues, Long cherrypickClippingTotalCount, Long cherrypickCount, List<ShopSimple> recentCherrypickShops, Long clippingCount, List<ShopSimple> recentClippingShops, List<String> userTags) {
         this.userNickname = userNickname;
         this.userPercentile = userPercentile;
+        this.userClass = userClass;
+        this.userAnalyzeValues = userAnalyzeValues;
         this.cherrypickClippingTotalCount = cherrypickClippingTotalCount;
         this.cherrypickCount = cherrypickCount;
         this.recentCherrypickShops = recentCherrypickShops;
         this.clippingCount = clippingCount;
         this.recentClippingShops = recentClippingShops;
-        this.weeklyTags = weeklyTags;
+        this.userTags = userTags;
     }
 
 }

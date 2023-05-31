@@ -81,6 +81,20 @@ public class ClippingService {
     }
 
     @Transactional
+    public List<Shop> findClippingShopByUser(String userEmail)
+    {
+        User user = userRepository.findByEmail(userEmail).get();
+        List <Clipping> clippingList = clippingRepository.findAllByUser(user);
+        List <Shop> clippedShopByUser =  new ArrayList<>();
+
+
+        for(Clipping clip : clippingList){
+            clippedShopByUser.add(clip.getShop());
+        }
+        return clippedShopByUser;
+    }
+
+    @Transactional
     public List<Clipping> findClippingByUser(User user)
     {
         List <Clipping> clippingList = clippingRepository.findAllByUser(user);

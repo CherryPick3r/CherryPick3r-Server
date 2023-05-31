@@ -5,6 +5,7 @@ import com.cherrypicker.cherrypick3r.game.service.GameService;
 import com.cherrypicker.cherrypick3r.result.service.ResultService;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
 import com.cherrypicker.cherrypick3r.user.dto.*;
+import com.cherrypicker.cherrypick3r.user.service.UserAnalyzeService;
 import com.cherrypicker.cherrypick3r.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,23 +26,29 @@ public class UserController {
 
     private final ClippingService clippingService;
 
+    private final UserAnalyzeService userAnalyzeService;
+
     @GetMapping("/analyze")
     public ResponseEntity<UserAnalyzeResponse> composeUserAnalyze(@RequestParam("userEmail") String userEmail) {
         Long resultCount = resultService.findResultCountByUserEmail(userEmail);
         Long clippingCount = clippingService.findClippingCountByUserEmail(userEmail);
         List<ShopSimple> recentCherrypickShops = resultService.find3ShopSimpleByUserEmail(userEmail);
         List<ShopSimple> recentClippingShops = clippingService.find3ShopSimpleByUserEmail(userEmail);
-        List<String> weeklyTags = new ArrayList<>();
+        List<String> userTags = userAnalyzeService.findUserPreferenceTags(userEmail);
+        Double userPercentile = userAnalyzeService.calcUserPercentile(userEmail);
+        UserClassPair userClassPair = userAnalyzeService.findUserClass(userEmail);
 
         UserAnalyzeResponse userAnalyzeResponse = UserAnalyzeResponse.builder()
                 .userNickname(userService.findUserNicknameByUserEmail(userEmail).getUserNickname()) // 유저 닉네임
-                .userPercentile(1D) // 유저 상위 퍼센트(로직 작성 필요)
+                .userPercentile(userPercentile) // 유저 상위 퍼센트
+                .userClass(userClassPair.getUserClass()) // 유저 분류
+                .userAnalyzeValues(userClassPair.getUserClassValues()) // 유저 취향 값
                 .cherrypickClippingTotalCount(resultCount + clippingCount) // 체리픽 횟수 + 클리핑 횟수
                 .cherrypickCount(resultCount) // 체리픽 횟수
                 .recentCherrypickShops(recentCherrypickShops) // 체리픽한 가게들의 심플정보 3개
                 .clippingCount(clippingCount) // 클리핑 횟수
                 .recentClippingShops(recentClippingShops) // 클리핑한 가게들의 심플정보 3개
-                .weeklyTags(weeklyTags) // 한 주간 찾은 태그들 모음(로직 작성 필요)
+                .userTags(userTags) // 한 주간 찾은 태그들 모음
                 .build();
 
         return ResponseEntity.ok(userAnalyzeResponse);
