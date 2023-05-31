@@ -56,7 +56,6 @@ public class UserAnalyzeService {
         User target = userRepository.findByEmail(userEmail).get();
         List<Double> targetTagValues = target.getTag().getTagsByList();
         List<User> users = userRepository.findAll();
-        int size = users.size();
         List<UserSimilarityPair> userSimilarityPairs = new ArrayList<>();
 
         // 각 유저와 다른 모든 유저의 유사도를 더한 리스트를 만든다.
@@ -73,12 +72,14 @@ public class UserAnalyzeService {
         // 오름차순 정렬
         Collections.sort(userSimilarityPairs, Comparator.comparingDouble(UserSimilarityPair::getSimilarity));
 
+        int size = userSimilarityPairs.size();
         for (int i=0;i<size;i++) {
             if (userSimilarityPairs.get(i).getUser().getEmail() == userEmail) {
-                return Double.valueOf(((1 - (double)i / size)) * 100);
+                return Double.valueOf((1 - ((double)i / size)) * 100);
             }
         }
 
+        System.out.println("PreferenceUserNotFound");
         // 유저가 리스트에 없는 경우
         return 1D;
     }
@@ -191,7 +192,7 @@ public class UserAnalyzeService {
         int tagsLen = tags.size();
 
         for (int i=0;i<tagsLen;i++) {
-            if (tags.get(i) <= 5D) {
+            if (tags.get(i) <= 2D) {
                 userClassifys.add(0L);
             }
             else {
