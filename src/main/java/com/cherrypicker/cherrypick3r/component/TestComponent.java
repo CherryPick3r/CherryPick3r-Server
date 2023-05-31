@@ -326,10 +326,10 @@ public class TestComponent {
         tagValues.add(4.761904762D);
         tagValues.add(9.523809524D);
         tagValues.add(24.9047619D);
-        tagValues.add(14.28571429D);
+        tagValues.add(6.28571429D);
         tagValues.add(0D);
         tagValues.add(4.761904762D);
-        tagValues.add(17.9047619D);
+        tagValues.add(10.9047619D);
         tagValues.add(9.523809524D);
         tagValues.add(0D);
         tagValues.add(35.04761905D);
@@ -558,7 +558,7 @@ public class TestComponent {
         tagValues.add(0D);
         tagValues.add(30.621342512909D);
         tagValues.add(19.85197934595525D);
-        tagValues.add(17.03614457831325D);
+        tagValues.add(8.03614457831325D);
         tagValues.add(0D);
         tagValues.add(5.76592082616179D);
         tagValues.add(33.4044750430293D);
@@ -702,7 +702,7 @@ public class TestComponent {
         tagValues.add(2.5390625D);
         tagValues.add(0.1953125D);
         tagValues.add(0D);
-        tagValues.add(25.9765625D);
+        tagValues.add(20.9765625D);
         tagValues.add(0.1953125D);
         tagValues.add(0D);
         tagValues.add(0D);
@@ -711,7 +711,7 @@ public class TestComponent {
         tagValues.add(3.3203125D);
         tagValues.add(30.8359375D);
         tagValues.add(0.78125D);
-        tagValues.add(62.046875D);
+        tagValues.add(55.046875D);
         tagValues.add(15.1796875D);
         tagValues.add(0D);
         tagValues.add(0.087890625D);
@@ -1029,11 +1029,11 @@ public class TestComponent {
         tagValues.add(0D);
         tagValues.add(0D);
         tagValues.add(16.88888889D);
-        tagValues.add(18D);
+        tagValues.add(18.1D);
         tagValues.add(1.77777778D);
         tagValues.add(0D);
         tagValues.add(37.7777778D);
-        tagValues.add(12.8888889D);
+        tagValues.add(6.8888889D);
         tagValues.add(0D);
         tagValues.add(0.12111111D);
         tagValues.add(0D);
@@ -1246,8 +1246,8 @@ public class TestComponent {
         tagValues.clear();
         tagValues.add(0D);
         tagValues.add(0D);
-        tagValues.add(39.3706293706294D);
-        tagValues.add(28.99300699300699D);
+        tagValues.add(29.3706293706294D);
+        tagValues.add(18.99300699300699D);
         tagValues.add(0D);
         tagValues.add(0D);
         tagValues.add(0D);
@@ -1264,8 +1264,8 @@ public class TestComponent {
         tagValues.add(4.1958041958042D);
         tagValues.add(4.1958041958042D);
         tagValues.add(0D);
-        tagValues.add(45.59440559440559D);
-        tagValues.add(41.034965034965D);
+        tagValues.add(31.59440559440559D);
+        tagValues.add(21.034965034965D);
         tagValues.add(0D);
         tagValues.add(0.0979020979020979D);
         tagValues.add(0D);
