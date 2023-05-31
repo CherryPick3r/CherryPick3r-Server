@@ -59,7 +59,7 @@ public class GameService {
         tag.setTagsByList(gameCalc.makeSimilarly(gameTagValues, userTagValues, 3L));
 
         Game game = Game.builder()
-                .totalRound(3L) // 임의의 라운드 12라운드로 설정, 3라운드씩 추천 (4번 후 종료)
+                .totalRound(6L) // 임의의 라운드 12라운드로 설정, 3라운드씩 추천 (4번 후 종료)
                 .curRound(0L) // 0라운드부터 시작
                 .status(0L) // 게임은 시작하지 않은 상태
                 .user(user) // 유저가 존재한다면 게임을 시작시킨 유저를 설정
