@@ -53,8 +53,6 @@ public class UserAnalyzeService {
 
     @Transactional
     public Double calcUserPercentile(String userEmail) {
-        User target = userRepository.findByEmail(userEmail).get();
-        List<Double> targetTagValues = target.getTag().getTagsByList();
         List<User> users = userRepository.findAll();
         List<UserSimilarityPair> userSimilarityPairs = new ArrayList<>();
 
@@ -74,12 +72,12 @@ public class UserAnalyzeService {
 
         int size = userSimilarityPairs.size();
         for (int i=0;i<size;i++) {
-            if (userSimilarityPairs.get(i).getUser().getEmail() == userEmail) {
+            if (userSimilarityPairs.get(i).getUser().getEmail().equals(userEmail)) {
                 return Double.valueOf((1 - ((double)i / size)) * 100);
             }
         }
 
-        System.out.println("PreferenceUserNotFound");
+//        System.out.println("PreferenceUserNotFound");
         // 유저가 리스트에 없는 경우
         return 1D;
     }

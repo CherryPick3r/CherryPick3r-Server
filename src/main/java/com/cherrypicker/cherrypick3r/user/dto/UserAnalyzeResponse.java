@@ -13,6 +13,8 @@ public class UserAnalyzeResponse {
 
     public Double userPercentile;
 
+    public List<String> userTags;
+
     // 보류: 유저 분류
     public String userClass;
 
@@ -28,8 +30,6 @@ public class UserAnalyzeResponse {
     public Long clippingCount;
 
     public List<ShopSimple> recentClippingShops;
-
-    public List<String> userTags;
 
     @Builder
     public UserAnalyzeResponse(String userNickname, Double userPercentile, String userClass, List<Double> userAnalyzeValues, Long cherrypickClippingTotalCount, Long cherrypickCount, List<ShopSimple> recentCherrypickShops, Long clippingCount, List<ShopSimple> recentClippingShops, List<String> userTags) {
