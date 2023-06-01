@@ -179,17 +179,20 @@ public class ShopService {
         for (Game game : games) {
             Result result = resultRepository.findByGame(game);
             if (result != null) {
-                shopSimples.add(new ShopSimple(result.getShop(), result.getCreatedTime()));
+                ShopSimple shopSimple = new ShopSimple(result.getShop(), result.getCreatedTime());
+                shopSimple.setShopId(result.getId());
+                shopSimples.add(shopSimple);
             }
         }
 
-        // Set을 이용해서 중복 제거
-        // List를 Set으로 변경
-        Set<ShopSimple> set = new HashSet<ShopSimple>(shopSimples);
-        // Set을 List로 변경
-        List<ShopSimple> shopSimplesResult =new ArrayList<ShopSimple>(set);
+//        // Set을 이용해서 중복 제거
+//        // List를 Set으로 변경
+//        Set<ShopSimple> set = new HashSet<ShopSimple>(shopSimples);
+//        // Set을 List로 변경
+//        List<ShopSimple> shopSimplesResult =new ArrayList<ShopSimple>(set);
 
-        return shopSimplesResult;
+//        return shopSimplesResult;
+        return shopSimples;
     }
 
     @Transactional
