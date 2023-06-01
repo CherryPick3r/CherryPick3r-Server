@@ -39,6 +39,13 @@ public class GameController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/make-test-data-final")
+    public ResponseEntity<?> makeTestDataFinal() {
+        testComponent.putDataebang();
+        testComponent.putDataBySeongmik();
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/make-test-data-csv")
     public ResponseEntity<?> makeTestDataCsv() throws IOException, CsvException {
         testComponent.putDataIntoDatabaseByCSV();
