@@ -1521,7 +1521,7 @@ public class TestComponent {
         addressPointX = 127.0778D;
         clippingCount = 0L;
         pickedCount = 0L;
-        operatingHours = "\"월\n" +
+        operatingHours = "월\n" +
                 "17:00 ~ 00:00 \n" +
                 "화\n" +
                 "17:00 ~ 00:00 \n" +
@@ -1532,7 +1532,7 @@ public class TestComponent {
                 "금\n" +
                 "17:00 ~ 00:00 \n" +
                 "토\n"+
-                "17:00 ~ 00:00 \"";
+                "17:00 ~ 00:00 ";
         onelineReview = "파스타와 소주가 있는 착한 음주양식당";
         mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/406525/875169_1677146431558_1000003557";
         mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/406525/2215949_1648701267430_13615";
@@ -1649,26 +1649,16 @@ public class TestComponent {
         addressPointX = 127.0718D;
         clippingCount = 0L;
         pickedCount = 0L;
-        operatingHours = "\"월\n" +
+        operatingHours = "월\n" +
                 "11:00 - 21:00\n" +
-                "14:30 - 17:30 브레이크타임\n" +
-                "13:30, 20:00 라스트오더\n" +
                 "화\n" +
                 "11:00 - 21:00\n" +
-                "14:30 - 17:30 브레이크타임\n" +
-                "13:30, 20:00 라스트오더\n" +
                 "수\n" +
                 "11:00 - 21:00\n" +
-                "14:30 - 17:30 브레이크타임\n" +
-                "13:30, 20:00 라스트오더\n" +
                 "목\n" +
                 "11:00 - 21:00\n" +
-                "14:30 - 17:30 브레이크타임\n" +
-                "13:30, 20:00 라스트오더\n" +
                 "금\n" +
                 "11:00 - 21:00\n" +
-                "14:30 - 17:30 브레이크타임\n" +
-                "13:30, 20:00 라스트오더\n" +
                 "토\n" +
                 "정기휴무 (매주 토요일)\n" +
                 "일\n" +
@@ -1755,26 +1745,20 @@ public class TestComponent {
         addressPointX = 127.0761D;
         clippingCount = 0L;
         pickedCount = 0L;
-        operatingHours = "\"월\n" +
+        operatingHours = "월\n" +
                 "정기휴무 (매주 월요일)\n" +
                 "화\n" +
                 "11:00 - 22:00\n" +
-                "15:00 - 17:00 브레이크타임\n" +
                 "수\n" +
                 "11:00 - 22:00\n" +
-                "15:00 - 17:00 브레이크타임\n" +
                 "목\n" +
                 "11:00 - 22:00\n" +
-                "15:00 - 17:00 브레이크타임\n" +
                 "금\n" +
                 "11:00 - 22:00\n" +
-                "15:00 - 17:00 브레이크타임\n" +
                 "토\n" +
                 "11:00 - 22:00\n" +
-                "15:00 - 17:00 브레이크타임\n" +
                 "일\n" +
-                "11:00 - 22:00\n" +
-                "15:00 - 17:00 브레이크타임\"";
+                "11:00 - 22:00\n";
         onelineReview = "농림축산식품부 제공안심식당";
         mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/261386_1655293223867021.jpg";
         mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/395857/1240998_1646146879313";
@@ -1980,25 +1964,20 @@ public class TestComponent {
         addressPointX = 127.0794D;
         clippingCount = 0L;
         pickedCount = 0L;
-        operatingHours = "\"월\n" +
+        operatingHours = "월\n" +
                 "정기휴무 (매주 월요일)\n" +
                 "화\n" +
                 "11:00 - 24:00\n" +
-                "15:00 - 17:30 브레이크타임\n" +
                 "수\n" +
                 "11:00 - 24:00\n" +
-                "15:00 - 17:30 브레이크타임\n" +
                 "목\n" +
                 "11:00 - 24:00\n" +
-                "15:00 - 17:30 브레이크타임\n" +
                 "금\n" +
                 "11:00 - 24:00\n" +
-                "15:00 - 17:30 브레이크타임\n" +
                 "토\n" +
                 "11:00 - 24:00\n" +
                 "일\n" +
-                "11:00 - 21:30\n" +
-                "- 라스트오더 화-토 22시30분 / 일요일 20시30분\"";
+                "11:00 - 21:30\n";
         onelineReview = "";
         mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420";
         mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/357114/1240998_1546539684486";
@@ -2097,27 +2076,20 @@ public class TestComponent {
         addressPointX = 127.0795D;
         clippingCount = 0L;
         pickedCount = 0L;
-        operatingHours = "\"월\n" +
+        operatingHours = "월\n" +
                 "14:30 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "화\n" +
                 "14:30 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "수\n" +
                 "14:30 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "목\n" +
                 "14:30 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "금\n" +
                 "14:30 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "토\n" +
                 "12:00 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "일\n" +
-                "12:00 - 01:00\n" +
-                "00:30 라스트오더\"";
+                "12:00 - 01:00\n";
         onelineReview = "치킨,닭강정";
         mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.kakaocdn.net%2Fmystore%2FF0B475301A2F485392E077087D8BB663";
         mainPhotoUrl2 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F47d445e267704b061dda931028109241525ce05b%3Foriginal";
@@ -2217,32 +2189,20 @@ public class TestComponent {
         addressPointX = 127.0715D;
         clippingCount = 0L;
         pickedCount = 0L;
-        operatingHours = "\"월\n" +
+        operatingHours = "월\n" +
                 "11:30 - 21:20\n" +
-                "15:00 - 17:00 브레이크타임\n" +
-                "20:50 라스트오더\n" +
                 "화\n" +
                 "11:30 - 21:20\n" +
-                "15:00 - 17:00 브레이크타임\n" +
-                "20:50 라스트오더\n" +
                 "수\n" +
                 "11:30 - 21:20\n" +
-                "15:00 - 17:00 브레이크타임\n" +
-                "20:50 라스트오더\n" +
                 "목\n" +
                 "11:30 - 21:20\n" +
-                "15:00 - 17:00 브레이크타임\n" +
-                "20:50 라스트오더\n" +
                 "금\n" +
                 "11:30 - 21:20\n" +
-                "15:00 - 17:00 브레이크타임\n" +
-                "20:50 라스트오더\n" +
                 "토\n" +
                 "11:30 - 21:20\n" +
-                "20:50 라스트오더\n" +
                 "일\n" +
-                "11:30 - 21:20\n" +
-                "20:50 라스트오더\"";
+                "11:30 - 21:20\n";
         onelineReview = "어린이대공원맛집 육즙이 가득찬 중국식만두";
         mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.kakaocdn.net%2Fmystore%2FFDB18DA5E35E41E08B735781530EBAB3";
         mainPhotoUrl2 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F317aebc2d4b38f3483c4153c9a7fcca3af0d16c6%3Foriginal";
@@ -2342,20 +2302,16 @@ public class TestComponent {
         addressPointX = 127.0702D;
         clippingCount = 0L;
         pickedCount = 0L;
-        operatingHours = "\"월\n" +
+        operatingHours = "월\n" +
                 "정기휴무 (매주 월요일)\n" +
                 "화\n" +
                 "11:30 - 22:10\n" +
-                "15:00 - 16:30 브레이크타임\n" +
                 "수\n" +
                 "11:30 - 22:10\n" +
-                "15:00 - 16:30 브레이크타임\n" +
                 "목\n" +
                 "11:30 - 22:10\n" +
-                "15:00 - 16:30 브레이크타임\n" +
                 "금\n" +
                 "11:30 - 22:10\n" +
-                "15:00 - 16:30 브레이크타임\n" +
                 "토\n" +
                 "11:30 - 22:00\n" +
                 "일\n" +
@@ -2458,32 +2414,20 @@ public class TestComponent {
         addressPointX = 127.0708D;
         clippingCount = 0L;
         pickedCount = 0L;
-        operatingHours = "\"월\n" +
+        operatingHours = "월\n" +
                 "정기휴무 (매주 월요일)\n" +
                 "화\n" +
                 "12:00 - 22:00\n" +
-                "15:30 - 16:30 브레이크타임\n" +
-                "20:30 라스트오더\n" +
                 "수\n" +
                 "12:00 - 22:00\n" +
-                "15:30 - 16:30 브레이크타임\n" +
-                "20:30 라스트오더\n" +
                 "목\n" +
                 "12:00 - 22:00\n" +
-                "15:30 - 16:30 브레이크타임\n" +
-                "20:30 라스트오더\n" +
                 "금\n" +
                 "12:00 - 24:00\n" +
-                "15:30 - 16:30 브레이크타임\n" +
-                "22:30 라스트오더\n" +
                 "토\n" +
                 "12:00 - 24:00\n" +
-                "15:30 - 16:30 브레이크타임\n" +
-                "22:30 라스트오더\n" +
                 "일\n" +
-                "12:00 - 22:00\n" +
-                "15:30 - 16:30 브레이크타임\n" +
-                "20:30 라스트오더\"";
+                "12:00 - 22:00\n";
         onelineReview = "";
         mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2Fc5dba11324799e969c093caeabc4c1205756f42d%3Foriginal";
         mainPhotoUrl2 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2Fd3acbe4340a29f1f5b4ad08e6b9938e017dc17ad%3Foriginal";
@@ -2685,25 +2629,18 @@ public class TestComponent {
         pickedCount = 0L;
         operatingHours = "화\n" +
                 "17:00 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "수\n" +
                 "17:00 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "목\n" +
                 "17:00 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "금\n" +
                 "17:00 - 03:00\n" +
-                "02:30 라스트오더\n" +
                 "토\n" +
                 "16:00 - 03:00\n" +
-                "02:30 라스트오더\n" +
                 "일\n" +
                 "16:00 - 01:00\n" +
-                "00:30 라스트오더\n" +
                 "월\n" +
-                "17:00 - 01:00\n" +
-                "00:30 라스트오더";
+                "17:00 - 01:00\n";
         onelineReview = "술이 술술 넘어가는 숯불에 직접 구운 안주 신사동 전설의 맛집 온달집 프랜차이즈";
         mainPhotoUrl1 = "https://ldb-phinf.pstatic.net/20211018_169/1634544698532qkrRh_JPEG/X4iFTY1X9zsJlgA-_Kdk3u9w.jpg";
         mainPhotoUrl2 = "https://pup-review-phinf.pstatic.net/MjAyMzA1MjNfMTQ5/MDAxNjg0ODUyNTU3Mzkx.UD5nz_8VO7z2V4whgehoMRo_BsJmsbfWG6TziwaAy-8g.D8bJ437klraPp9iTHNH-OjrR6TXDDwEi8hAs8jN5oqUg.JPEG/IMG_8935.jpeg";
