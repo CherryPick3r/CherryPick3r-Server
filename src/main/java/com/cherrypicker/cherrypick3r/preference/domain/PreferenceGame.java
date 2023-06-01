@@ -32,7 +32,7 @@ public class PreferenceGame {
     @Column(name = "preference_game_status")
     private Long status;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_email")
     private User user;
 
