@@ -1495,6 +1495,1089 @@ public class TestComponent {
 
     }
 
+    @Transactional
+    public void putDataebang(){
+        //testCase1
+
+        String phone;
+        String name;
+        String address;
+        Double addressPointY;
+        Double addressPointX;
+        Long clippingCount;
+        Long pickedCount;
+        String operatingHours;
+        String onelineReview;
+        String mainPhotoUrl1;
+        String mainPhotoUrl2;
+        Long naverId;
+        Long kakaoId = 0L;
+        List<Double> tagValues = new ArrayList<>();
+
+
+        //TestCase1
+        phone = "0507-1410-1200";
+        name = "파쏘";
+        address = "서울특별시 광진구 군자로 174 1층";
+        addressPointY = 37.5560D;
+        addressPointX = 127.0778D;
+        clippingCount = 0L;
+        pickedCount = 0L;
+        operatingHours = "\"월\n" +
+                "17:00 ~ 00:00 \n" +
+                "화\n" +
+                "17:00 ~ 00:00 \n" +
+                "수\n" +
+                "17:00 ~ 00:00 \n" +
+                "목\n" +
+                "17:00 ~ 00:00 \n" +
+                "금\n" +
+                "17:00 ~ 00:00 \n" +
+                "토\n"+
+                "17:00 ~ 00:00 \"";
+        onelineReview = "파스타와 소주가 있는 착한 음주양식당";
+        mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/406525/875169_1677146431558_1000003557";
+        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/406525/2215949_1648701267430_13615";
+        naverId = 1220408309L;
+        kakaoId = 1679819498L;
+        Tag tag1 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        tagValues.clear();
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(46.5424D);
+        tagValues.add(0D);
+        tagValues.add(31.9123D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(24.781D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(39.5712D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(34.9D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tag1.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        tagRepository.save(tag1); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        Shop shop1 = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .phone(phone)
+                .name(name)
+                .address(address)
+                .addressPointY(addressPointY)
+                .addressPointX(addressPointX)
+                .clippingCount(clippingCount)
+                .pickedCount(pickedCount)
+                .operatingHours(operatingHours)
+                .onelineReview(onelineReview)
+                .mainPhotoUrl1(mainPhotoUrl1)
+                .mainPhotoUrl2(mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
+                .tag(tag1) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .build();
+
+        shopRepository.save(shop1); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        List<Menu> menus1 = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("까르보나라")
+                .price(12000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("새우 로제 파스타")
+                .price(13000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("새우한치따야린")
+                .price(15000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("흑돼지 라구 딸리아뗄레")
+                .price(16000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("감자뇨끼")
+                .price(16000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("새우 엔초비 오일 그라탕")
+                .price(18000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("생합찜")
+                .price(18000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("트리빠")
+                .price(20000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("가지구이")
+                .price(18000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus1.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("포르게타")
+                .price(24000L)
+                .shop(shop1).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        menuRepository.saveAll(menus1); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        ShopPhoto shopPhoto1 = ShopPhoto.builder().shop(shop1).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/406525/875169_1677146431558_1000003557").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto2 = ShopPhoto.builder().shop(shop1).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/406525/2215949_1648701267430_13615").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        shopPhotoRepository.save(shopPhoto1); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        shopPhotoRepository.save(shopPhoto2); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        //TestCase2
+        phone = "0507-1404-0365";
+        name = "방이샤브샤브 세종대점";
+        address = "서울 광진구 군자로 106 1층";
+        addressPointY = 37.5525D;
+        addressPointX = 127.0718D;
+        clippingCount = 0L;
+        pickedCount = 0L;
+        operatingHours = "\"월\n" +
+                "11:00 - 21:00\n" +
+                "14:30 - 17:30 브레이크타임\n" +
+                "13:30, 20:00 라스트오더\n" +
+                "화\n" +
+                "11:00 - 21:00\n" +
+                "14:30 - 17:30 브레이크타임\n" +
+                "13:30, 20:00 라스트오더\n" +
+                "수\n" +
+                "11:00 - 21:00\n" +
+                "14:30 - 17:30 브레이크타임\n" +
+                "13:30, 20:00 라스트오더\n" +
+                "목\n" +
+                "11:00 - 21:00\n" +
+                "14:30 - 17:30 브레이크타임\n" +
+                "13:30, 20:00 라스트오더\n" +
+                "금\n" +
+                "11:00 - 21:00\n" +
+                "14:30 - 17:30 브레이크타임\n" +
+                "13:30, 20:00 라스트오더\n" +
+                "토\n" +
+                "정기휴무 (매주 토요일)\n" +
+                "일\n" +
+                "정기휴무 (매주 일요일)\"";
+        onelineReview = "세종대학교 입소문 샤브샤브 맛집";
+        mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/1067951_1679016923607944.jpg";
+        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/463989_1676612715653933.jpg";
+        naverId = 1743947640L;
+        kakaoId = 976002163L;
+        Tag tag2 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        tagValues.clear();
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(43.1231D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(31.11D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(16.87D);
+        tagValues.add(15.8D);
+        tagValues.add(25.718D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tagValues.add(0D);
+        tag2.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        tagRepository.save(tag2); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        Shop shop2 = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .phone(phone)
+                .name(name)
+                .address(address)
+                .addressPointY(addressPointY)
+                .addressPointX(addressPointX)
+                .clippingCount(clippingCount)
+                .pickedCount(pickedCount)
+                .operatingHours(operatingHours)
+                .onelineReview(onelineReview)
+                .mainPhotoUrl1(mainPhotoUrl1)
+                .mainPhotoUrl2(mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
+                .tag(tag2) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .build();
+
+        shopRepository.save(shop2); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        List<Menu> menus2 = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus2.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("샤브세트")
+                .price(12000L)
+                .shop(shop2).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        menuRepository.saveAll(menus2); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        ShopPhoto shopPhoto3 = ShopPhoto.builder().shop(shop2).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/1067951_1679016923607944.jpg").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto4 = ShopPhoto.builder().shop(shop2).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/463989_1676612715653933.jpg").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        shopPhotoRepository.save(shopPhoto3); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        shopPhotoRepository.save(shopPhoto4); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+
+        //TestCase3
+        phone = "0507-1493-80880";
+        name = "천미향";
+        address = "서울특별시 광진구 군자동 능동로 237";
+        addressPointY = 37.551274D;
+        addressPointX = 127.0761D;
+        clippingCount = 0L;
+        pickedCount = 0L;
+        operatingHours = "\"월\n" +
+                "정기휴무 (매주 월요일)\n" +
+                "화\n" +
+                "11:00 - 22:00\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "수\n" +
+                "11:00 - 22:00\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "목\n" +
+                "11:00 - 22:00\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "금\n" +
+                "11:00 - 22:00\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "토\n" +
+                "11:00 - 22:00\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "일\n" +
+                "11:00 - 22:00\n" +
+                "15:00 - 17:00 브레이크타임\"";
+        onelineReview = "농림축산식품부 제공안심식당";
+        mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/261386_1655293223867021.jpg";
+        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/395857/1240998_1646146879313";
+        naverId = 12035278L;
+        kakaoId = 833758468L;
+        Tag tag3 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        tagValues.clear();
+        tagValues.add(0D); // 이색맛집
+        tagValues.add(0D); // 컨셉이 독특해요
+        tagValues.add(21.91D); // 맛있는 식당
+        tagValues.add(0D); // 좋은 술집
+        tagValues.add(21.38D); // 코스요리 맛집
+        tagValues.add(0D); // 차분한 분위기
+        tagValues.add(0D); // 아늑한 분위기
+        tagValues.add(0D); // 오래 있기 좋아요
+        tagValues.add(0D); // 좋은 음악
+        tagValues.add(0D); // 주차하기 편해요
+        tagValues.add(41.56D); // 단체모임
+        tagValues.add(0D); // 입소문
+        tagValues.add(33.85D); // 음식이 빨리 나와요
+        tagValues.add(0D); // 특별한 날
+        tagValues.add(0D); // 신선해요
+        tagValues.add(0D); // 혼밥
+        tagValues.add(15.8D); // 푸짐해요
+        tagValues.add(0D); // 친구랑 가기 좋아요
+        tagValues.add(0D); // 특별메뉴
+        tagValues.add(0D); // 감성사진
+        tagValues.add(0D); // 가성비 맛집
+        tagValues.add(0D); // 쾌적한 공간
+        tagValues.add(0D); // 카공맛집
+        tagValues.add(0D); // 친절해요
+        tagValues.add(0D); // 카페
+        tagValues.add(0D); // 커피맛집
+        tagValues.add(0D); // 맛있는 디저트
+        tagValues.add(0D); // 맛있는 음료
+        tag3.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        tagRepository.save(tag3); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        Shop shop3 = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .phone(phone)
+                .name(name)
+                .address(address)
+                .addressPointY(addressPointY)
+                .addressPointX(addressPointX)
+                .clippingCount(clippingCount)
+                .pickedCount(pickedCount)
+                .operatingHours(operatingHours)
+                .onelineReview(onelineReview)
+                .mainPhotoUrl1(mainPhotoUrl1)
+                .mainPhotoUrl2(mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
+                .tag(tag3) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .build();
+
+        shopRepository.save(shop3); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        List<Menu> menus3 = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus3.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("홍합짬뽕")
+                .price(9000L)
+                .shop(shop3).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus3.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("빙하 군만두")
+                .price(10000L)
+                .shop(shop3).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus3.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("미니탕수육")
+                .price(15000L)
+                .shop(shop3).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus3.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("짜장면")
+                .price(6000L)
+                .shop(shop3).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus3.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("간짜장")
+                .price(7000L)
+                .shop(shop3).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        menuRepository.saveAll(menus3); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        ShopPhoto shopPhoto5 = ShopPhoto.builder().shop(shop3).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/261386_1655293223867021.jpg").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto6 = ShopPhoto.builder().shop(shop3).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/395857/1240998_1646146879313").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        shopPhotoRepository.save(shopPhoto5); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        shopPhotoRepository.save(shopPhoto6); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        //TestCase4
+        phone = "010-6281-5547";
+        name = "오늘와인한잔 건대점";
+        address = "서울 광진구 동일로24길 102 1층 (우)05017";
+        addressPointY = 37.5422D;
+        addressPointX = 127.0705D;
+        clippingCount = 0L;
+        pickedCount = 0L;
+        operatingHours = "\"월 17:00 - 03:00\n" +
+                "화 17:00 - 03:00\n" +
+                "수 17:00 - 03:00\n" +
+                "목 17:00 - 03:00\n" +
+                "금 17:00 - 03:00\n" +
+                "토 16:00 - 03:00\n" +
+                "일 16:00 - 03:00\"";
+        onelineReview = "#데이트코스 #분위기좋은 #소개팅 #수제맥주";
+        mainPhotoUrl1 = "https://mp-seoul-image-production-s3.mangoplate.com/1148533_1570873613125900.jpg";
+        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/357114/1240998_1546539684486";
+        naverId = 1438059030L;
+        kakaoId = 1460831838L;
+        Tag tag4 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        tagValues.clear();
+        tagValues.add(0D); // 이색맛집
+        tagValues.add(0D); // 컨셉이 독특해요
+        tagValues.add(0D); // 맛있는 식당
+        tagValues.add(25.312D); // 좋은 술집
+        tagValues.add(0D); // 코스요리 맛집
+        tagValues.add(0D); // 차분한 분위기
+        tagValues.add(43.91D); // 아늑한 분위기
+        tagValues.add(15.8D); // 오래 있기 좋아요
+        tagValues.add(0D); // 좋은 음악
+        tagValues.add(0D); // 주차하기 편해요
+        tagValues.add(0D); // 단체모임
+        tagValues.add(0D); // 입소문
+        tagValues.add(0D); // 음식이 빨리 나와요
+        tagValues.add(29.9D); // 특별한 날
+        tagValues.add(0D); // 신선해요
+        tagValues.add(0D); // 혼밥
+        tagValues.add(0D); // 푸짐해요
+        tagValues.add(0D); // 친구랑 가기 좋아요
+        tagValues.add(0D); // 특별메뉴
+        tagValues.add(9.9D); // 감성사진
+        tagValues.add(0D); // 가성비 맛집
+        tagValues.add(0D); // 쾌적한 공간
+        tagValues.add(0D); // 카공맛집
+        tagValues.add(0D); // 친절해요
+        tagValues.add(0D); // 카페
+        tagValues.add(0D); // 커피맛집
+        tagValues.add(0D); // 맛있는 디저트
+        tagValues.add(0D); // 맛있는 음료
+        tag4.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        tagRepository.save(tag4); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        Shop shop4 = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .phone(phone)
+                .name(name)
+                .address(address)
+                .addressPointY(addressPointY)
+                .addressPointX(addressPointX)
+                .clippingCount(clippingCount)
+                .pickedCount(pickedCount)
+                .operatingHours(operatingHours)
+                .onelineReview(onelineReview)
+                .mainPhotoUrl1(mainPhotoUrl1)
+                .mainPhotoUrl2(mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
+                .tag(tag4) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .build();
+
+        shopRepository.save(shop4); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        List<Menu> menus4 = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus4.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("와인 한 잔")
+                .price(2900L)
+                .shop(shop4).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus4.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("하몽 크룽지")
+                .price(12900L)
+                .shop(shop4).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus4.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("명란구이 크래커")
+                .price(6900L)
+                .shop(shop4).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus4.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("명란 크림 파스타")
+                .price(12900L)
+                .shop(shop4).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus4.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("과일 & 치즈 플래터")
+                .price(29900L)
+                .shop(shop4).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        menuRepository.saveAll(menus4); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        ShopPhoto shopPhoto7 = ShopPhoto.builder().shop(shop4).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/1148533_1570873613125900.jpg").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto8 = ShopPhoto.builder().shop(shop4).photoUrl("https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/357114/1240998_1546539684486").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        shopPhotoRepository.save(shopPhoto7); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        shopPhotoRepository.save(shopPhoto8); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+
+
+        //TestCase5
+        phone = "0507-1425-0704";
+        name = "LAB41";
+        address = "서울 광진구 능동로 300 2층";
+        addressPointY = 37.5564D;
+        addressPointX = 127.0794D;
+        clippingCount = 0L;
+        pickedCount = 0L;
+        operatingHours = "\"월\n" +
+                "정기휴무 (매주 월요일)\n" +
+                "화\n" +
+                "11:00 - 24:00\n" +
+                "15:00 - 17:30 브레이크타임\n" +
+                "수\n" +
+                "11:00 - 24:00\n" +
+                "15:00 - 17:30 브레이크타임\n" +
+                "목\n" +
+                "11:00 - 24:00\n" +
+                "15:00 - 17:30 브레이크타임\n" +
+                "금\n" +
+                "11:00 - 24:00\n" +
+                "15:00 - 17:30 브레이크타임\n" +
+                "토\n" +
+                "11:00 - 24:00\n" +
+                "일\n" +
+                "11:00 - 21:30\n" +
+                "- 라스트오더 화-토 22시30분 / 일요일 20시30분\"";
+        onelineReview = "";
+        mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420";
+        mainPhotoUrl2 = "https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/357114/1240998_1546539684486";
+        naverId = 552724285L;
+        kakaoId = 1431399667L;
+        Tag tag5 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        tagValues.clear();
+        tagValues.add(0D); // 이색맛집
+        tagValues.add(15.9D); // 컨셉이 독특해요
+        tagValues.add(25.91D); // 맛있는 식당
+        tagValues.add(0D); // 좋은 술집
+        tagValues.add(0D); // 코스요리 맛집
+        tagValues.add(0D); // 차분한 분위기
+        tagValues.add(0D); // 아늑한 분위기
+        tagValues.add(13.8D); // 오래 있기 좋아요
+        tagValues.add(0D); // 좋은 음악
+        tagValues.add(0D); // 주차하기 편해요
+        tagValues.add(0D); // 단체모임
+        tagValues.add(0D); // 입소문
+        tagValues.add(0D); // 음식이 빨리 나와요
+        tagValues.add(0D); // 특별한 날
+        tagValues.add(0D); // 신선해요
+        tagValues.add(0D); // 혼밥
+        tagValues.add(0D); // 푸짐해요
+        tagValues.add(0D); // 친구랑 가기 좋아요
+        tagValues.add(0D); // 특별메뉴
+        tagValues.add(38.9D); // 감성사진
+        tagValues.add(0D); // 가성비 맛집
+        tagValues.add(28.11D); // 쾌적한 공간
+        tagValues.add(0D); // 카공맛집
+        tagValues.add(0D); // 친절해요
+        tagValues.add(0D); // 카페
+        tagValues.add(0D); // 커피맛집
+        tagValues.add(0D); // 맛있는 디저트
+        tagValues.add(0D); // 맛있는 음료
+        tag5.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        tagRepository.save(tag5); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        Shop shop5 = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .phone(phone)
+                .name(name)
+                .address(address)
+                .addressPointY(addressPointY)
+                .addressPointX(addressPointX)
+                .clippingCount(clippingCount)
+                .pickedCount(pickedCount)
+                .operatingHours(operatingHours)
+                .onelineReview(onelineReview)
+                .mainPhotoUrl1(mainPhotoUrl1)
+                .mainPhotoUrl2(mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
+                .tag(tag5) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .build();
+
+        shopRepository.save(shop5); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        List<Menu> menus5 = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus5.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("고르곤졸라크림뇨끼")
+                .price(20000L)
+                .shop(shop5).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus5.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("화이트라구파스타")
+                .price(20000L)
+                .shop(shop5).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus5.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("명란알리오올리오")
+                .price(16000L)
+                .shop(shop5).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus5.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("새우루꼴라오일파스타")
+                .price(18000L)
+                .shop(shop5).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus5.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("아마트리치아나")
+                .price(16000L)
+                .shop(shop5).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        menuRepository.saveAll(menus5); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        ShopPhoto shopPhoto9 = ShopPhoto.builder().shop(shop5).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto10 = ShopPhoto.builder().shop(shop5).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        shopPhotoRepository.save(shopPhoto9); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        shopPhotoRepository.save(shopPhoto10); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        //TestCase6
+        phone = "02-455-5207";
+        name = "도른계";
+        address = "서울 광진구 능동로36길 8 1층 도른계";
+        addressPointY = 37.5561D;
+        addressPointX = 127.0795D;
+        clippingCount = 0L;
+        pickedCount = 0L;
+        operatingHours = "\"월\n" +
+                "14:30 - 01:00\n" +
+                "00:30 라스트오더\n" +
+                "화\n" +
+                "14:30 - 01:00\n" +
+                "00:30 라스트오더\n" +
+                "수\n" +
+                "14:30 - 01:00\n" +
+                "00:30 라스트오더\n" +
+                "목\n" +
+                "14:30 - 01:00\n" +
+                "00:30 라스트오더\n" +
+                "금\n" +
+                "14:30 - 01:00\n" +
+                "00:30 라스트오더\n" +
+                "토\n" +
+                "12:00 - 01:00\n" +
+                "00:30 라스트오더\n" +
+                "일\n" +
+                "12:00 - 01:00\n" +
+                "00:30 라스트오더\"";
+        onelineReview = "치킨,닭강정";
+        mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.kakaocdn.net%2Fmystore%2FF0B475301A2F485392E077087D8BB663";
+        mainPhotoUrl2 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F47d445e267704b061dda931028109241525ce05b%3Foriginal";
+        naverId = 1848549520L;
+        kakaoId = 2035524806L;
+        Tag tag6 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        tagValues.clear();
+        tagValues.add(0D); // 이색맛집
+        tagValues.add(28.11D); // 컨셉이 독특해요
+        tagValues.add(32.81D); // 맛있는 식당
+        tagValues.add(0D); // 좋은 술집
+        tagValues.add(0D); // 코스요리 맛집
+        tagValues.add(0D); // 차분한 분위기
+        tagValues.add(0D); // 아늑한 분위기
+        tagValues.add(11.3D); // 오래 있기 좋아요
+        tagValues.add(0D); // 좋은 음악
+        tagValues.add(0D); // 주차하기 편해요
+        tagValues.add(0D); // 단체모임
+        tagValues.add(8.9D); // 입소문
+        tagValues.add(23.1D); // 음식이 빨리 나와요
+        tagValues.add(0D); // 특별한 날
+        tagValues.add(0D); // 신선해요
+        tagValues.add(0D); // 혼밥
+        tagValues.add(0D); // 푸짐해요
+        tagValues.add(0D); // 친구랑 가기 좋아요
+        tagValues.add(0D); // 특별메뉴
+        tagValues.add(0D); // 감성사진
+        tagValues.add(0D); // 가성비 맛집
+        tagValues.add(0D); // 쾌적한 공간
+        tagValues.add(0D); // 카공맛집
+        tagValues.add(11.3D); // 친절해요
+        tagValues.add(0D); // 카페
+        tagValues.add(0D); // 커피맛집
+        tagValues.add(0D); // 맛있는 디저트
+        tagValues.add(0D); // 맛있는 음료
+        tag6.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        tagRepository.save(tag6); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        Shop shop6 = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .phone(phone)
+                .name(name)
+                .address(address)
+                .addressPointY(addressPointY)
+                .addressPointX(addressPointX)
+                .clippingCount(clippingCount)
+                .pickedCount(pickedCount)
+                .operatingHours(operatingHours)
+                .onelineReview(onelineReview)
+                .mainPhotoUrl1(mainPhotoUrl1)
+                .mainPhotoUrl2(mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
+                .tag(tag6) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .build();
+
+        shopRepository.save(shop6); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        List<Menu> menus6 = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus6.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("한국계")
+                .price(26000L)
+                .shop(shop6).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus6.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("미국계")
+                .price(28000L)
+                .shop(shop6).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus6.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("태국계")
+                .price(28000L)
+                .shop(shop6).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus6.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("일본계")
+                .price(28000L)
+                .shop(shop6).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus6.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("옛날통닭")
+                .price(18000L)
+                .shop(shop6).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        menuRepository.saveAll(menus6); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        ShopPhoto shopPhoto11 = ShopPhoto.builder().shop(shop6).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.kakaocdn.net%2Fmystore%2FF0B475301A2F485392E077087D8BB663").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto12 = ShopPhoto.builder().shop(shop6).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F47d445e267704b061dda931028109241525ce05b%3Foriginal").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        shopPhotoRepository.save(shopPhoto11); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        shopPhotoRepository.save(shopPhoto12); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+
+        //TestCase7
+        phone = "02-462-9256";
+        name = "빠오즈푸 본점";
+        address = "서울 광진구 광나루로 373";
+        addressPointY = 37.5481D;
+        addressPointX = 127.0715D;
+        clippingCount = 0L;
+        pickedCount = 0L;
+        operatingHours = "\"월\n" +
+                "11:30 - 21:20\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "20:50 라스트오더\n" +
+                "화\n" +
+                "11:30 - 21:20\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "20:50 라스트오더\n" +
+                "수\n" +
+                "11:30 - 21:20\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "20:50 라스트오더\n" +
+                "목\n" +
+                "11:30 - 21:20\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "20:50 라스트오더\n" +
+                "금\n" +
+                "11:30 - 21:20\n" +
+                "15:00 - 17:00 브레이크타임\n" +
+                "20:50 라스트오더\n" +
+                "토\n" +
+                "11:30 - 21:20\n" +
+                "20:50 라스트오더\n" +
+                "일\n" +
+                "11:30 - 21:20\n" +
+                "20:50 라스트오더\"";
+        onelineReview = "어린이대공원맛집 육즙이 가득찬 중국식만두";
+        mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.kakaocdn.net%2Fmystore%2FFDB18DA5E35E41E08B735781530EBAB3";
+        mainPhotoUrl2 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F317aebc2d4b38f3483c4153c9a7fcca3af0d16c6%3Foriginal";
+        naverId = 20757891L;
+        kakaoId = 15101449L;
+        Tag tag7 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        tagValues.clear();
+        tagValues.add(0D); // 이색맛집
+        tagValues.add(0D); // 컨셉이 독특해요
+        tagValues.add(43.14D); // 맛있는 식당
+        tagValues.add(0D); // 좋은 술집
+        tagValues.add(0D); // 코스요리 맛집
+        tagValues.add(0D); // 차분한 분위기
+        tagValues.add(18.99D); // 아늑한 분위기
+        tagValues.add(0D); // 오래 있기 좋아요
+        tagValues.add(0D); // 좋은 음악
+        tagValues.add(0D); // 주차하기 편해요
+        tagValues.add(0D); // 단체모임
+        tagValues.add(0D); // 입소문
+        tagValues.add(33.1D); // 음식이 빨리 나와요
+        tagValues.add(0D); // 특별한 날
+        tagValues.add(0D); // 신선해요
+        tagValues.add(23.8D); // 혼밥
+        tagValues.add(0D); // 푸짐해요
+        tagValues.add(0D); // 친구랑 가기 좋아요
+        tagValues.add(0D); // 특별메뉴
+        tagValues.add(0D); // 감성사진
+        tagValues.add(0D); // 가성비 맛집
+        tagValues.add(0D); // 쾌적한 공간
+        tagValues.add(0D); // 카공맛집
+        tagValues.add(9.3D); // 친절해요
+        tagValues.add(0D); // 카페
+        tagValues.add(0D); // 커피맛집
+        tagValues.add(0D); // 맛있는 디저트
+        tagValues.add(0D); // 맛있는 음료
+        tag7.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        tagRepository.save(tag7); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        Shop shop7 = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .phone(phone)
+                .name(name)
+                .address(address)
+                .addressPointY(addressPointY)
+                .addressPointX(addressPointX)
+                .clippingCount(clippingCount)
+                .pickedCount(pickedCount)
+                .operatingHours(operatingHours)
+                .onelineReview(onelineReview)
+                .mainPhotoUrl1(mainPhotoUrl1)
+                .mainPhotoUrl2(mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
+                .tag(tag7) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .build();
+
+        shopRepository.save(shop7); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        List<Menu> menus7 = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus7.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("고기빠오즈")
+                .price(8000L)
+                .shop(shop7).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus7.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("삼선빠오즈")
+                .price(9500L)
+                .shop(shop7).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus7.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("부추빠오즈")
+                .price(8000L)
+                .shop(shop7).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus7.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("부추지짐")
+                .price(8000L)
+                .shop(shop7).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus7.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("새우지짐")
+                .price(9000L)
+                .shop(shop7).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        menuRepository.saveAll(menus7); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        ShopPhoto shopPhoto13 = ShopPhoto.builder().shop(shop7).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.kakaocdn.net%2Fmystore%2FFDB18DA5E35E41E08B735781530EBAB3").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto14 = ShopPhoto.builder().shop(shop7).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F317aebc2d4b38f3483c4153c9a7fcca3af0d16c6%3Foriginal").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        shopPhotoRepository.save(shopPhoto13); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        shopPhotoRepository.save(shopPhoto14); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+
+        //TestCase8
+        phone = "02-461-3739";
+        name = "호야초밥참치 본점";
+        address = "서울 광진구 능동로13길 39 1층";
+        addressPointY = 37.5434D;
+        addressPointX = 127.0702D;
+        clippingCount = 0L;
+        pickedCount = 0L;
+        operatingHours = "\"월\n" +
+                "정기휴무 (매주 월요일)\n" +
+                "화\n" +
+                "11:30 - 22:10\n" +
+                "15:00 - 16:30 브레이크타임\n" +
+                "수\n" +
+                "11:30 - 22:10\n" +
+                "15:00 - 16:30 브레이크타임\n" +
+                "목\n" +
+                "11:30 - 22:10\n" +
+                "15:00 - 16:30 브레이크타임\n" +
+                "금\n" +
+                "11:30 - 22:10\n" +
+                "15:00 - 16:30 브레이크타임\n" +
+                "토\n" +
+                "11:30 - 22:00\n" +
+                "일\n" +
+                "11:30 - 22:00\"";
+        onelineReview = "건대 초밥맛집 지라시스시 생각나서 찾아간 호야초밥";
+        mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=https%3A%2F%2Fpostfiles.pstatic.net%2FMjAyMzA1MjlfODcg%2FMDAxNjg1MzU4OTIzMzYy.l_NP6jur7bfEyjpsWSIiUQ5oSu8WBGM4t7XJqPxnVHsg.UHz0Od-q0wEYBu2Vp2StJfjCbHguZJMedylM5fbhrAIg.JPEG.pure_yeong0%2FSE-EEDD93F9-4507-4562-B4D3-E52903B29BF0.jpg%3Ftype%3Dw966";
+        mainPhotoUrl2 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=https%3A%2F%2Fpostfiles.pstatic.net%2FMjAyMzA1MjVfMTIy%2FMDAxNjg0OTk3OTI4NzMz.jLVMVRzXd_F1jNet-5VGXiKWURO6u3fcKaLpWPW-onEg.h7q62VCtQbfhBvdAnJTUJr3OMAAZ7NRlzlhl7MTuGSgg.JPEG.dada9655%2FIMG_9900.jpg%3Ftype%3Dw773";
+        naverId = 32089668L;
+        kakaoId = 11989881L;
+        Tag tag8 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        tagValues.clear();
+        tagValues.add(0D); // 이색맛집
+        tagValues.add(35.9D); // 컨셉이 독특해요
+        tagValues.add(40.9D); // 맛있는 식당
+        tagValues.add(0D); // 좋은 술집
+        tagValues.add(0D); // 코스요리 맛집
+        tagValues.add(11.9D); // 차분한 분위기
+        tagValues.add(0D); // 아늑한 분위기
+        tagValues.add(0D); // 오래 있기 좋아요
+        tagValues.add(0D); // 좋은 음악
+        tagValues.add(0D); // 주차하기 편해요
+        tagValues.add(0D); // 단체모임
+        tagValues.add(0D); // 입소문
+        tagValues.add(0D); // 음식이 빨리 나와요
+        tagValues.add(0D); // 특별한 날
+        tagValues.add(0D); // 신선해요
+        tagValues.add(0D); // 혼밥
+        tagValues.add(0D); // 푸짐해요
+        tagValues.add(21.8D); // 친구랑 가기 좋아요
+        tagValues.add(0D); // 특별메뉴
+        tagValues.add(0D); // 감성사진
+        tagValues.add(8.8D); // 가성비 맛집
+        tagValues.add(0D); // 쾌적한 공간
+        tagValues.add(0D); // 카공맛집
+        tagValues.add(0D); // 친절해요
+        tagValues.add(0D); // 카페
+        tagValues.add(0D); // 커피맛집
+        tagValues.add(0D); // 맛있는 디저트
+        tagValues.add(0D); // 맛있는 음료
+        tag8.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        tagRepository.save(tag8); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        Shop shop8 = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .phone(phone)
+                .name(name)
+                .address(address)
+                .addressPointY(addressPointY)
+                .addressPointX(addressPointX)
+                .clippingCount(clippingCount)
+                .pickedCount(pickedCount)
+                .operatingHours(operatingHours)
+                .onelineReview(onelineReview)
+                .mainPhotoUrl1(mainPhotoUrl1)
+                .mainPhotoUrl2(mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
+                .tag(tag8) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .build();
+
+        shopRepository.save(shop8); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        List<Menu> menus8 = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus8.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("A호야")
+                .price(15000L)
+                .shop(shop8).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus8.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("B호야")
+                .price(19000L)
+                .shop(shop8).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus8.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("C연어")
+                .price(25000L)
+                .shop(shop8).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus8.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("런치초밥")
+                .price(12000L)
+                .shop(shop8).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus8.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("회덮밥")
+                .price(9000L)
+                .shop(shop8).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        menuRepository.saveAll(menus8); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        ShopPhoto shopPhoto15 = ShopPhoto.builder().shop(shop8).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=https%3A%2F%2Fpostfiles.pstatic.net%2FMjAyMzA1MjlfODcg%2FMDAxNjg1MzU4OTIzMzYy.l_NP6jur7bfEyjpsWSIiUQ5oSu8WBGM4t7XJqPxnVHsg.UHz0Od-q0wEYBu2Vp2StJfjCbHguZJMedylM5fbhrAIg.JPEG.pure_yeong0%2FSE-EEDD93F9-4507-4562-B4D3-E52903B29BF0.jpg%3Ftype%3Dw966").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto16 = ShopPhoto.builder().shop(shop8).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=https%3A%2F%2Fpostfiles.pstatic.net%2FMjAyMzA1MjVfMTIy%2FMDAxNjg0OTk3OTI4NzMz.jLVMVRzXd_F1jNet-5VGXiKWURO6u3fcKaLpWPW-onEg.h7q62VCtQbfhBvdAnJTUJr3OMAAZ7NRlzlhl7MTuGSgg.JPEG.dada9655%2FIMG_9900.jpg%3Ftype%3Dw773").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        shopPhotoRepository.save(shopPhoto15); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        shopPhotoRepository.save(shopPhoto16); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        //TestCase9
+        phone = "0507-1317-0558";
+        name = "뉴웨이브서울";
+        address = "서울 광진구 아차산로33길 28-10";
+        addressPointY = 37.5417D;
+        addressPointX = 127.0708D;
+        clippingCount = 0L;
+        pickedCount = 0L;
+        operatingHours = "\"월\n" +
+                "정기휴무 (매주 월요일)\n" +
+                "화\n" +
+                "12:00 - 22:00\n" +
+                "15:30 - 16:30 브레이크타임\n" +
+                "20:30 라스트오더\n" +
+                "수\n" +
+                "12:00 - 22:00\n" +
+                "15:30 - 16:30 브레이크타임\n" +
+                "20:30 라스트오더\n" +
+                "목\n" +
+                "12:00 - 22:00\n" +
+                "15:30 - 16:30 브레이크타임\n" +
+                "20:30 라스트오더\n" +
+                "금\n" +
+                "12:00 - 24:00\n" +
+                "15:30 - 16:30 브레이크타임\n" +
+                "22:30 라스트오더\n" +
+                "토\n" +
+                "12:00 - 24:00\n" +
+                "15:30 - 16:30 브레이크타임\n" +
+                "22:30 라스트오더\n" +
+                "일\n" +
+                "12:00 - 22:00\n" +
+                "15:30 - 16:30 브레이크타임\n" +
+                "20:30 라스트오더\"";
+        onelineReview = "";
+        mainPhotoUrl1 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2Fc5dba11324799e969c093caeabc4c1205756f42d%3Foriginal";
+        mainPhotoUrl2 = "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2Fd3acbe4340a29f1f5b4ad08e6b9938e017dc17ad%3Foriginal";
+        naverId = 1774311378L;
+        kakaoId = 1602523591L;
+        Tag tag9 = new Tag(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        tagValues.clear();
+        tagValues.add(0D); // 이색맛집
+        tagValues.add(15.9D); // 컨셉이 독특해요
+        tagValues.add(43.3D); // 맛있는 식당
+        tagValues.add(9.9D); // 좋은 술집
+        tagValues.add(0D); // 코스요리 맛집
+        tagValues.add(29.8D); // 차분한 분위기
+        tagValues.add(0D); // 아늑한 분위기
+        tagValues.add(0D); // 오래 있기 좋아요
+        tagValues.add(0D); // 좋은 음악
+        tagValues.add(0D); // 주차하기 편해요
+        tagValues.add(0D); // 단체모임
+        tagValues.add(0D); // 입소문
+        tagValues.add(0D); // 음식이 빨리 나와요
+        tagValues.add(0D); // 특별한 날
+        tagValues.add(0D); // 신선해요
+        tagValues.add(0D); // 혼밥
+        tagValues.add(0D); // 푸짐해요
+        tagValues.add(0D); // 친구랑 가기 좋아요
+        tagValues.add(0D); // 특별메뉴
+        tagValues.add(0D); // 감성사진
+        tagValues.add(22.9D); // 가성비 맛집
+        tagValues.add(0D); // 쾌적한 공간
+        tagValues.add(0D); // 카공맛집
+        tagValues.add(0D); // 친절해요
+        tagValues.add(0D); // 카페
+        tagValues.add(0D); // 커피맛집
+        tagValues.add(0D); // 맛있는 디저트
+        tagValues.add(0D); // 맛있는 음료
+        tag9.setTagsByList(tagValues); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        tagRepository.save(tag9); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        Shop shop9 = Shop.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .phone(phone)
+                .name(name)
+                .address(address)
+                .addressPointY(addressPointY)
+                .addressPointX(addressPointX)
+                .clippingCount(clippingCount)
+                .pickedCount(pickedCount)
+                .operatingHours(operatingHours)
+                .onelineReview(onelineReview)
+                .mainPhotoUrl1(mainPhotoUrl1)
+                .mainPhotoUrl2(mainPhotoUrl2)
+                .naverId(naverId)
+                .kakaoId(kakaoId)
+                .tag(tag9) // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .build();
+
+        shopRepository.save(shop9); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        List<Menu> menus9 = new ArrayList<>(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus9.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("하우스와인")
+                .price(6900L)
+                .shop(shop9).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus9.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("클래식 라자냐")
+                .price(18900L)
+                .shop(shop9).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus9.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("블루치즈크림 튀긴뇨끼")
+                .price(16900L)
+                .shop(shop9).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus9.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("대명 방앗간 들기름파스타")
+                .price(15900L)
+                .shop(shop9).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        menus9.add(Menu.builder() // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+                .name("스테이크")
+                .price(39900L)
+                .shop(shop9).build()); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+        menuRepository.saveAll(menus9); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        ShopPhoto shopPhoto17 = ShopPhoto.builder().shop(shop9).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2Fc5dba11324799e969c093caeabc4c1205756f42d%3Foriginal").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        ShopPhoto shopPhoto18 = ShopPhoto.builder().shop(shop9).photoUrl("https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2Fd3acbe4340a29f1f5b4ad08e6b9938e017dc17ad%3Foriginal").build(); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+        shopPhotoRepository.save(shopPhoto17); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+        shopPhotoRepository.save(shopPhoto18); // [테스트 데이터 늘릴 때, 객체 이름 바꿔줘야 함]
+
+
+
+    }
 
 
     // 정제된 데이터 csv로 넣기
