@@ -57,7 +57,10 @@ public class PreferenceGameService {
         }
 
         // 유저 초기 취향 게임 기존 정보 삭제
-        preferenceGameRepository.deleteAll(preferenceGameRepository.findAllByUser(user));
+        List<PreferenceGame> preferenceGames =  preferenceGameRepository.findAllByUser(user);
+        for (PreferenceGame preferenceGame : preferenceGames) {
+            preferenceGameRepository.delete(preferenceGame);
+        }
 
         // 유저 초기 취향 초기화
         List<Double> settingValues = new ArrayList<>();
