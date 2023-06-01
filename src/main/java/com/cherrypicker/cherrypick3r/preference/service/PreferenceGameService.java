@@ -49,12 +49,74 @@ public class PreferenceGameService {
     private final GameCalc gameCalc;
 
     @Transactional
+    public UserPreferenceStartResponse remakeGame(String userEmail) {
+        User user = userRepository.findByEmail(userEmail).get();
+
+        if (user == null) {
+            return null; // UserNotFound 에러 핸들링으로 바꿔야함
+        }
+
+        // 유저 초기 취향 게임 기존 정보 삭제
+        preferenceGameRepository.deleteAll(preferenceGameRepository.findAllByUser(user));
+
+        // 유저 초기 취향 초기화
+        List<Double> settingValues = new ArrayList<>();
+        for (int i=0;i<28;i++) {
+            settingValues.add(0D);
+        }
+        user.getTag().setTagsByList(settingValues);
+
+        // 초기취향 게임 생성
+        PreferenceGame preferenceGame = PreferenceGame.builder()
+                .totalRound(5L) // 임의의 라운드 5라운드로 설정
+                .curRound(0L) // 0라운드부터 시작
+                .status(0L) // 게임은 시작하지 않은 상태
+                .user(user) // 유저가 존재한다면 초기취향 게임을 시작시킨 유저를 설정
+                .build();
+
+        // 초기취향 게임 시작
+        preferenceGame.setStatusStart();
+
+//        // TODO: 일단 랜덤하게 가게를 뽑아서 주지만 정형화한 가게 5개를 만들어서 줄 필요성이 있음
+//        // 초기 취향 게임 가게 5개 생성, 일단 랜덤한 5개의 가게를 뽑아서 줌
+//        List<Shop> shops = shopRepository.findRandomShops();
+//        List<PreferenceCard> preferenceCards = new ArrayList<>();
+//        for (Shop shop : shops) {
+//            preferenceGame.getRecommendedShopIds().add(shop.getId());
+//            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByShop(shop)));
+//        }
+
+        // 정형화한 가게 5개를 만들어서 줌
+        List<PreferenceShop> preferenceShops = preferenceShopRepository.findRandomPreferenceShops();
+        List<PreferenceCard> preferenceCards = new ArrayList<>();
+        for (PreferenceShop preferenceShop : preferenceShops) {
+            preferenceGame.getRecommendedShopIds().add(preferenceShop.getId());
+            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByPreferenceShop(preferenceShop)));
+        }
+
+        // 생성한 초기취향 게임 저장
+        preferenceGameRepository.save(preferenceGame);
+
+        // 결과 생성
+        UserPreferenceStartResponse userPreferenceStartResponse = new UserPreferenceStartResponse(preferenceGame, preferenceCards);
+
+        return userPreferenceStartResponse;
+    }
+
+    @Transactional
     public UserPreferenceStartResponse makeGame(String userEmail) {
         User user = userRepository.findByEmail(userEmail).get();
 
         if (user == null) {
             return null; // UserNotFound 에러 핸들링으로 바꿔야함
         }
+
+        // 유저 초기 취향 초기화
+        List<Double> settingValues = new ArrayList<>();
+        for (int i=0;i<28;i++) {
+            settingValues.add(0D);
+        }
+        user.getTag().setTagsByList(settingValues);
 
         // 초기취향 게임 생성
         PreferenceGame preferenceGame = PreferenceGame.builder()
@@ -157,12 +219,13 @@ public class PreferenceGameService {
     public CheckPreferenceGameResponse findPlayRecode(String userEmail) {
         User user = userRepository.findByEmail(userEmail).get();
         List<PreferenceGame> preferenceGames = preferenceGameRepository.findAllByUser(user);
-        int size = preferenceGames.size();
 
-        if (size == 0)
-            return CheckPreferenceGameResponse.builder().isPlayed(0L).build();
-        else
-            return CheckPreferenceGameResponse.builder().isPlayed(1L).build();
+        for (PreferenceGame preferenceGame : preferenceGames) {
+            if (preferenceGame.getTotalRound() == preferenceGame.getCurRound()) {
+                return CheckPreferenceGameResponse.builder().isPlayed(1L).build();
+            }
+        }
+        return CheckPreferenceGameResponse.builder().isPlayed(0L).build();
     }
 
 }

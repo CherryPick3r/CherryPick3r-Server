@@ -73,7 +73,8 @@ public class UserAnalyzeService {
         int size = userSimilarityPairs.size();
         for (int i=0;i<size;i++) {
             if (userSimilarityPairs.get(i).getUser().getEmail().equals(userEmail)) {
-                return Double.valueOf((1 - ((double)i / size)) * 100);
+                double percentile = (1 - ((double)i / size)) * 100;
+                return Double.valueOf(String.format("%.2f", percentile));
             }
         }
 

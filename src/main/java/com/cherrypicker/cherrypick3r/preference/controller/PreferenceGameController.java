@@ -22,6 +22,13 @@ public class PreferenceGameController {
         return ResponseEntity.ok(checkPreferenceGameResponse);
     }
 
+    @PostMapping("/restart-game")
+    public ResponseEntity<UserPreferenceStartResponse> gameRestart(@RequestParam("userEmail") String userEmail) {
+        UserPreferenceStartResponse userPreferenceStartResponse = preferenceGameService.remakeGame(userEmail);
+
+        return ResponseEntity.ok(userPreferenceStartResponse);
+    }
+
     @PostMapping("/start-game")
     public ResponseEntity<UserPreferenceStartResponse> gameStart(@RequestParam("userEmail") String userEmail) {
         UserPreferenceStartResponse userPreferenceStartResponse = preferenceGameService.makeGame(userEmail);
