@@ -95,8 +95,8 @@ public class UserAnalyzeService {
 //        userClasses.add("건강식");        // 00000 00000 00001 00000 00000 000
 //        userClasses.add("기타");         // 00000 00001 00000 00000 00000 000
 //        userClasses.add("카페인 뱀파이어"); // 00000 11100 00000 00000 01101 111
-//        userClasses.add("혼밥러");        // 00000 00000 00100 10000 10000 000
-//        userClasses.add("술고래");        // 00110 00010 10000 01100 00000 000
+//        userClasses.add("혼밥러");        // 00000 00000 00000 10000 10000 000
+//        userClasses.add("술고래");        // 00110 00010 10100 01100 00000 000
 
         List<Double> userClassValues = new ArrayList<>();
 

@@ -179,9 +179,7 @@ public class ShopService {
         for (Game game : games) {
             Result result = resultRepository.findByGame(game);
             if (result != null) {
-                ShopSimple shopSimple = new ShopSimple(result.getShop(), result.getCreatedTime());
-                shopSimple.setShopId(result.getId());
-                shopSimples.add(shopSimple);
+                shopSimples.add(new ShopSimple(result.getShop(), result.getCreatedTime()));
             }
         }
 
