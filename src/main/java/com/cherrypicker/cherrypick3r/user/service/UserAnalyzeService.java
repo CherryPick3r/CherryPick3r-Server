@@ -87,6 +87,23 @@ public class UserAnalyzeService {
     public UserClassPair findUserClass(String userEmail) {
         List<Shop> shops = clippingService.findClippingShopByUser(userEmail);
 
+        if (shops.size() == 0) {
+            List<Double> userClassValues = new ArrayList<>();
+            userClassValues.add(0D);
+            userClassValues.add(0D);
+            userClassValues.add(0D);
+            userClassValues.add(0D);
+            userClassValues.add(0D);
+            userClassValues.add(0D);
+            userClassValues.add(0D);
+
+            UserClassPair userClassPair = UserClassPair.builder()
+                    .userClass("기타")
+                    .userClassValues(userClassValues)
+                    .build();
+            return userClassPair;
+        }
+
         // 순서: 맛집탐방러, 미니인플루언서, 건강식, 기타, 카페인 뱀파이어, 혼밥러, 술고래
         String userClass;
 //        List<String> userClasses = new ArrayList<>();
