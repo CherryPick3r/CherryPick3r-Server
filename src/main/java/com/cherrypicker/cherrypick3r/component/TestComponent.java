@@ -2067,7 +2067,7 @@ public class TestComponent {
                 .tag(tag5)
                 .build();
 
-        shopRepository.save(shop4);
+        shopRepository.save(shop5);
 
         List<Menu> menus5 = new ArrayList<>();
         menus5.add(Menu.builder()
