@@ -3,6 +3,7 @@ package com.cherrypicker.cherrypick3r.user.service;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.user.domain.User;
+import com.cherrypicker.cherrypick3r.user.domain.UserMappingRepository;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import com.cherrypicker.cherrypick3r.user.dto.UserDeleteResponse;
 import com.cherrypicker.cherrypick3r.user.dto.UserDto;
@@ -19,6 +20,8 @@ import javax.transaction.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private final UserMappingRepository userMappingRepository;
     private final TagRepository tagRepository;
 
     @Transactional
@@ -51,10 +54,14 @@ public class UserService {
 
     @Transactional
     public UserNicknameResponse findUserNicknameByUserEmail(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+//        User user = userRepository.findByEmail(userEmail).get();
+        String nickname = userMappingRepository.findByEmail(userEmail).get().getNickname();
 
+//        UserNicknameResponse userNicknameResponse = UserNicknameResponse.builder()
+//                .userNickname(user.getNickname())
+//                .build();
         UserNicknameResponse userNicknameResponse = UserNicknameResponse.builder()
-                .userNickname(user.getNickname())
+                .userNickname(nickname)
                 .build();
 
         return userNicknameResponse;

@@ -1,11 +1,22 @@
-package com.cherrypicker.cherrypick3r.shop.dto;
+package com.cherrypicker.cherrypick3r.shopSimple.domain;
 
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@RedisHash("shopsimple")
 public class ShopSimple {
+
+    @Id
+    public String shopSimpleId;
 
     public Long shopId;
 
@@ -46,5 +57,4 @@ public class ShopSimple {
         this.operatingHours = shopDto.getOperatingHours();
         this.mainPhotoUrl = shopDto.getMainPhotoUrl1();
     }
-
 }

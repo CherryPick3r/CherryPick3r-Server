@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
 
 @Data
 public class ShopDto {
@@ -40,6 +41,7 @@ public class ShopDto {
     private Long naverId;
 
     private Long kakaoId;
+
 
     private Tag tag;
 

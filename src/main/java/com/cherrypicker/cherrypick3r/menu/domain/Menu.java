@@ -1,12 +1,15 @@
 package com.cherrypicker.cherrypick3r.menu.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.menu.dto.MenuSimple;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -36,4 +39,18 @@ public class Menu extends BaseTimeEntity {
         this.shop = shop;
     }
 
+    public MenuSimple getSimple(Menu menu) {
+        return MenuSimple.builder()
+                .name(menu.getName())
+                .price(menu.getPrice())
+                .build();
+    }
+
+    public List<MenuSimple> getSimpleList(List<Menu> menus) {
+        List<MenuSimple> menuSimples = new ArrayList<>();
+        for (Menu menu : menus) {
+            menuSimples.add(getSimple(menu));
+        }
+        return menuSimples;
+    }
 }

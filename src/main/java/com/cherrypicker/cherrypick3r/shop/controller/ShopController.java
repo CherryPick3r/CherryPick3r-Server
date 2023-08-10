@@ -4,6 +4,7 @@ import com.cherrypicker.cherrypick3r.clipping.dto.ClippingsSimpleResponse;
 import com.cherrypicker.cherrypick3r.game.service.GameService;
 import com.cherrypicker.cherrypick3r.result.dto.ResultsSimpleResponse;
 import com.cherrypicker.cherrypick3r.result.service.ResultService;
+import com.cherrypicker.cherrypick3r.shop.Service.ShopSearchService;
 import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDetailResponse;
@@ -24,12 +25,14 @@ public class ShopController {
 
     private final ShopService shopService;
 
+    private final ShopSearchService shopSearchService;
+
     private final ResultService resultService;
 
     @GetMapping("/card")
     public ResponseEntity<ShopCardResponse> getShopCard(@RequestParam("shopId") Long shopId,
                                                         @RequestParam("userEmail") String userEmail) {
-        ShopDto shopDto = shopService.findShopByShopId(shopId);
+        ShopDto shopDto = shopSearchService.findShopByShopId(shopId);
 
         ShopCardResponse shopCardResponse = shopService.createShopCardResponseByShopDtoAndUserEmail(shopDto, userEmail);
 
@@ -39,7 +42,7 @@ public class ShopController {
     @GetMapping("/detail")
     public ResponseEntity<ShopDetailResponse> getShopDetail(@RequestParam("shopId") Long shopId,
                                                             @RequestParam("userEmail") String userEmail) {
-        ShopDto shopDto = shopService.findShopByShopId(shopId);
+        ShopDto shopDto = shopSearchService.findShopByShopId(shopId);
 
         ShopDetailResponse shopDetailResponse = shopService.createShopDetailResponseByShopDto(shopDto, userEmail);
 
@@ -51,7 +54,7 @@ public class ShopController {
                                                                   @RequestParam("gameCategory") Long gameCategory) {
 
         ResultsSimpleResponse resultsSimpleResponse = ResultsSimpleResponse.builder()
-                .shopSimples(shopService.createShopSimpleListByUserEmailResults(userEmail))
+                .shopSimpleDtos(shopService.createShopSimpleListByUserEmailResults(userEmail))
                 .build();
 
         return ResponseEntity.ok(resultsSimpleResponse);
@@ -62,7 +65,7 @@ public class ShopController {
                                                                     @RequestParam("gameCategory") Long gameCategory) {
 
         ClippingsSimpleResponse clippingsSimpleResponse = ClippingsSimpleResponse.builder()
-                .shopSimples(shopService.createShopSimpleListByUserEmailClippings(userEmail))
+                .shopSimpleDtos(shopService.createShopSimpleListByUserEmailClippings(userEmail))
                 .build();
 
         return ResponseEntity.ok(clippingsSimpleResponse);

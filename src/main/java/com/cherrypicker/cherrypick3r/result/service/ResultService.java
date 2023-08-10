@@ -1,6 +1,5 @@
 package com.cherrypicker.cherrypick3r.result.service;
 
-import com.cherrypicker.cherrypick3r.clipping.domain.Clipping;
 import com.cherrypicker.cherrypick3r.game.domain.Game;
 import com.cherrypicker.cherrypick3r.game.domain.GameRepository;
 import com.cherrypicker.cherrypick3r.game.dto.GameDto;
@@ -10,7 +9,7 @@ import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopSimpleDto;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -108,10 +107,10 @@ public class ResultService {
     }
 
     @Transactional
-    public List<ShopSimple> find3ShopSimpleByUserEmail(String userEmail) {
+    public List<ShopSimpleDto> find3ShopSimpleByUserEmail(String userEmail) {
         User user = userRepository.findByEmail(userEmail).get();
         List<Game> games = gameRepository.findAllByUser(user);
-        List<ShopSimple> shopSimples = new ArrayList<>();
+        List<ShopSimpleDto> shopSimpleDtos = new ArrayList<>();
         int cnt = 0;
 
         Collections.reverse(games);
@@ -121,12 +120,12 @@ public class ResultService {
             if (result != null) {
                 if (cnt >= 3)
                     break;
-                shopSimples.add(new ShopSimple(result.getShop()));
+                shopSimpleDtos.add(new ShopSimpleDto(result.getShop()));
                 cnt++;
             }
         }
 
-        return shopSimples;
+        return shopSimpleDtos;
     }
 
 }

@@ -1,14 +1,23 @@
-package com.cherrypicker.cherrypick3r.shop.dto;
+package com.cherrypicker.cherrypick3r.shopCard.domain;
 
-import com.cherrypicker.cherrypick3r.shopCard.domain.ShopCard;
+import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.tag.dto.TagPairDto;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
 
+import javax.persistence.*;
 import java.util.List;
 
-@Data
-public class ShopCardResponse {
+@Getter
+@Setter
+@NoArgsConstructor
+@RedisHash("shopcard")
+public class ShopCard {
+
+    @Id
+    public String shopCardId; // "shopId" + "useremail" = shopCardId
 
     public Long shopId;
 
@@ -27,7 +36,8 @@ public class ShopCardResponse {
     public Long shopClipping;
 
     @Builder
-    public ShopCardResponse(Long shopId, String shopMainPhoto1, String shopMainPhoto2, String shopName, String shopCategory, String oneLineReview, List<TagPairDto> topTags, Long shopClipping) {
+    public ShopCard(String shopCardId, Long shopId, String shopMainPhoto1, String shopMainPhoto2, String shopName, String shopCategory, String oneLineReview, List<TagPairDto> topTags, Long shopClipping) {
+        this.shopCardId = shopCardId;
         this.shopId = shopId;
         this.shopMainPhoto1 = shopMainPhoto1;
         this.shopMainPhoto2 = shopMainPhoto2;
@@ -38,7 +48,8 @@ public class ShopCardResponse {
         this.shopClipping = shopClipping;
     }
 
-    public ShopCardResponse(ShopDto shopDto) {
+    public ShopCard(ShopDto shopDto) {
+        this.shopCardId = "";
         this.shopId = shopDto.getId();
         this.shopMainPhoto1 = shopDto.getMainPhotoUrl1();
         this.shopMainPhoto2 = shopDto.getMainPhotoUrl2();
@@ -47,16 +58,5 @@ public class ShopCardResponse {
         this.oneLineReview = shopDto.getOnelineReview();
         this.topTags = null;
         this.shopClipping = null;
-    }
-
-    public ShopCardResponse(ShopCard shopCard) {
-        this.shopId = shopCard.getShopId();
-        this.shopMainPhoto1 = shopCard.getShopMainPhoto1();
-        this.shopMainPhoto2 = shopCard.getShopMainPhoto2();
-        this.shopName = shopCard.getShopName();
-        this.shopCategory = shopCard.getShopCategory();
-        this.oneLineReview = shopCard.getOneLineReview();
-        this.topTags = shopCard.getTopTags();
-        this.shopClipping = shopCard.getShopClipping();
     }
 }

@@ -1,16 +1,14 @@
 package com.cherrypicker.cherrypick3r.user.controller;
 
 import com.cherrypicker.cherrypick3r.clipping.service.ClippingService;
-import com.cherrypicker.cherrypick3r.game.service.GameService;
 import com.cherrypicker.cherrypick3r.result.service.ResultService;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopSimpleDto;
 import com.cherrypicker.cherrypick3r.user.dto.*;
 import com.cherrypicker.cherrypick3r.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.sound.sampled.Clip;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +27,8 @@ public class UserController {
     public ResponseEntity<UserAnalyzeResponse> composeUserAnalyze(@RequestParam("userEmail") String userEmail) {
         Long resultCount = resultService.findResultCountByUserEmail(userEmail);
         Long clippingCount = clippingService.findClippingCountByUserEmail(userEmail);
-        List<ShopSimple> recentCherrypickShops = resultService.find3ShopSimpleByUserEmail(userEmail);
-        List<ShopSimple> recentClippingShops = clippingService.find3ShopSimpleByUserEmail(userEmail);
+        List<ShopSimpleDto> recentCherrypickShops = resultService.find3ShopSimpleByUserEmail(userEmail);
+        List<ShopSimpleDto> recentClippingShops = clippingService.find3ShopSimpleByUserEmail(userEmail);
         List<String> weeklyTags = new ArrayList<>();
 
         UserAnalyzeResponse userAnalyzeResponse = UserAnalyzeResponse.builder()

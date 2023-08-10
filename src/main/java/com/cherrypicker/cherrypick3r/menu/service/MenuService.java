@@ -27,13 +27,7 @@ public class MenuService {
 
         List<Menu> menus = menuRepository.findAllByShop(shop);
 
-        List<MenuSimple> menuSimples = new ArrayList<>();
-        for (Menu menu : menus) {
-            menuSimples.add(MenuSimple.builder()
-                    .name(menu.getName())
-                    .price(menu.getPrice())
-                    .build());
-        }
+        List<MenuSimple> menuSimples = new Menu().getSimpleList(menus);
 
         return menuSimples;
     }

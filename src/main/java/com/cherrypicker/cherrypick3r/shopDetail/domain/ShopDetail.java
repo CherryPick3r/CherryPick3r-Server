@@ -1,17 +1,25 @@
-package com.cherrypicker.cherrypick3r.shop.dto;
+package com.cherrypicker.cherrypick3r.shopDetail.domain;
 
 import com.cherrypicker.cherrypick3r.menu.dto.MenuSimple;
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shopDetail.domain.ShopDetail;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.tag.dto.TagPairDto;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Data
-public class ShopDetailResponse {
+@Getter
+@Setter
+@NoArgsConstructor
+@RedisHash("shopdetail")
+public class ShopDetail {
+
+    @Id
+    public String shopDetailId;
 
     public Long shopId;
 
@@ -40,7 +48,8 @@ public class ShopDetailResponse {
     public Long shopKakaoId;
 
     @Builder
-    public ShopDetailResponse(Long shopId, String shopName, String shopCategory, String oneLineReview, String shopAddress, Long totalCherryPickCount, String operatingHours, List<TagPairDto> topTags, List<MenuSimple> shopMenus, List<String> shopMainPhotoURLs, Long shopClipping, Long shopNaverId, Long shopKakaoId) {
+    public ShopDetail(String shopDetailId, Long shopId, String shopName, String shopCategory, String oneLineReview, String shopAddress, Long totalCherryPickCount, String operatingHours, List<TagPairDto> topTags, List<MenuSimple> shopMenus, List<String> shopMainPhotoURLs, Long shopClipping, Long shopNaverId, Long shopKakaoId) {
+        this.shopDetailId = shopDetailId;
         this.shopId = shopId;
         this.shopName = shopName;
         this.shopCategory = shopCategory;
@@ -56,7 +65,7 @@ public class ShopDetailResponse {
         this.shopKakaoId = shopKakaoId;
     }
 
-    public ShopDetailResponse(ShopDto shopDto) {
+    public ShopDetail(ShopDto shopDto) {
         this.shopId = shopDto.getId();
         this.shopName = shopDto.getName();
         this.shopCategory = ""; //샵카테고리 어떻게 넣을지
@@ -70,21 +79,5 @@ public class ShopDetailResponse {
         this.shopClipping = null;
         this.shopNaverId = shopDto.getNaverId();
         this.shopKakaoId = shopDto.getKakaoId();
-    }
-
-    public ShopDetailResponse(ShopDetail shopDetail) {
-        this.shopId = shopDetail.getShopId();
-        this.shopName = shopDetail.getShopName();
-        this.shopCategory = shopDetail.getShopCategory();
-        this.oneLineReview = shopDetail.getOneLineReview();
-        this.shopAddress = shopDetail.getShopAddress();
-        this.totalCherryPickCount = shopDetail.getTotalCherryPickCount();
-        this.operatingHours = shopDetail.getOperatingHours();
-        this.topTags = shopDetail.getTopTags();
-        this.shopMenus = shopDetail.getShopMenus();
-        this.shopMainPhotoURLs = shopDetail.getShopMainPhotoURLs();
-        this.shopClipping = shopDetail.getShopClipping();
-        this.shopNaverId = shopDetail.getShopNaverId();
-        this.shopKakaoId = shopDetail.getShopKakaoId();
     }
 }

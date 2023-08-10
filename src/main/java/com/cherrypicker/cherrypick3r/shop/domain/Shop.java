@@ -4,6 +4,7 @@ import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
+import com.cherrypicker.cherrypick3r.shopRedis.domain.ShopRedis;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -66,12 +67,11 @@ public class Shop extends BaseTimeEntity {
     @Column(name = "shop_kakao_id")
     private Long kakaoId;
 
-
-    @OneToOne(cascade = CascadeType.DETACH)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
-    @OneToOne(mappedBy = "shop")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "shop")
     @JsonManagedReference
     private ShopClassify shopClassify;
 
@@ -93,6 +93,25 @@ public class Shop extends BaseTimeEntity {
         this.kakaoId = kakaoId;
         this.shopClassify = null;
         this.tag = tag;
+    }
+
+    public Shop(ShopRedis shopRedis) {
+        this.id = shopRedis.getId();
+        this.phone = shopRedis.getPhone();
+        this.name = shopRedis.getName();
+        this.address = shopRedis.getAddress();
+        this.addressPointY = shopRedis.getAddressPointY();
+        this.addressPointX = shopRedis.getAddressPointX();
+        this.clippingCount = shopRedis.getClippingCount();
+        this.pickedCount = shopRedis.getPickedCount();
+        this.operatingHours = shopRedis.getOperatingHours();
+        this.onelineReview = shopRedis.getOnelineReview();
+        this.mainPhotoUrl1 = shopRedis.getMainPhotoUrl1();
+        this.mainPhotoUrl2 = shopRedis.getMainPhotoUrl2();
+        this.naverId = shopRedis.getNaverId();
+        this.kakaoId = shopRedis.getKakaoId();
+        this.shopClassify = shopRedis.getShopClassify();
+        this.tag = shopRedis.getTag();
     }
 
     public ShopDto toDto() {

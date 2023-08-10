@@ -18,17 +18,13 @@ public class ClippingController {
     public ResponseEntity<ClippingDoResponse> doClipping(@RequestParam("userEmail") String userEmail,
                                                          @RequestParam("shopId") Long shopId) {
 
-        ClippingDoResponse clippingDoResponse = clippingService.createClipping(shopId, userEmail);
-
-        return ResponseEntity.ok(clippingDoResponse);
+        return ResponseEntity.ok(clippingService.createClipping(shopId, userEmail));
     }
 
     @DeleteMapping("/undo")
     public ResponseEntity<ClippingUndoResponse> undoClipping(@RequestParam("userEmail") String userEmail,
                                                              @RequestParam("shopId") Long shopId) {
 
-        ClippingUndoResponse clippingUndoResponse = clippingService.deleteClipping(shopId, userEmail);
-
-        return ResponseEntity.ok(clippingUndoResponse);
+        return ResponseEntity.ok(clippingService.deleteClipping(shopId, userEmail));
     }
 }

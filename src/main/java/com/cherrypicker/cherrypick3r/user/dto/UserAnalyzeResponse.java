@@ -1,6 +1,6 @@
 package com.cherrypicker.cherrypick3r.user.dto;
 
-import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopSimpleDto;
 import lombok.Builder;
 import lombok.Data;
 
@@ -21,16 +21,16 @@ public class UserAnalyzeResponse {
 
     public Long cherrypickCount;
 
-    public List<ShopSimple> recentCherrypickShops;
+    public List<ShopSimpleDto> recentCherrypickShops;
 
     public Long clippingCount;
 
-    public List<ShopSimple> recentClippingShops;
+    public List<ShopSimpleDto> recentClippingShops;
 
     public List<String> weeklyTags;
 
     @Builder
-    public UserAnalyzeResponse(String userNickname, Double userPercentile, Long cherrypickClippingTotalCount, Long cherrypickCount, List<ShopSimple> recentCherrypickShops, Long clippingCount, List<ShopSimple> recentClippingShops, List<String> weeklyTags) {
+    public UserAnalyzeResponse(String userNickname, Double userPercentile, Long cherrypickClippingTotalCount, Long cherrypickCount, List<ShopSimpleDto> recentCherrypickShops, Long clippingCount, List<ShopSimpleDto> recentClippingShops, List<String> weeklyTags) {
         this.userNickname = userNickname;
         this.userPercentile = userPercentile;
         this.cherrypickClippingTotalCount = cherrypickClippingTotalCount;

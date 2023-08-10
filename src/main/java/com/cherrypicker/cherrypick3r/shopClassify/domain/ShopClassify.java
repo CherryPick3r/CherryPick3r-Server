@@ -107,7 +107,7 @@ public class ShopClassify extends BaseTimeEntity {
     @Column(name = "shop_classify_tag_28")
     private Long shopClassifyTag28;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id")
     @JsonBackReference
     private Shop shop;

@@ -7,11 +7,14 @@ import com.cherrypicker.cherrypick3r.clipping.dto.ClippingUndoResponse;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
+import com.cherrypicker.cherrypick3r.shop.dto.ShopSimpleDto;
+import com.cherrypicker.cherrypick3r.shopCard.service.ShopCardService;
+import com.cherrypicker.cherrypick3r.shopDetail.service.ShopDetailService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import com.cherrypicker.cherrypick3r.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisKeyValueTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,9 +25,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ClippingService {
+
     private final ClippingRepository clippingRepository;
     private final UserRepository userRepository;
     private final ShopRepository shopRepository;
+
+    private final ShopCardService shopCardService;
+
+    private final ShopDetailService shopDetailService;
 
     @Transactional
     public Clipping createClipping(Shop shop, User user)
@@ -47,6 +55,9 @@ public class ClippingService {
                 .userEmail(userEmail)
                 .build();
 
+        shopCardService.updateShopCard(shopId, userEmail, 1L);
+        shopDetailService.updateShopDetail(shopId, userEmail, 1L);
+
         return clippingDoResponse;
     }
 
@@ -63,6 +74,9 @@ public class ClippingService {
                 .shopId(shopId)
                 .userEmail(userEmail)
                 .build();
+
+        shopCardService.updateShopCard(shopId, userEmail, 0L);
+        shopDetailService.updateShopDetail(shopId, userEmail, 0L);
 
         return clippingUndoResponse;
     }
@@ -101,20 +115,6 @@ public class ClippingService {
         return findClippingShopByUser(user).size();
     }
 
-    @Transactional
-    public Long findClippingByUserEmailAndShopId(String userEmail, Long shopId) {
-        Shop shop = shopRepository.findById(shopId).get();
-        User user = userRepository.findByEmail(userEmail).get();
-
-        Clipping clipping = clippingRepository.findByShopAndUser(shop, user);
-
-        if (clipping != null) {
-            return 1L;
-        }
-        else {
-            return 0L;
-        }
-    }
 
     @Transactional
     public Long findClippingCountByUserEmail(String userEmail) {
@@ -125,21 +125,21 @@ public class ClippingService {
     }
 
     @Transactional
-    public List<ShopSimple> find3ShopSimpleByUserEmail(String userEmail) {
+    public List<ShopSimpleDto> find3ShopSimpleByUserEmail(String userEmail) {
         User user = userRepository.findByEmail(userEmail).get();
         List<Clipping> clippings = clippingRepository.findAllByUser(user);
-        List<ShopSimple> shopSimples = new ArrayList<>();
+        List<ShopSimpleDto> shopSimpleDtos = new ArrayList<>();
         int cnt = 0;
 
         Collections.reverse(clippings);
         for (Clipping clipping : clippings) {
             if (cnt >= 3)
                 break;
-            shopSimples.add(new ShopSimple(clipping.getShop()));
+            shopSimpleDtos.add(new ShopSimpleDto(clipping.getShop()));
             cnt++;
         }
 
-        return shopSimples;
+        return shopSimpleDtos;
     }
 
 }

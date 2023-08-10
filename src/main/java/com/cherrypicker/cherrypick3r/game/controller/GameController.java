@@ -6,6 +6,7 @@ import com.cherrypicker.cherrypick3r.game.service.GameService;
 import com.cherrypicker.cherrypick3r.result.domain.Result;
 import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
 import com.cherrypicker.cherrypick3r.result.service.ResultService;
+import com.cherrypicker.cherrypick3r.shop.Service.ShopSearchService;
 import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
@@ -26,6 +27,8 @@ import java.util.List;
 public class GameController {
 
     private final ShopService shopService;
+
+    private final ShopSearchService shopSearchService;
 
     private final GameService gameService;
 
@@ -80,7 +83,7 @@ public class GameController {
     @PostMapping("/swipe-left")
     public ResponseEntity<?> swipeLeft(@RequestParam("gameId") Long gameId,
                                        @RequestParam("shopId") Long shopId) {
-        GameDto gameDto = gameService.swipeLeft(gameService.findGameDtoById(gameId), shopService.findShopByShopId(shopId));
+        GameDto gameDto = gameService.swipeLeft(gameService.findGameDtoById(gameId), shopSearchService.findShopByShopId(shopId));
 
         if (gameDto == null) {
             return ResponseEntity.badRequest().build();
@@ -91,7 +94,7 @@ public class GameController {
 
             // 결과 생성
             // TODO: 게임 모드에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-            List<ShopDto> shopDtos = shopService.findAllDtos();
+            List<ShopDto> shopDtos = shopSearchService.findAllDtos();
 
             // 게임을 종료상태로 만든다. : 스코어를 이용한 결과 도출
             ResultDto resultDto = gameService.endGame(gameDto, gameService.findShopByScore(gameDto, shopDtos));
@@ -148,7 +151,7 @@ public class GameController {
     @PostMapping("/swipe-right")
     public ResponseEntity<?> swipeRight(@RequestParam("gameId") Long gameId,
                                         @RequestParam("shopId") Long shopId) {
-        GameDto gameDto = gameService.swipeRight(gameService.findGameDtoById(gameId), shopService.findShopByShopId(shopId));
+        GameDto gameDto = gameService.swipeRight(gameService.findGameDtoById(gameId), shopSearchService.findShopByShopId(shopId));
 
         if (gameDto == null) {
             return ResponseEntity.badRequest().build();
@@ -159,7 +162,7 @@ public class GameController {
 
             // 결과 생성
             // TODO: 게임 모드에 해당하는 가게로 해야함, 일단 설계의 한계로 모든 가게에 대해서 하게 구현
-            List<ShopDto> shopDtos = shopService.findAllDtos();
+            List<ShopDto> shopDtos = shopSearchService.findAllDtos();
 
             // 게임을 종료상태로 만든다. : 스코어를 이용한 결과 도출
             ResultDto resultDto = gameService.endGame(gameDto, gameService.findShopByScore(gameDto, shopDtos));
