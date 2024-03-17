@@ -1,4 +1,4 @@
-# 광진구 음식점 추천 어플 CherryPick3rd
+# 광진구 음식점 추천 어플 '체리피커'
 ![KakaoTalk_Photo_2023-06-02-10-54-00 001 복사본](https://github.com/CherryPick3r/CherryPick3r-Server/assets/44383895/bf55ff4b-8202-4509-a281-a8ae9ef84177)
 
 이제는 음식 추천도 재미있게! 체리피커
