@@ -54,7 +54,7 @@
 - AWS 활용 자동배포 시스템 구축
 
 
-How to recommend “restaurant” based on “personal preference” ?
+### How to recommend “restaurant” based on “personal preference” ?
 
 1. 유저의 취향을 기반으로 음식점을 게임형태로 추천해주는 시스템을 제안하였습니다.
 2. 유저는 초기 취향 게임을 통해서 본인의 취향을 세팅하고 게임을 진행할 수 있으며, 별도의 목적에 맞는 식당을 ‘단체 모임’, ‘혼밥’, ‘카페 공부’, ‘술집’ 중에 선택하여 카테고리별 게임도 진행할 수 있습니다.
