@@ -10,6 +10,10 @@
 <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/docker Compose-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/Github Action-181717?style=for-the-badge&logo=github&logoColor=white"> <br>
 <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white"> <br>
 
+## Team
+
+![스크린샷 2024-03-17 오후 7 22 57](https://github.com/CherryPick3r/CherryPick3r-Server/assets/44383895/a4ab0844-2266-4e43-ad85-ea2dab876fad) ![스크린샷 2024-03-17 오후 7 22 45](https://github.com/CherryPick3r/CherryPick3r-Server/assets/44383895/49b9e10c-ab5d-49f0-add3-7e3b7c1ea0c5)
+
   
 ## 배경
 
@@ -81,10 +85,5 @@ How to recommend “restaurant” based on “personal preference” ?
 - MSE = Mean Squared Error
 
 ![image](https://github.com/CherryPick3r/CherryPick3r-Server/assets/44383895/176c0f1e-c877-4d3a-8ac9-bab10df021cc)
-
-
-## Team
-
-![스크린샷 2024-03-17 오후 7 22 57](https://github.com/CherryPick3r/CherryPick3r-Server/assets/44383895/a4ab0844-2266-4e43-ad85-ea2dab876fad) ![스크린샷 2024-03-17 오후 7 22 45](https://github.com/CherryPick3r/CherryPick3r-Server/assets/44383895/49b9e10c-ab5d-49f0-add3-7e3b7c1ea0c5)
 
 
