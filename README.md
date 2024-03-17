@@ -82,9 +82,7 @@
 
 - 각 preference Category에 대한 기준 태그 값이 존재합니다.
 
-- 유저의 취향 태그와 preference Category와의 오차 계산
-
-- MSE = Mean Squared Error
+- 유저의 취향 태그와 preference Category와의 MSE(Mean Squared Error)를 이용한 유클리디안 오차 계산을 통해 유저의 취향에 가장 가까운 태그를 설정하고, 이를 토대로 개인화된 분석을 도출합니다.
 
 ![image](https://github.com/CherryPick3r/CherryPick3r-Server/assets/44383895/176c0f1e-c877-4d3a-8ac9-bab10df021cc)
 
