@@ -49,9 +49,9 @@
 
 ## 주요 기능 및 개발 사항
 
-• Java spring boot을 이용한 api 개발
-• 룰 베이스 학습 방식을 도입한 음식점 추천 알고리즘 도입 
-• AWS 활용 자동배포 시스템 구축
+- Java spring boot을 이용한 api 개발
+- 룰 베이스 학습 방식을 도입한 음식점 추천 알고리즘 도입 
+- AWS 활용 자동배포 시스템 구축
 
 
 How to recommend “restaurant” based on “personal preference” ?
