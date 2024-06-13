@@ -88,7 +88,7 @@ public class PreferenceGameService {
         List<PreferenceCard> preferenceCards = new ArrayList<>();
         for (PreferenceShop preferenceShop : preferenceShops) {
             preferenceGame.getRecommendedShopIds().add(preferenceShop.getId());
-            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByPreferenceShop(preferenceShop)));
+            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByShopTag(preferenceShop.getTag())));
         }
 
         // 생성한 초기취향 게임 저장
@@ -140,7 +140,7 @@ public class PreferenceGameService {
         List<PreferenceCard> preferenceCards = new ArrayList<>();
         for (PreferenceShop preferenceShop : preferenceShops) {
             preferenceGame.getRecommendedShopIds().add(preferenceShop.getId());
-            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByPreferenceShop(preferenceShop)));
+            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByShopTag(preferenceShop.getTag())));
         }
 
         // 생성한 초기취향 게임 저장
