@@ -4,15 +4,12 @@ import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
-import com.cherrypicker.cherrypick3r.user.dto.UserDeleteResponse;
-import com.cherrypicker.cherrypick3r.user.dto.UserDto;
 import com.cherrypicker.cherrypick3r.user.dto.UserNicknameChangeResponse;
 import com.cherrypicker.cherrypick3r.user.dto.UserNicknameResponse;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Service

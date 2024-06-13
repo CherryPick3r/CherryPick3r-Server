@@ -1,26 +1,26 @@
 package com.cherrypicker.cherrypick3r.game.controller;
 
 import com.cherrypicker.cherrypick3r.component.TestComponent;
-import com.cherrypicker.cherrypick3r.game.dto.*;
+import com.cherrypicker.cherrypick3r.game.dto.GameDto;
+import com.cherrypicker.cherrypick3r.game.dto.GameEndResponse;
+import com.cherrypicker.cherrypick3r.game.dto.GameResponse;
+import com.cherrypicker.cherrypick3r.game.dto.GameStartResponse;
 import com.cherrypicker.cherrypick3r.game.service.GameService;
-import com.cherrypicker.cherrypick3r.result.domain.Result;
 import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
-import com.cherrypicker.cherrypick3r.result.service.ResultService;
 import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
-import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
-import com.cherrypicker.cherrypick3r.user.service.UserService;
 import com.opencsv.exceptions.CsvException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/game")

@@ -11,13 +11,12 @@ import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import com.cherrypicker.cherrypick3r.user.dto.UserDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

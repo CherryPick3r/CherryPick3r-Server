@@ -1,6 +1,5 @@
 package com.cherrypicker.cherrypick3r.result.service;
 
-import com.cherrypicker.cherrypick3r.clipping.domain.Clipping;
 import com.cherrypicker.cherrypick3r.game.domain.Game;
 import com.cherrypicker.cherrypick3r.game.domain.GameRepository;
 import com.cherrypicker.cherrypick3r.game.dto.GameDto;
@@ -13,13 +12,12 @@ import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service

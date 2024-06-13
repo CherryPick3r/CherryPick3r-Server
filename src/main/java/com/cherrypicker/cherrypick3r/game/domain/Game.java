@@ -2,16 +2,25 @@ package com.cherrypicker.cherrypick3r.game.domain;
 
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.game.dto.GameDto;
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.user.domain.User;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter

@@ -1,11 +1,9 @@
 package com.cherrypicker.cherrypick3r.shop.dto;
 
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import java.time.LocalDateTime;
 
 @Data
 public class ShopSimple {

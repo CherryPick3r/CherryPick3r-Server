@@ -1,19 +1,10 @@
 package com.cherrypicker.cherrypick3r.component;
 
-import com.cherrypicker.cherrypick3r.game.domain.GameRepository;
-import com.cherrypicker.cherrypick3r.game.dto.GameDto;
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
-import com.cherrypicker.cherrypick3r.tag.domain.Tag;
-import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
-import com.cherrypicker.cherrypick3r.tag.dto.TagDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component

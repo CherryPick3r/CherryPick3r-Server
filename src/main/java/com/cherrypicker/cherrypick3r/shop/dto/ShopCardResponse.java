@@ -1,10 +1,9 @@
 package com.cherrypicker.cherrypick3r.shop.dto;
 
 import com.cherrypicker.cherrypick3r.tag.dto.TagPairDto;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class ShopCardResponse {

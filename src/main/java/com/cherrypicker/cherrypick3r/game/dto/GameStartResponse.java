@@ -1,10 +1,9 @@
 package com.cherrypicker.cherrypick3r.game.dto;
 
 import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class GameStartResponse {

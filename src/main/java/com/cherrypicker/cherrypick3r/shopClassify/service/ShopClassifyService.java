@@ -5,15 +5,12 @@ import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
-import com.cherrypicker.cherrypick3r.shopClassify.dto.ShopClassifyDto;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
-import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service

@@ -1,21 +1,23 @@
 package com.cherrypicker.cherrypick3r.auth.controller;
 
+import com.cherrypicker.cherrypick3r.auth.dto.SocialDto;
+import com.cherrypicker.cherrypick3r.auth.service.SocialService;
 import com.cherrypicker.cherrypick3r.component.GoogleKey;
+import com.cherrypicker.cherrypick3r.component.JwtTokenProvider;
 import com.cherrypicker.cherrypick3r.component.KakaoKey;
 import com.cherrypicker.cherrypick3r.user.domain.User;
-import com.cherrypicker.cherrypick3r.auth.dto.SocialDto;
-import com.cherrypicker.cherrypick3r.component.JwtTokenProvider;
-import com.cherrypicker.cherrypick3r.auth.service.SocialService;
 import com.cherrypicker.cherrypick3r.user.dto.LoginResponse;
 import com.cherrypicker.cherrypick3r.user.service.UserService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth")

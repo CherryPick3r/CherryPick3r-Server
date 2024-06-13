@@ -1,20 +1,15 @@
 package com.cherrypicker.cherrypick3r.userClassify.service;
 
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
-import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
-import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassify;
 import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassifyRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service

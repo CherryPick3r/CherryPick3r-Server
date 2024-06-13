@@ -1,19 +1,22 @@
 package com.cherrypicker.cherrypick3r.user.controller;
 
 import com.cherrypicker.cherrypick3r.clipping.service.ClippingService;
-import com.cherrypicker.cherrypick3r.game.service.GameService;
 import com.cherrypicker.cherrypick3r.result.service.ResultService;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
-import com.cherrypicker.cherrypick3r.user.dto.*;
+import com.cherrypicker.cherrypick3r.user.dto.UserAnalyzeResponse;
+import com.cherrypicker.cherrypick3r.user.dto.UserClassPair;
+import com.cherrypicker.cherrypick3r.user.dto.UserNicknameChangeResponse;
+import com.cherrypicker.cherrypick3r.user.dto.UserNicknameResponse;
 import com.cherrypicker.cherrypick3r.user.service.UserAnalyzeService;
 import com.cherrypicker.cherrypick3r.user.service.UserService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.sound.sampled.Clip;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/user")

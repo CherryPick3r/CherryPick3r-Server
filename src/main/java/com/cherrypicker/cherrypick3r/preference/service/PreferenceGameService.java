@@ -1,8 +1,6 @@
 package com.cherrypicker.cherrypick3r.preference.service;
 
 import com.cherrypicker.cherrypick3r.component.GameCalc;
-import com.cherrypicker.cherrypick3r.game.domain.Game;
-import com.cherrypicker.cherrypick3r.game.dto.GameDto;
 import com.cherrypicker.cherrypick3r.preference.domain.PreferenceGame;
 import com.cherrypicker.cherrypick3r.preference.domain.PreferenceGameRepository;
 import com.cherrypicker.cherrypick3r.preference.dto.CheckPreferenceGameResponse;
@@ -12,21 +10,17 @@ import com.cherrypicker.cherrypick3r.preference.dto.UserPreferenceStartResponse;
 import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShop;
 import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShopRepository;
 import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.tag.service.TagService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

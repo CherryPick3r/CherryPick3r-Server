@@ -1,17 +1,19 @@
 package com.cherrypicker.cherrypick3r.auth.service;
 
-import com.cherrypicker.cherrypick3r.component.KakaoKey;
 import com.cherrypicker.cherrypick3r.auth.dto.KakaoAccessTokenDto;
+import com.cherrypicker.cherrypick3r.component.KakaoKey;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor

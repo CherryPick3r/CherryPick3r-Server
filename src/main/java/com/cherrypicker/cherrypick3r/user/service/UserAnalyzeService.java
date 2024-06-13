@@ -6,8 +6,6 @@ import com.cherrypicker.cherrypick3r.component.GameCalc;
 import com.cherrypicker.cherrypick3r.component.TagType;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopScoreDto;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
@@ -15,17 +13,15 @@ import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import com.cherrypicker.cherrypick3r.user.dto.UserClassPair;
 import com.cherrypicker.cherrypick3r.user.dto.UserSimilarityPair;
-import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassify;
 import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassifyRepository;
 import com.cherrypicker.cherrypick3r.userClassify.service.UserClassifyService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

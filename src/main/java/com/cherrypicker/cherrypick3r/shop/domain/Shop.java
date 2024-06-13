@@ -3,18 +3,20 @@ package com.cherrypicker.cherrypick3r.shop.domain;
 import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
-import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
-import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-
-
-import javax.persistence.*;
 
 @Entity
 @Getter
