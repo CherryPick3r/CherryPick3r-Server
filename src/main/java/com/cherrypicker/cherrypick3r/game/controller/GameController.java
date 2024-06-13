@@ -7,7 +7,7 @@ import com.cherrypicker.cherrypick3r.game.dto.GameResponse;
 import com.cherrypicker.cherrypick3r.game.dto.GameStartResponse;
 import com.cherrypicker.cherrypick3r.game.service.GameService;
 import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
-import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
+import com.cherrypicker.cherrypick3r.shop.service.ShopService;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.opencsv.exceptions.CsvException;

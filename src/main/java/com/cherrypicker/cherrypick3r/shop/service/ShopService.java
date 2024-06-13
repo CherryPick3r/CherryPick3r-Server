@@ -1,4 +1,4 @@
-package com.cherrypicker.cherrypick3r.shop.Service;
+package com.cherrypicker.cherrypick3r.shop.service;
 
 import com.cherrypicker.cherrypick3r.clipping.domain.Clipping;
 import com.cherrypicker.cherrypick3r.clipping.service.ClippingService;

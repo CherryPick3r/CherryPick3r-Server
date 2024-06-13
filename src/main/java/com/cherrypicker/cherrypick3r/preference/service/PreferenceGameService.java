@@ -9,7 +9,7 @@ import com.cherrypicker.cherrypick3r.preference.dto.UserPreferenceResponse;
 import com.cherrypicker.cherrypick3r.preference.dto.UserPreferenceStartResponse;
 import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShop;
 import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShopRepository;
-import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
+import com.cherrypicker.cherrypick3r.shop.service.ShopService;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;

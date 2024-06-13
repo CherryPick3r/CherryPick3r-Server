@@ -4,7 +4,7 @@ import com.cherrypicker.cherrypick3r.clipping.dto.ClippingsSimpleResponse;
 import com.cherrypicker.cherrypick3r.game.service.GameService;
 import com.cherrypicker.cherrypick3r.result.dto.ResultsSimpleResponse;
 import com.cherrypicker.cherrypick3r.result.service.ResultService;
-import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
+import com.cherrypicker.cherrypick3r.shop.service.ShopService;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDetailResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
