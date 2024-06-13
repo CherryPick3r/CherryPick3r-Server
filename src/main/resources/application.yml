@@ -1,4 +1,54 @@
-# Mysql
+# default
+spring:
+  profiles:
+    active: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  h2:
+    console:
+      enabled: true  # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
+      path: /h2-console  # H2 Console의 Path
+  # Database Setting Info (Database를 H2로 사용하기 위해 H2연결 정보 입력)
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db;MODE=MYSQL
+    username: sa
+    password:
+
+  jpa:
+    generate-ddl: 'true'
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true # sql 과 함께 jpql 주석처리되어  콘솔창에 출력
+
+# oauth kakao
+client:
+  id:
+    kakao: ${CLIENT_ID_KAKAO}
+    google: ${CLIENT_ID_GOOGLE}
+redirect:
+  uri:
+    kakao: ${REDIRECT_URI_KAKAO}
+    google: ${REDIRECT_URI_GOOGLE}
+
+# oauth google
+secret:
+  google: ${SECRET_GOOGLE}
+---
+spring:
+  config:
+    activate:
+      on-profile: deploy
 aws:
   paramstore:
     enabled: true
@@ -9,6 +59,8 @@ aws:
 spring:
   config:
     import: 'aws-parameterstore:'
+    activate:
+      on-profile: prod
 
   datasource:
     url: ${DATASOURCE_URL}
@@ -23,9 +75,6 @@ spring:
         format_sql: true
         show_sql: true
         ddl-auto: update
-  profiles:
-    include: oauth-key
-
 
 # oauth kakao
 client:
