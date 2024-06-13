@@ -2,7 +2,6 @@ package com.cherrypicker.cherrypick3r.component;
 
 import com.cherrypicker.cherrypick3r.menu.domain.Menu;
 import com.cherrypicker.cherrypick3r.menu.domain.MenuRepository;
-import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShop;
 import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShopRepository;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
@@ -12,22 +11,18 @@ import com.cherrypicker.cherrypick3r.shopPhoto.domain.ShopPhoto;
 import com.cherrypicker.cherrypick3r.shopPhoto.domain.ShopPhotoRepository;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
-import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Component;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.Transactional;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component

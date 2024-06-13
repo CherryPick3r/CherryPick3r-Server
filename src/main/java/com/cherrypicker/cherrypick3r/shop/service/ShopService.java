@@ -1,4 +1,4 @@
-package com.cherrypicker.cherrypick3r.shop.Service;
+package com.cherrypicker.cherrypick3r.shop.service;
 
 import com.cherrypicker.cherrypick3r.clipping.domain.Clipping;
 import com.cherrypicker.cherrypick3r.clipping.service.ClippingService;
@@ -13,22 +13,20 @@ import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDetailResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
+import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
 import com.cherrypicker.cherrypick3r.shopPhoto.service.ShopPhotoService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
-import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
-import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
-
 import com.cherrypicker.cherrypick3r.tag.service.TagService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
@@ -36,7 +34,7 @@ public class ShopService {
 
     private final ShopRepository shopRepository;
 
-    private final TagRepository tagRepository;
+    private final ShopSearchService shopSearchService;
 
     private final ShopClassifyService shopClassifyService;
 
@@ -55,72 +53,84 @@ public class ShopService {
     private final ResultRepository resultRepository;
 
     @Transactional
-    public Shop createShop(String phone, String name, String address, Double addressPointY, Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours, String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Long naverId, Long kakaoId, Tag tag)
-    {
-        Shop shop =  new Shop(phone, name , address, addressPointY, addressPointX , clippingCount, pickedCount, operatingHours, onelineReview, mainPhotoUrl1, mainPhotoUrl2, naverId, kakaoId, tag);
+    public Shop createShop(String phone, String name, String address, Double addressPointY,
+        Double addressPointX, Long clippingCount, Long pickedCount, String operatingHours,
+        String onelineReview, String mainPhotoUrl1, String mainPhotoUrl2, Long naverId,
+        Long kakaoId, Tag tag) {
+        Shop shop = new Shop(phone, name, address, addressPointY, addressPointX, clippingCount,
+            pickedCount, operatingHours, onelineReview, mainPhotoUrl1, mainPhotoUrl2, naverId,
+            kakaoId, tag);
         shopRepository.save(shop);
         return shop;
     }
 
     @Transactional
-    public ShopDto findShopByShopId(Long id){
-        Shop shop = shopRepository.findById(id).get();
-        return shop.toDto();
+    public ShopDto findShopByShopId(Long id) {
+        return shopSearchService.findShopById(id).toDto();
     }
 
 
     //은정  : shopClassifyService. findAllShopByClassifyTags(taglist)를 이용해서 특정 태그를 가진 가게 리스트를 반환한다 : 태그의 희소성을 나타낼 수 있다. (해당 태그 가게 수/전체 가게 수)
     @Transactional
-    public List<Shop> findAllShopByTagIdx(int idx){
+    public List<Shop> findAllShopByTagIdx(int idx) {
 
-        ArrayList<Long> tagBoolList  = new ArrayList<>();
-        for(int i = 0; i < idx; i++)
+        ArrayList<Long> tagBoolList = new ArrayList<>();
+        for (int i = 0; i < idx; i++) {
             tagBoolList.add(0L);
+        }
         tagBoolList.add(1L);
-        for(int i = idx + 1; i < 28; i++)
+        for (int i = idx + 1; i < 28; i++) {
             tagBoolList.add(0L);
+        }
         return shopClassifyService.findAllShopByClassifyTags(tagBoolList);
     }
 
     @Transactional
-    public List<ShopDto> findAllShopDtoByTagIdx(int idx){
+    public List<ShopDto> findAllShopDtoByTagIdx(int idx) {
 
-        ArrayList<Long> tagBoolList  = new ArrayList<>();
-        for(int i = 0; i < idx; i++)
+        ArrayList<Long> tagBoolList = new ArrayList<>();
+        for (int i = 0; i < idx; i++) {
             tagBoolList.add(0L);
+        }
         tagBoolList.add(1L);
-        for(int i = idx + 1; i < 28; i++)
+        for (int i = idx + 1; i < 28; i++) {
             tagBoolList.add(0L);
-        return shopClassifyService.findAllShopDtoByClassifyTags(tagBoolList);
+        }
+        return shopClassifyService.findAllShopByClassifyTags(tagBoolList).stream()
+            .map(Shop::toDto)
+            .collect(Collectors.toList());
     }
 
     //오버로딩: Integer.
     @Transactional
-    public List<ShopDto> findAllShopDtoByTagIdx(Integer idx){
+    public List<ShopDto> findAllShopDtoByTagIdx(Integer idx) {
 
-        ArrayList<Long> tagBoolList  = new ArrayList<>();
-        for(int i = 0; i < idx; i++)
+        ArrayList<Long> tagBoolList = new ArrayList<>();
+        for (int i = 0; i < idx; i++) {
             tagBoolList.add(0L);
+        }
         tagBoolList.add(1L);
-        for(int i = idx + 1; i < 28; i++)
+        for (int i = idx + 1; i < 28; i++) {
             tagBoolList.add(0L);
-        return shopClassifyService.findAllShopDtoByClassifyTags(tagBoolList);
+        }
+        return shopClassifyService.findAllShopByClassifyTags(tagBoolList).stream()
+            .map(Shop::toDto)
+            .collect(Collectors.toList());
     }
 
 
     @Transactional
-    public Long findShopid(Shop shop)
-    {
+    public Long findShopId(Shop shop) {
         return shop.getId();
     }
+
     @Transactional
-    public ShopDto findShopById(Long id)
-    {
-        return shopRepository.findById(id).get().toDto();
+    public ShopDto findShopById(Long id) {
+        return shopSearchService.findShopById(id).toDto();
     }
 
 
-    public ShopDto findShopByName(String name){
+    public ShopDto findShopByName(String name) {
         return shopRepository.findByName(name).get().toDto();
     }
 
@@ -135,11 +145,13 @@ public class ShopService {
     }
 
     @Transactional
-    public ShopCardResponse createShopCardResponseByShopDtoAndUserEmail(ShopDto shopDto, String userEmail) {
+    public ShopCardResponse createShopCardResponseByShopDtoAndUserEmail(ShopDto shopDto,
+        String userEmail) {
         ShopCardResponse shopCardResponse = new ShopCardResponse(shopDto);
 
-        shopCardResponse.setTopTags(tagService.getTop5TagPairDtoByShop(shopDto));
-        shopCardResponse.setShopClipping(clippingService.findClippingByUserEmailAndShopId(userEmail, shopDto.getId()));
+        shopCardResponse.setTopTags(tagService.getTop5TagPairDtoByShopTag(shopDto.getTag()));
+        shopCardResponse.setShopClipping(
+            clippingService.findClippingByUserEmailAndShopId(userEmail, shopDto.getId()));
 
         return shopCardResponse;
     }
@@ -148,26 +160,26 @@ public class ShopService {
     public ShopDetailResponse createShopDetailResponseByShopDto(ShopDto shopDto, String userEmail) {
         ShopDetailResponse shopDetailResponse = new ShopDetailResponse(shopDto);
 
-        shopDetailResponse.setTopTags(tagService.getTop5TagPairDtoByShop(shopDto));
+        shopDetailResponse.setTopTags(tagService.getTop5TagPairDtoByShopTag(shopDto.getTag()));
         shopDetailResponse.setShopMenus(menuService.findAllMenuSimpleByShopDto(shopDto));
-        shopDetailResponse.setShopMainPhotoURLs(shopPhotoService.findShopPhotoURLsByShopDto(shopDto));
-        shopDetailResponse.setShopClipping(clippingService.findClippingByUserEmailAndShopId(userEmail, shopDto.getId()));
+        shopDetailResponse.setShopMainPhotoURLs(
+            shopPhotoService.findShopPhotoURLsByShopDto(shopDto));
+        shopDetailResponse.setShopClipping(
+            clippingService.findClippingByUserEmailAndShopId(userEmail, shopDto.getId()));
 
         return shopDetailResponse;
     }
 
     @Transactional
     public ShopSimple createShopSimpleByShopDto(ShopDto shopDto) {
-        ShopSimple shopSimple = ShopSimple.builder()
-                .shopId(shopDto.getId())
-                .shopName(shopDto.getName())
-                .shopCategory("")
-                .shopAddress(shopDto.getAddress())
-                .operatingHours(shopDto.getOperatingHours())
-                .mainPhotoUrl(shopDto.getMainPhotoUrl1())
-                .build();
-
-        return shopSimple;
+        return ShopSimple.builder()
+            .shopId(shopDto.getId())
+            .shopName(shopDto.getName())
+            .shopCategory("")
+            .shopAddress(shopDto.getAddress())
+            .operatingHours(shopDto.getOperatingHours())
+            .mainPhotoUrl(shopDto.getMainPhotoUrl1())
+            .build();
     }
 
     @Transactional
@@ -216,7 +228,7 @@ public class ShopService {
         // List를 Set으로 변경
         Set<ShopSimple> set = new HashSet<ShopSimple>(shopSimples);
         // Set을 List로 변경
-        List<ShopSimple> shopSimplesResult =new ArrayList<ShopSimple>(set);
+        List<ShopSimple> shopSimplesResult = new ArrayList<ShopSimple>(set);
 
         return shopSimplesResult;
     }

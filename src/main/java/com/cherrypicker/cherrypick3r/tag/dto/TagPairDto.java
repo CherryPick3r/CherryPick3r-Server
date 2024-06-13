@@ -1,6 +1,5 @@
 package com.cherrypicker.cherrypick3r.tag.dto;
 
-import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Builder;
 import lombok.Data;
 

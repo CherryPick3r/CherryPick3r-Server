@@ -1,10 +1,9 @@
 package com.cherrypicker.cherrypick3r.userClassify.dto;
 
 import com.cherrypicker.cherrypick3r.user.domain.User;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class UserClassifyDto {

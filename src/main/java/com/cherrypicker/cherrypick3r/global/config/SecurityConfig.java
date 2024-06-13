@@ -1,4 +1,4 @@
-package com.cherrypicker.cherrypick3r.config;
+package com.cherrypicker.cherrypick3r.global.config;
 
 import com.cherrypicker.cherrypick3r.component.JwtAuthenticationFilter;
 import com.cherrypicker.cherrypick3r.component.JwtTokenProvider;
