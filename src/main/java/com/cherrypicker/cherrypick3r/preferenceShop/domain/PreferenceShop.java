@@ -1,6 +1,6 @@
 package com.cherrypicker.cherrypick3r.preferenceShop.domain;
 
-import com.cherrypicker.cherrypick3r.global.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.global.aop.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import java.util.ArrayList;
 import java.util.List;

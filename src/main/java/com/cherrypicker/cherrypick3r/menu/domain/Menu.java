@@ -1,6 +1,6 @@
 package com.cherrypicker.cherrypick3r.menu.domain;
 
-import com.cherrypicker.cherrypick3r.global.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.global.aop.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import javax.persistence.Column;
 import javax.persistence.Entity;

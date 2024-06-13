@@ -1,6 +1,6 @@
 package com.cherrypicker.cherrypick3r.shop.domain;
 
-import com.cherrypicker.cherrypick3r.global.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.global.aop.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
