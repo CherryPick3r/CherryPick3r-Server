@@ -1,6 +1,6 @@
 package com.cherrypicker.cherrypick3r.clipping.domain;
 
-import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.global.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.clipping.dto.ClippingDto;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.user.domain.User;

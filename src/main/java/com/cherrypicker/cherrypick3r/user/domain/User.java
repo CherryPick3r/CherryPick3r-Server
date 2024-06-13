@@ -1,6 +1,6 @@
 package com.cherrypicker.cherrypick3r.user.domain;
 
-import com.cherrypicker.cherrypick3r.baseTimeEntity.domain.BaseTimeEntity;
+import com.cherrypicker.cherrypick3r.global.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.user.dto.UserDto;
 import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassify;

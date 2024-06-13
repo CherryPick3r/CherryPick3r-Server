@@ -67,6 +67,18 @@ public class UserClassifyService {
     // 0L을 null로 바꿔서 넣는 이유: 0L을 null로 만들어서 넣으면 쿼리를 생성할 때, 해당 값은 신경쓰지 않고 넘어감
     @Transactional
     public List<User> findAllUserByClassifyTags(List<Long> tags) {
+//        // 0L을 null로 변경하고, null을 필터링하여 제거합니다.
+//        List<Long> filteredTags = tags.stream()
+//            .map(tag -> tag == 0L ? null : tag)
+//            .filter(Objects::nonNull)
+//            .collect(Collectors.toList());
+//
+//        List<UserClassify> userClassifies = userClassifyRepository.findByAnyUserClassifyTagIn(filteredTags);
+//
+//        List<User> users = userClassifies.stream()
+//            .map(UserClassify::getUser)
+//            .collect(Collectors.toList());
+
         List<User> users = new ArrayList<>();
 
         List<UserClassify> userClassifies = userClassifyRepository.findByUserClassifyTag1OrUserClassifyTag2OrUserClassifyTag3OrUserClassifyTag4OrUserClassifyTag5OrUserClassifyTag6OrUserClassifyTag7OrUserClassifyTag8OrUserClassifyTag9OrUserClassifyTag10OrUserClassifyTag11OrUserClassifyTag12OrUserClassifyTag13OrUserClassifyTag14OrUserClassifyTag15OrUserClassifyTag16OrUserClassifyTag17OrUserClassifyTag18OrUserClassifyTag19OrUserClassifyTag20OrUserClassifyTag21OrUserClassifyTag22OrUserClassifyTag23OrUserClassifyTag24OrUserClassifyTag25OrUserClassifyTag26OrUserClassifyTag27OrUserClassifyTag28(

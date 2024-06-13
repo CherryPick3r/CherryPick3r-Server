@@ -1,4 +1,4 @@
-package com.cherrypicker.cherrypick3r.baseTimeEntity.domain;
+package com.cherrypicker.cherrypick3r.global.baseTimeEntity.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.EntityListeners;

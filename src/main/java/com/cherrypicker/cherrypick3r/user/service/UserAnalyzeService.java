@@ -1,20 +1,15 @@
 package com.cherrypicker.cherrypick3r.user.service;
 
-import com.cherrypicker.cherrypick3r.clipping.domain.ClippingRepository;
 import com.cherrypicker.cherrypick3r.clipping.service.ClippingService;
 import com.cherrypicker.cherrypick3r.component.GameCalc;
 import com.cherrypicker.cherrypick3r.component.TagType;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
 import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
-import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import com.cherrypicker.cherrypick3r.user.dto.UserClassPair;
 import com.cherrypicker.cherrypick3r.user.dto.UserSimilarityPair;
-import com.cherrypicker.cherrypick3r.userClassify.domain.UserClassifyRepository;
-import com.cherrypicker.cherrypick3r.userClassify.service.UserClassifyService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -29,17 +24,7 @@ public class UserAnalyzeService {
 
     private final UserRepository userRepository;
 
-    private final TagRepository tagRepository;
-
-    private final ShopRepository shopRepository;
-
     private final ClippingService clippingService;
-
-    private final ClippingRepository clippingRepository;
-
-    private final UserClassifyRepository userClassifyRepository;
-
-    private final UserClassifyService userClassifyService;
 
     private final ShopClassifyService shopClassifyService;
 

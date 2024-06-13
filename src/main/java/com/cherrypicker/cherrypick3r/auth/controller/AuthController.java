@@ -33,7 +33,9 @@ public class AuthController {
     @GetMapping("/kakao/login")
     public ResponseEntity<LoginResponse> kakaoLogin() {
         // 로그인 링크 생성
-        String kakaoLoginUrl =  "https://kauth.kakao.com/oauth/authorize?client_id=" + kakaoKey.getClientId() + "&redirect_uri=" + kakaoKey.getRedirectUri() + "&response_type=code";
+        String kakaoLoginUrl =
+            "https://kauth.kakao.com/oauth/authorize?client_id=" + kakaoKey.getClientId()
+                + "&redirect_uri=" + kakaoKey.getRedirectUri() + "&response_type=code";
 
         // 로그
         System.out.println(kakaoLoginUrl);
@@ -47,7 +49,7 @@ public class AuthController {
 
     @GetMapping("/kakao/callback")
     public ResponseEntity kakaoCallback(@RequestParam String code,
-                                                HttpServletResponse response) {
+        HttpServletResponse response) {
         // 코드로 유저 불러오기
         SocialDto socialDto = socialService.verificationKakao(code);
         // 유저 등록
@@ -71,13 +73,14 @@ public class AuthController {
     public ResponseEntity<LoginResponse> googleLogin() {
         // 로그인 링크 생성
         String googleLoginUrl = "https://accounts.google.com/o/oauth2/v2/auth?" +
-                "scope=https%3A//www.googleapis.com/auth/userinfo.email https%3A//www.googleapis.com/auth/userinfo.profile&" +
-                "access_type=offline&" +
-                "include_granted_scopes=true&" +
-                "response_type=code&" +
-                "state=state_parameter_passthrough_value" +
-                "&redirect_uri=" + googleKey.getRedirectUri() +
-                "&client_id=" + googleKey.getClientId();
+            "scope=https%3A//www.googleapis.com/auth/userinfo.email https%3A//www.googleapis.com/auth/userinfo.profile&"
+            +
+            "access_type=offline&" +
+            "include_granted_scopes=true&" +
+            "response_type=code&" +
+            "state=state_parameter_passthrough_value" +
+            "&redirect_uri=" + googleKey.getRedirectUri() +
+            "&client_id=" + googleKey.getClientId();
 
         // 로그
         System.out.println(googleLoginUrl);
@@ -91,7 +94,7 @@ public class AuthController {
 
     @GetMapping("/google/callback")
     public ResponseEntity googleCallback(@RequestParam String code,
-                                        HttpServletResponse response) {
+        HttpServletResponse response) {
         // 코드로 유저 불러오기
         SocialDto socialDto = socialService.verificationGoogle(code);
         // 유저 등록
@@ -115,8 +118,8 @@ public class AuthController {
 
     @GetMapping("/apple/login")
     public ResponseEntity appleLogin(@RequestParam("userEmail") String userEmail,
-                                     @RequestParam("nickname") String nickname,
-                                     HttpServletResponse response) {
+        @RequestParam("nickname") String nickname,
+        HttpServletResponse response) {
 
         // 유저 생성
         User user = userService.saveUserByUserEmail(userEmail, nickname);
