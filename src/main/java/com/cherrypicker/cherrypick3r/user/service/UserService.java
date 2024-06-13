@@ -6,29 +6,25 @@ import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import com.cherrypicker.cherrypick3r.user.dto.UserNicknameChangeResponse;
 import com.cherrypicker.cherrypick3r.user.dto.UserNicknameResponse;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
 
+    private final UserSearchService userSearchService;
     private final UserRepository userRepository;
     private final TagRepository tagRepository;
 
     @Transactional
-    public User loadUserByUserEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
-    }
-
-    @Transactional
     public User saveUserByUserEmail(String email, String nickname) {
         // 이미 존재하는 유저인지 확인
-        //User user = userRepository.findByEmail(email).isEmpty();
-        if (!userRepository.findByEmail(email).isEmpty())
-            return userRepository.findByEmail(email).get();
+        Optional<User> existUser = userRepository.findByEmail(email);
+        if (existUser.isPresent())
+            return existUser.get();
 
         Tag tag = new Tag();
         tagRepository.save(tag);
@@ -41,45 +37,37 @@ public class UserService {
                 .tag(tag)
                 .build();
 
-        userRepository.save(user);
-
-        return user;
+        return userRepository.save(user);
     }
 
     @Transactional
     public UserNicknameResponse findUserNicknameByUserEmail(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
 
-        UserNicknameResponse userNicknameResponse = UserNicknameResponse.builder()
+        return UserNicknameResponse.builder()
                 .userNickname(user.getNickname())
                 .build();
-
-        return userNicknameResponse;
     }
 
     @Transactional
     public UserNicknameChangeResponse changeUserNicknameByUserEmail(String userEmail, String changeUserNickname) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
 
         String originUserNickname = user.getNickname();
         user.changeNickname(changeUserNickname);
         userRepository.save(user);
 
-        UserNicknameChangeResponse userNicknameChangeResponse = UserNicknameChangeResponse.builder()
+        return UserNicknameChangeResponse.builder()
                 .originalUserNickname(originUserNickname)
                 .changedUserNickname(user.getNickname())
                 .build();
-
-        return userNicknameChangeResponse;
     }
 
     @Transactional
     public void unregisterUserByUserEmail(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
 
         userRepository.delete(user);
     }
-
-    //public UserDto(String email, String nickname, String auth, Tag tag, UserClassify userClassify){
 
 }
