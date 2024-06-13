@@ -10,6 +10,7 @@ import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
+import com.cherrypicker.cherrypick3r.shop.service.ShopSearchService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import org.springframework.stereotype.Service;
 public class ResultService {
 
     private final ResultRepository resultRepository;
-    private final ShopRepository shopRepository;
+    private final ShopSearchService shopSearchService;
     private final GameRepository gameRepository;
 
     private final UserRepository userRepository;
@@ -43,7 +44,7 @@ public class ResultService {
 
     @Transactional
     public ResultDto createResult(ShopDto shopDto, GameDto gameDto) {
-        Shop shop = shopRepository.findById(shopDto.getId()).get();
+        Shop shop = shopSearchService.findShopById(shopDto.getId());
         Game game = gameRepository.findById(gameDto.getId()).get();
 
         Result result = Result.builder()
@@ -70,7 +71,7 @@ public class ResultService {
     }
     @Transactional
     public void deleteResultByShopId(Long id) {
-        Shop shop = shopRepository.findById(id).get();
+        Shop shop = shopSearchService.findShopById(id);
 
         // PickedCount를 1줄인다.
         shop.decreasePickedCount();

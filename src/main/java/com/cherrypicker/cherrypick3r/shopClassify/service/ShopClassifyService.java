@@ -28,7 +28,7 @@ public class ShopClassifyService {
         Tag tag = shop.getTag();
 
         if (tag == null) {
-            return null; // TODO: TagNotFoundException
+            throw new IllegalArgumentException("가게에 태그가 없습니다.");
         }
 
         List<Double> tags = tag.getTagsByList();
