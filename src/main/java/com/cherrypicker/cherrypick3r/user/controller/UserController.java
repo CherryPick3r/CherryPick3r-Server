@@ -8,6 +8,7 @@ import com.cherrypicker.cherrypick3r.user.dto.UserClassPair;
 import com.cherrypicker.cherrypick3r.user.dto.UserNicknameChangeResponse;
 import com.cherrypicker.cherrypick3r.user.dto.UserNicknameResponse;
 import com.cherrypicker.cherrypick3r.user.service.UserAnalyzeService;
+import com.cherrypicker.cherrypick3r.user.service.UserClassService;
 import com.cherrypicker.cherrypick3r.user.service.UserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,8 @@ public class UserController {
 
     private final UserAnalyzeService userAnalyzeService;
 
+    private final UserClassService userClassService;
+
     @GetMapping("/analyze")
     public ResponseEntity<UserAnalyzeResponse> composeUserAnalyze(@RequestParam("userEmail") String userEmail) {
         Long resultCount = resultService.findResultCountByUserEmail(userEmail);
@@ -39,7 +42,7 @@ public class UserController {
         List<ShopSimple> recentClippingShops = clippingService.find3ShopSimpleByUserEmail(userEmail);
         List<String> userTags = userAnalyzeService.findUserPreferenceTags(userEmail);
         Double userPercentile = userAnalyzeService.calcUserPercentile(userEmail);
-        UserClassPair userClassPair = userAnalyzeService.findUserClass(userEmail);
+        UserClassPair userClassPair = userClassService.findUserClass(userEmail);
 
         UserAnalyzeResponse userAnalyzeResponse = UserAnalyzeResponse.builder()
                 .userNickname(userService.findUserNicknameByUserEmail(userEmail).getUserNickname()) // 유저 닉네임
