@@ -1,7 +1,7 @@
 package com.cherrypicker.cherrypick3r.result.domain;
 
-import com.cherrypicker.cherrypick3r.global.aop.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.game.domain.Game;
+import com.cherrypicker.cherrypick3r.global.aop.baseTimeEntity.domain.BaseTimeEntity;
 import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import javax.persistence.CascadeType;

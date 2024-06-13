@@ -1,9 +1,6 @@
 package com.cherrypicker.cherrypick3r.tag.service;
 
 import com.cherrypicker.cherrypick3r.component.TagType;
-import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShop;
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shop.service.ShopSearchService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
