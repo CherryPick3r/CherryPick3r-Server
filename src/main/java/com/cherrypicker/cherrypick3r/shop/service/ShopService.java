@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -95,7 +96,9 @@ public class ShopService {
         for (int i = idx + 1; i < 28; i++) {
             tagBoolList.add(0L);
         }
-        return shopClassifyService.findAllShopDtoByClassifyTags(tagBoolList);
+        return shopClassifyService.findAllShopByClassifyTags(tagBoolList).stream()
+            .map(Shop::toDto)
+            .collect(Collectors.toList());
     }
 
     //오버로딩: Integer.
@@ -110,12 +113,14 @@ public class ShopService {
         for (int i = idx + 1; i < 28; i++) {
             tagBoolList.add(0L);
         }
-        return shopClassifyService.findAllShopDtoByClassifyTags(tagBoolList);
+        return shopClassifyService.findAllShopByClassifyTags(tagBoolList).stream()
+            .map(Shop::toDto)
+            .collect(Collectors.toList());
     }
 
 
     @Transactional
-    public Long findShopid(Shop shop) {
+    public Long findShopId(Shop shop) {
         return shop.getId();
     }
 
