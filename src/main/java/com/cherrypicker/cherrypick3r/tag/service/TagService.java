@@ -1,7 +1,6 @@
 package com.cherrypicker.cherrypick3r.tag.service;
 
 import com.cherrypicker.cherrypick3r.component.TagType;
-import com.cherrypicker.cherrypick3r.shop.service.ShopSearchService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.tag.dto.TagDescriptionDto;
@@ -21,8 +20,6 @@ public class TagService {
     private final TagSearchService tagSearchService;
 
     private final TagRepository tagRepository;
-
-    private final ShopSearchService shopSearchService;
 
     @Transactional
     public Tag createTag() {
