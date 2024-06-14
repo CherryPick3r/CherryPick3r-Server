@@ -7,12 +7,11 @@ import com.cherrypicker.cherrypick3r.result.domain.Result;
 import com.cherrypicker.cherrypick3r.result.domain.ResultRepository;
 import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
 import com.cherrypicker.cherrypick3r.shop.service.ShopSearchService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
-import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
+import com.cherrypicker.cherrypick3r.user.service.UserSearchService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,10 +24,12 @@ import org.springframework.stereotype.Service;
 public class ResultService {
 
     private final ResultRepository resultRepository;
+
     private final ShopSearchService shopSearchService;
+
     private final GameRepository gameRepository;
 
-    private final UserRepository userRepository;
+    private final UserSearchService userSearchService;
 
     @Transactional
     public Result createResult(Shop shop, Game game) {
@@ -92,7 +93,7 @@ public class ResultService {
 
     @Transactional
     public Long findResultCountByUserEmail(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
         List<Game> games = gameRepository.findAllByUser(user);
         List<Result> results = new ArrayList<>();
 
@@ -108,7 +109,7 @@ public class ResultService {
 
     @Transactional
     public List<ShopSimple> find3ShopSimpleByUserEmail(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
         List<Game> games = gameRepository.findAllByUser(user);
         List<ShopSimple> shopSimples = new ArrayList<>();
         int cnt = 0;

@@ -16,6 +16,7 @@ import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.tag.service.TagService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
+import com.cherrypicker.cherrypick3r.user.service.UserSearchService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -32,6 +33,8 @@ public class PreferenceGameService {
 
     private final UserRepository userRepository;
 
+    private final UserSearchService userSearchService;
+
     private final ShopRepository shopRepository;
 
     private final PreferenceShopRepository preferenceShopRepository;
@@ -44,7 +47,7 @@ public class PreferenceGameService {
 
     @Transactional
     public UserPreferenceStartResponse remakeGame(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
 
         if (user == null) {
             return null; // UserNotFound 에러 핸들링으로 바꿔야함
@@ -102,7 +105,7 @@ public class PreferenceGameService {
 
     @Transactional
     public UserPreferenceStartResponse makeGame(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
 
         if (user == null) {
             return null; // UserNotFound 에러 핸들링으로 바꿔야함
@@ -214,7 +217,7 @@ public class PreferenceGameService {
 
     @Transactional
     public CheckPreferenceGameResponse findPlayRecode(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
         List<PreferenceGame> preferenceGames = preferenceGameRepository.findAllByUser(user);
 
         for (PreferenceGame preferenceGame : preferenceGames) {

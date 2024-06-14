@@ -18,7 +18,7 @@ import com.cherrypicker.cherrypick3r.shopPhoto.service.ShopPhotoService;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.service.TagService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
-import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
+import com.cherrypicker.cherrypick3r.user.service.UserSearchService;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +38,7 @@ public class ShopService {
 
     private final ShopClassifyService shopClassifyService;
 
-    private final UserRepository userRepository;
+    private final UserSearchService userSearchService;
 
     private final TagService tagService;
 
@@ -184,7 +184,7 @@ public class ShopService {
 
     @Transactional
     public List<ShopSimple> createShopSimpleListByUserEmailResults(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
         List<Game> games = gameRepository.findAllByUser(user);
         List<ShopSimple> shopSimples = new ArrayList<>();
 
@@ -207,7 +207,7 @@ public class ShopService {
 
     @Transactional
     public List<ShopSimple> createShopSimpleListByUserEmailClippings(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
 //        List<ShopDto> shopDtos = clippingService.findClippingShopByUser(user);
         List<Clipping> clippings = clippingService.findClippingByUser(user);
         List<ShopSimple> shopSimples = new ArrayList<>();

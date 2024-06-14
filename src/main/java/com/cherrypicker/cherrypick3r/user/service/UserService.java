@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserSearchService userSearchService;
+
     private final UserRepository userRepository;
+
     private final TagRepository tagRepository;
 
     @Transactional
