@@ -1,8 +1,7 @@
 package com.cherrypicker.cherrypick3r.tag.dto;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class TagDescriptionDto {

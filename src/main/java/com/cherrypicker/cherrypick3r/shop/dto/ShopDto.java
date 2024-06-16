@@ -5,11 +5,6 @@ import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
 @Data
 public class ShopDto {
 

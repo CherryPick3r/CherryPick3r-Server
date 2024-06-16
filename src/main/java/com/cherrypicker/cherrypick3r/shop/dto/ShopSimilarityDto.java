@@ -1,8 +1,5 @@
 package com.cherrypicker.cherrypick3r.shop.dto;
 
-import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
-import com.cherrypicker.cherrypick3r.tag.domain.Tag;
-import lombok.Builder;
 import lombok.Data;
 
 @Data

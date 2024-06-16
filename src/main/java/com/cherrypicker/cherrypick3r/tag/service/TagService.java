@@ -1,35 +1,25 @@
 package com.cherrypicker.cherrypick3r.tag.service;
 
 import com.cherrypicker.cherrypick3r.component.TagType;
-import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShop;
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
-import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassify;
-import com.cherrypicker.cherrypick3r.shopClassify.domain.ShopClassifyRepository;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.tag.dto.TagDescriptionDto;
 import com.cherrypicker.cherrypick3r.tag.dto.TagDto;
 import com.cherrypicker.cherrypick3r.tag.dto.TagPairDto;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class TagService {
-    private final TagRepository tagRepository;
-    private final ShopRepository shopRepository;
 
-    private final ShopClassifyRepository shopClassifyRepository;
+    private final TagSearchService tagSearchService;
+
+    private final TagRepository tagRepository;
 
     @Transactional
     public Tag createTag() {
@@ -42,7 +32,7 @@ public class TagService {
 
     @Transactional
     public TagDto findTagByTagId(Long id) {
-        Tag tag = tagRepository.findById(id).get();
+        Tag tag = tagSearchService.findTagById(id);
 
         return tag.toDto();
     }
@@ -54,101 +44,44 @@ public class TagService {
 
     @Transactional
     public TagDto updateTagByTagId(Long id, List<Double> tagValues) {
-        Tag tag = tagRepository.findById(id).get();
+        Tag tag = tagSearchService.findTagById(id);
 
-        if (tag == null) {
-            return null; // TODO: TagNotFound 에러 핸들링 해야함
-        }
         tag.setTagsByList(tagValues);
         tagRepository.save(tag);
 
         return findTagByTagId(id);
     }
 
-    // 가게를 받아서 가게의 태그를 TagDescriptionDto로 바꿔주는 메서드
+    // 태그를 받아서 가게의 태그를 TagDescriptionDto로 바꿔주는 메서드
     @Transactional
-    public TagDescriptionDto getTagDescriptionDtoListByShop(Shop shop) {
-        Tag tag = shop.getTag();
+    public TagDescriptionDto getTagDescriptionDtoListByTag(Tag tag) {
         List<Double> tagValues = tag.getTagsByList();
 
         List<TagPairDto> tagPairDtos = new ArrayList<>();
         int i = 0;
         // 열거형 상수 순회하기
-        for (TagType tagType : TagType.values()) {
+        TagType[] tagTypes = TagType.values();
+        for (TagType tagType : tagTypes) {
             tagPairDtos.add(TagPairDto.builder()
-                    .description(tagType.getDescription())
-                    .value(tagValues.get(i++))
-                    .build());
+                .description(tagType.getDescription())
+                .value(tagValues.get(i++))
+                .build());
         }
-        TagDescriptionDto tagDescriptionDto = new TagDescriptionDto(tagPairDtos);
 
-        return tagDescriptionDto;
+        return new TagDescriptionDto(tagPairDtos);
     }
 
-    // 가게를 받아서 가게의 태그를 TagDescriptionDto로 바꿔주는 메서드
+    // Tag의 상위 5개 태그값을 (설명, 값) 쌍으로 반환해주는 메서드
     @Transactional
-    public TagDescriptionDto getTagDescriptionDtoListByPreferenceShop(PreferenceShop shop) {
-        Tag tag = shop.getTag();
-        List<Double> tagValues = tag.getTagsByList();
-
-        List<TagPairDto> tagPairDtos = new ArrayList<>();
-        int i = 0;
-        // 열거형 상수 순회하기
-        for (TagType tagType : TagType.values()) {
-            tagPairDtos.add(TagPairDto.builder()
-                    .description(tagType.getDescription())
-                    .value(tagValues.get(i++))
-                    .build());
-        }
-        TagDescriptionDto tagDescriptionDto = new TagDescriptionDto(tagPairDtos);
-
-        return tagDescriptionDto;
-    }
-
-    // shop의 상위 5개 태그값을 (설명, 값) 쌍으로 반환해주는 메서드
-    @Transactional
-    public List<TagPairDto> getTop5TagPairDtoByShop(Shop shop) {
-        TagDescriptionDto tagDescriptionDto = getTagDescriptionDtoListByShop(shop);
+    public List<TagPairDto> getTop5TagPairDtoByShopTag(Tag tag) {
+        TagDescriptionDto tagDescriptionDto = getTagDescriptionDtoListByTag(tag);
         List<TagPairDto> tagPairDtos = new ArrayList<>();
 
         // Double형 태그 값을 기준으로 내림차순 정렬
-        Collections.sort(tagDescriptionDto.getTagPairDtos(), Comparator.comparing(TagPairDto::getValue).reversed());
+        tagDescriptionDto.getTagPairDtos()
+            .sort(Comparator.comparing(TagPairDto::getValue).reversed());
 
-        for (int i=0;i<5;i++) {
-            tagPairDtos.add(tagDescriptionDto.getTagPairDtos().get(i));
-        }
-
-        return tagPairDtos;
-    }
-
-    // shop의 상위 5개 태그값을 (설명, 값) 쌍으로 반환해주는 메서드
-    @Transactional
-    public List<TagPairDto> getTop5TagPairDtoByPreferenceShop(PreferenceShop shop) {
-        TagDescriptionDto tagDescriptionDto = getTagDescriptionDtoListByPreferenceShop(shop);
-        List<TagPairDto> tagPairDtos = new ArrayList<>();
-
-        // Double형 태그 값을 기준으로 내림차순 정렬
-        Collections.sort(tagDescriptionDto.getTagPairDtos(), Comparator.comparing(TagPairDto::getValue).reversed());
-
-        for (int i=0;i<5;i++) {
-            tagPairDtos.add(tagDescriptionDto.getTagPairDtos().get(i));
-        }
-
-        return tagPairDtos;
-    }
-
-    // shop의 상위 5개 태그값을 (설명, 값) 쌍으로 반환해주는 메서드
-    @Transactional
-    public List<TagPairDto> getTop5TagPairDtoByShop(ShopDto shopDto) {
-        Shop shop = shopRepository.findById(shopDto.getId()).get();
-
-        TagDescriptionDto tagDescriptionDto = getTagDescriptionDtoListByShop(shop);
-        List<TagPairDto> tagPairDtos = new ArrayList<>();
-
-        // Double형 태그 값을 기준으로 내림차순 정렬
-        Collections.sort(tagDescriptionDto.getTagPairDtos(), Comparator.comparing(TagPairDto::getValue).reversed());
-
-        for (int i=0;i<5;i++) {
+        for (int i = 0; i < 5; i++) {
             tagPairDtos.add(tagDescriptionDto.getTagPairDtos().get(i));
         }
 

@@ -1,35 +1,39 @@
 package com.cherrypicker.cherrypick3r.result.service;
 
-import com.cherrypicker.cherrypick3r.clipping.domain.Clipping;
 import com.cherrypicker.cherrypick3r.game.domain.Game;
 import com.cherrypicker.cherrypick3r.game.domain.GameRepository;
 import com.cherrypicker.cherrypick3r.game.dto.GameDto;
+import com.cherrypicker.cherrypick3r.game.service.GameSearchService;
 import com.cherrypicker.cherrypick3r.result.domain.Result;
 import com.cherrypicker.cherrypick3r.result.domain.ResultRepository;
 import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
+import com.cherrypicker.cherrypick3r.shop.service.ShopSearchService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
-import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import com.cherrypicker.cherrypick3r.user.service.UserSearchService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class ResultService {
 
     private final ResultRepository resultRepository;
-    private final ShopRepository shopRepository;
+
+    private final ShopSearchService shopSearchService;
+
+    private final GameSearchService gameSearchService;
+
     private final GameRepository gameRepository;
 
-    private final UserRepository userRepository;
+    private final UserSearchService userSearchService;
 
     @Transactional
     public Result createResult(Shop shop, Game game) {
@@ -45,8 +49,8 @@ public class ResultService {
 
     @Transactional
     public ResultDto createResult(ShopDto shopDto, GameDto gameDto) {
-        Shop shop = shopRepository.findById(shopDto.getId()).get();
-        Game game = gameRepository.findById(gameDto.getId()).get();
+        Shop shop = shopSearchService.findShopById(shopDto.getId());
+        Game game = gameSearchService.findGameById(gameDto.getId());
 
         Result result = Result.builder()
                 .shop(shop)
@@ -60,19 +64,19 @@ public class ResultService {
 
     @Transactional
     public void deleteResult(Long id) {
-        Result result = resultRepository.findById(id).get();
+        Optional<Result> result = resultRepository.findById(id);
 
-        if (result == null) {
-            return ; // TODO: ResultNotFountException
+        if (result.isEmpty()) {
+            throw new IllegalArgumentException("해당 결과가 존재하지 않습니다.");
         }
 
-        resultRepository.delete(result);
+        resultRepository.delete(result.get());
 
         return ;
     }
     @Transactional
     public void deleteResultByShopId(Long id) {
-        Shop shop = shopRepository.findById(id).get();
+        Shop shop = shopSearchService.findShopById(id);
 
         // PickedCount를 1줄인다.
         shop.decreasePickedCount();
@@ -84,7 +88,7 @@ public class ResultService {
 
     @Transactional
     public void deleteResultByGameId(Long id) {
-        Game game = gameRepository.findById(id).get();
+        Game game = gameSearchService.findGameById(id);
 
         resultRepository.deleteByGame(game);
 
@@ -93,7 +97,7 @@ public class ResultService {
 
     @Transactional
     public Long findResultCountByUserEmail(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
         List<Game> games = gameRepository.findAllByUser(user);
         List<Result> results = new ArrayList<>();
 
@@ -109,7 +113,7 @@ public class ResultService {
 
     @Transactional
     public List<ShopSimple> find3ShopSimpleByUserEmail(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
         List<Game> games = gameRepository.findAllByUser(user);
         List<ShopSimple> shopSimples = new ArrayList<>();
         int cnt = 0;

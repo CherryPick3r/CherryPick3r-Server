@@ -1,10 +1,9 @@
 package com.cherrypicker.cherrypick3r.preference.dto;
 
 import com.cherrypicker.cherrypick3r.preference.domain.PreferenceGame;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class UserPreferenceStartResponse {

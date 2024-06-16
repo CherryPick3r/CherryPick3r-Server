@@ -1,27 +1,29 @@
 package com.cherrypicker.cherrypick3r.game.controller;
 
 import com.cherrypicker.cherrypick3r.component.TestComponent;
-import com.cherrypicker.cherrypick3r.game.dto.*;
+import com.cherrypicker.cherrypick3r.game.dto.GameDto;
+import com.cherrypicker.cherrypick3r.game.dto.GameEndResponse;
+import com.cherrypicker.cherrypick3r.game.dto.GameResponse;
+import com.cherrypicker.cherrypick3r.game.dto.GameStartResponse;
 import com.cherrypicker.cherrypick3r.game.service.GameService;
-import com.cherrypicker.cherrypick3r.result.domain.Result;
 import com.cherrypicker.cherrypick3r.result.dto.ResultDto;
-import com.cherrypicker.cherrypick3r.result.service.ResultService;
-import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
-import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopCardResponse;
 import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
-import com.cherrypicker.cherrypick3r.shopClassify.service.ShopClassifyService;
-import com.cherrypicker.cherrypick3r.user.service.UserService;
+import com.cherrypicker.cherrypick3r.shop.service.ShopService;
 import com.opencsv.exceptions.CsvException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/game")
 @RequiredArgsConstructor
@@ -56,6 +58,7 @@ public class GameController {
     public ResponseEntity<GameStartResponse> startGame(@RequestParam("userEmail") String userEmail,
                                                 @RequestParam("gameMode") Long gameMode) {
 
+        log.info("게임 생성");
         GameDto gameDto = gameService.makeGame(userEmail);
         if (gameDto == null) {
             return ResponseEntity.badRequest().build(); // MakeGameFailure
@@ -66,6 +69,8 @@ public class GameController {
 //
 //        // 스코어를 기반으로 추천 가게 리스트를 만든다.
 //        List<ShopDto> recommendedShopDtos = gameService.findShopsByScore(gameDto, shopDtos, 3L);
+
+        log.info("게임 시작");
         // 랜덤하게 3개의 추천 가게 리스트를 만든다.
         List<ShopDto> recommendedShopDtos = gameService.find3ShopByRandom(gameDto);
         List<Long> recommendedShopIds = new ArrayList<>();
@@ -74,10 +79,11 @@ public class GameController {
             recommendedShopIds.add(recommendedShopDtos.get(i).getId());
             shopCardResponses.add(shopService.createShopCardResponseByShopDtoAndUserEmail(recommendedShopDtos.get(i), userEmail));
         }
-
+        log.info("가게 추천 완료");
 
         // 추천한 가게를 저장한다.
         gameService.saveRecommendedShopsByList(gameDto, recommendedShopDtos);
+        log.info("추천된 가게 저장 완료");
 
         // 결과 세팅
         GameStartResponse gameStartResponse = GameStartResponse.builder()
@@ -101,6 +107,7 @@ public class GameController {
             return ResponseEntity.badRequest().build();
         }
 
+        log.info("swipe-left");
         if (gameDto.getCurRound() == gameDto.getTotalRound()) {
             // CASE1: 게임의 끝에 도달
 
@@ -169,6 +176,7 @@ public class GameController {
             return ResponseEntity.badRequest().build();
         }
 
+        log.info("swipe-right");
         if (gameDto.getCurRound() == gameDto.getTotalRound()) {
             // CASE1: 게임의 끝에 도달
 

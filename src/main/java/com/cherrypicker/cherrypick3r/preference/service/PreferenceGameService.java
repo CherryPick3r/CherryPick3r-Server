@@ -1,8 +1,6 @@
 package com.cherrypicker.cherrypick3r.preference.service;
 
 import com.cherrypicker.cherrypick3r.component.GameCalc;
-import com.cherrypicker.cherrypick3r.game.domain.Game;
-import com.cherrypicker.cherrypick3r.game.dto.GameDto;
 import com.cherrypicker.cherrypick3r.preference.domain.PreferenceGame;
 import com.cherrypicker.cherrypick3r.preference.domain.PreferenceGameRepository;
 import com.cherrypicker.cherrypick3r.preference.dto.CheckPreferenceGameResponse;
@@ -11,22 +9,18 @@ import com.cherrypicker.cherrypick3r.preference.dto.UserPreferenceResponse;
 import com.cherrypicker.cherrypick3r.preference.dto.UserPreferenceStartResponse;
 import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShop;
 import com.cherrypicker.cherrypick3r.preferenceShop.domain.PreferenceShopRepository;
-import com.cherrypicker.cherrypick3r.shop.Service.ShopService;
-import com.cherrypicker.cherrypick3r.shop.domain.Shop;
 import com.cherrypicker.cherrypick3r.shop.domain.ShopRepository;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopDto;
-import com.cherrypicker.cherrypick3r.shop.dto.ShopSimple;
 import com.cherrypicker.cherrypick3r.tag.domain.Tag;
 import com.cherrypicker.cherrypick3r.tag.domain.TagRepository;
 import com.cherrypicker.cherrypick3r.tag.service.TagService;
 import com.cherrypicker.cherrypick3r.user.domain.User;
 import com.cherrypicker.cherrypick3r.user.domain.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import com.cherrypicker.cherrypick3r.user.service.UserSearchService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -38,11 +32,11 @@ public class PreferenceGameService {
 
     private final UserRepository userRepository;
 
+    private final UserSearchService userSearchService;
+
     private final ShopRepository shopRepository;
 
     private final PreferenceShopRepository preferenceShopRepository;
-
-    private final ShopService shopService;
 
     private final TagService tagService;
 
@@ -50,7 +44,7 @@ public class PreferenceGameService {
 
     @Transactional
     public UserPreferenceStartResponse remakeGame(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
 
         if (user == null) {
             return null; // UserNotFound 에러 핸들링으로 바꿔야함
@@ -94,7 +88,7 @@ public class PreferenceGameService {
         List<PreferenceCard> preferenceCards = new ArrayList<>();
         for (PreferenceShop preferenceShop : preferenceShops) {
             preferenceGame.getRecommendedShopIds().add(preferenceShop.getId());
-            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByPreferenceShop(preferenceShop)));
+            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByShopTag(preferenceShop.getTag())));
         }
 
         // 생성한 초기취향 게임 저장
@@ -108,7 +102,7 @@ public class PreferenceGameService {
 
     @Transactional
     public UserPreferenceStartResponse makeGame(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
 
         if (user == null) {
             return null; // UserNotFound 에러 핸들링으로 바꿔야함
@@ -146,7 +140,7 @@ public class PreferenceGameService {
         List<PreferenceCard> preferenceCards = new ArrayList<>();
         for (PreferenceShop preferenceShop : preferenceShops) {
             preferenceGame.getRecommendedShopIds().add(preferenceShop.getId());
-            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByPreferenceShop(preferenceShop)));
+            preferenceCards.add(new PreferenceCard(tagService.getTop5TagPairDtoByShopTag(preferenceShop.getTag())));
         }
 
         // 생성한 초기취향 게임 저장
@@ -220,11 +214,11 @@ public class PreferenceGameService {
 
     @Transactional
     public CheckPreferenceGameResponse findPlayRecode(String userEmail) {
-        User user = userRepository.findByEmail(userEmail).get();
+        User user = userSearchService.findUserByEmail(userEmail);
         List<PreferenceGame> preferenceGames = preferenceGameRepository.findAllByUser(user);
 
         for (PreferenceGame preferenceGame : preferenceGames) {
-            if (preferenceGame.getTotalRound() == preferenceGame.getCurRound()) {
+            if (preferenceGame.getTotalRound().equals(preferenceGame.getCurRound())) {
                 return CheckPreferenceGameResponse.builder().isPlayed(1L).build();
             }
         }

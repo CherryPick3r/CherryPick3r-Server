@@ -1,13 +1,9 @@
 package com.cherrypicker.cherrypick3r.shopClassify.dto;
 
 import com.cherrypicker.cherrypick3r.shop.domain.Shop;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import java.util.List;
 
 @Data
 public class ShopClassifyDto {
