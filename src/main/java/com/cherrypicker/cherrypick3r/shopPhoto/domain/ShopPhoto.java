@@ -30,7 +30,7 @@ public class ShopPhoto extends BaseTimeEntity {
     @Column(name = "shop_photo_url", length = 1000)
     private String photoUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shop_id")
     private Shop shop;
 
